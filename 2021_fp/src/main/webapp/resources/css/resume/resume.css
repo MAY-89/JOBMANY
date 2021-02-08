@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* 폰트 */
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NotoSerifKR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+
+/* 공통  */
+.resume{
+	margin-top: 550px;
+}
+.resume-subTitle{
+	color: gray;
+	font-weight: bold;
+}
+p{
+	color: #6b6b6b;
+	font-family: 'NanumBarunGothic';
+	font-size: 16px;
+	font-weight: bold;
+}
+.p{
+	color: #6b6b6b;
+	font-family: 'NanumBarunGothic';
+	font-size: 16px;
+	font-weight: bold;
+}
+
+/* 상단 타이틀 텍스트 */
+.resume-top{
+	color: gray;
+	margin-top: 5px;
+	margin-bottom: 50px;
+}
+.resume-title-front{
+	color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 5px;
+	background: rgba(114, 192, 44, 1);
+	border-radius: 20px 0px 20px 0px;
+}
+.resume-title-tail{
+	margin-left: -5px;
+	border-right: 3px solid rgba(114, 192, 44, 1);
+}
+
+/* 최종학력 */
+.schoolType{
+	text-align: center !important; 
+}
+.radio-btn{
+	font-family: 'NanumBarunGothic';
+	font-size: 16px;
+	font-weight: bold;
+}
+input[type='radio'],
+input[type='radio']:checked {
+	appearance: none;
+}
+
+/* 자기소개 */
+.self{
+	margin-bottom: 20px;
+}
+
+/* 포트폴리오 */
+.portfolio{
+	margin-bottom: 20px;
+}
+.portfolio-btn-box{
+	margin-bottom: 20px;
+}
+.portfolio-btn-box .col .btn{
+	float: right;
+	margin-left: 15px;
+}
+
+

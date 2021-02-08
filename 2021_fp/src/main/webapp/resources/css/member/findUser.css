@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/* 폰트 */
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NotoSerifKR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Jaemin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jaemin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 공통 */
+section{
+	padding-top: 100px;
+	height: 480px;
+	
+}
+
+/* 상단 텍스트 */
+.title{
+	font-family: 'GmarketSansBold';
+	font-size: 50px;
+	color: black;
+	background: rgba(255,255,255, 0.7);
+	text-align: center;
+	border-bottom: 1px solid rgba(114, 192, 44, 1);
+}
+
+/* 라벨 */
+label{
+	margin-top: 5px;
+	font-family: 'NotoSerifKR';
+}
+
+/* 버튼 */
+.member-btn{
+	color: white;
+	background: rgba(114, 192, 44, 1);
+}
+.member-btn:hover{
+	color: white;
+	background: rgba(114, 192, 44, 1);
+	box-shadow: 500px 0 0 0 rgba(255,255,255,0.25) inset;
+}
+
+/* 로그인 */
+.login-box{
+	width: 350px;
+	height: 500px;
+}
+
+
+
+
+
+
+
+
+

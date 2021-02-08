@@ -1,0 +1,127 @@
+@charset "UTF-8";
+/* 폰트 */
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NotoSerifKR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 400;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+
+/* section 공통 */
+section{
+	margin-top: 550px;
+}
+
+/* 상단 타이틀 텍스트 */
+section .read-top {
+	color: gray;
+	margin-top: 5px;
+	margin-bottom: 100px;
+}
+.read-title-front{
+	color: white;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 5px;
+	background: rgba(114, 192, 44, 1);
+	border-radius: 20px 0px 20px 0px;
+}
+.read-title-tail{
+	margin-left: -5px;
+	border-right: 3px solid rgba(114, 192, 44, 1);
+}
+
+
+/* 본문 */
+.readTitle{
+	
+}
+.read{
+	border: none;
+}
+.read-content{
+	padding-top: 50px;
+	height: 500px;
+}
+
+
+/* 댓글목록  */
+.read-comment-title{
+	color: rgba(114, 192, 44, 1);
+}
+.read-comment-item .comment-writer{
+	font-family: 'NotoSerifKR';
+	font-size: 17px;
+	
+}
+
+
+
+
+
+/* 댓글작성 */
+.read-post-title{
+	color: rgba(114, 192, 44, 1);
+}
+.read-post{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+
+
+
+
+/* 버튼 */
+.read-btn-send{
+	float: right;
+	font-family: 'NotoSerifKR';
+	color: white;
+	font-weight: 500;
+	background: rgba(114, 192, 44, 1);
+}
+.read-btn-send:hover{
+	color:white;
+	box-shadow: 140px 0 0 0 rgba(255,255,255,0.25) inset;
+}
+.read-btn-list{
+	font-family: 'NotoSerifKR';
+	color: white;
+	font-weight: 500;
+	background: rgba(114, 192, 44, 1);
+}
+.read-btn-list:hover{
+	color:white;
+	box-shadow: 60px 0 0 0 rgba(255,255,255,0.25) inset;
+}
+.reply-btn{
+	float: right;
+	text-decoration: none !important;
+	font-family: 'NotoSerifKR';
+	color: rgba(114, 192, 44, 1);
+	font-weight: 500;
+}
+.reply-btn:hover{
+	color: rgba(114, 192, 44, 0.5);
+}
