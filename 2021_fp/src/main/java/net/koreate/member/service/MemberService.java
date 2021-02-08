@@ -6,6 +6,6 @@ public interface MemberService {
 
 	UserVO login(UserVO user) throws Exception;
 	
-	String sign(UserVO user) throws Exception;
+	boolean sign(UserVO user) throws Exception;
 	
 }

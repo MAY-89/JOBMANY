@@ -38,17 +38,21 @@ public class MemberController {
 		return "/member/signMember";
 	}
 	
-	
 	@PostMapping("signMember")
 	public String sign(UserVO user, Model model)throws Exception {
-		model.addAttribute("message", service.sign(user));
-		return "/member/signMember";
+		
+		String message = "환영 합니다."+user.getUnickname();
+		if(service.sign(user)) {
+			message = "이미 등록된 아이디, 또는 닉네임 입니다.";
+			model.addAttribute("message", message);
+			return "/member/signMember";
+		}
+		model.addAttribute("message", message);
+		return "redirect:/main";
 	}
 	
 	@GetMapping("memberInfo")
 	public String info(ModelAndView mav) {
-		
-		
 		
 		return "/member/memberInfo";
 	}

@@ -18,7 +18,7 @@
 <header>
 	<div class="container">
 	<nav class="navbar navbar-expand-lg header-nav">
- 		<a class="navbar-brand header-nav-logo" href="${root}">
+ 		<a class="navbar-brand header-nav-logo" href="${root}/">
  			<span class="header-nav-logo-front h3">J</span>
  			<span class="header-nav-logo-tail h3">ob Many</span>
  		</a>
@@ -61,7 +61,7 @@
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
 						<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
 						<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
-						<li><a class="dropdown-item" href="${root}/member/memberInfo">내 </a></li>
+						<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>
 						<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 						<li><a class="dropdown-item" href="${root}/member/findUser">ID | PW 찾기</a></li>
 						<li><hr class="dropdown-divider"></li>

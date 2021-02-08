@@ -94,12 +94,49 @@
 		/* 버튼 클릭시 생년월일 일치 확인 */
 		document.getElementById("signSubmit").onclick = function() {
 			user_age = document.getElementById('userAge').value;
+			var password = document.getElementById("password").value;
+			var passwordre = document.getElementById("passwordRe").value;
+			if(password != passwordre){
+				alert("비밀번호를 확인 해주세요");
+				return false;
+			}
 			if (user_age.length != 8) {
 				alert("생년월일이 잘못 되었습니다");
 				return false;
-			}
+			} 
+			/* 
+			var signForm = 
 			
+		// 이하 비동기 회원가입 해야 하나?	
+			$.ajax({
+				
+				type : "post",
+				
+				url : "member/signMember",
+				
+				headers :{
+					
+					"content-Type" : "application/json"
+				},
+				
+				dataType : text,
+				
+				data : JSON.stringify({
+					
+					
+					
+				})
+				
+		
+			
+			});
+		
 		};
+		  */
+		
+		
+		
+		
 		var message = '${message}';
 		
 		if(message != null && message != ""){
