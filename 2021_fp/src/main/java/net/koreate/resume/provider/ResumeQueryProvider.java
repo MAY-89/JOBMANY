@@ -6,7 +6,7 @@ import net.koreate.util.SearchCriteria;
 
 public class ResumeQueryProvider {
 
-	String table = "resumeTalbe";
+	String table = "resumetable";
 
 	public String list(SearchCriteria cri) {
 		return new SQL() {
@@ -27,13 +27,15 @@ public class ResumeQueryProvider {
 //				SET("name,birth,email,mobile,phone,postcode,addr,"
 //						+ "detailaddr,shcoolType,uniType,uniName,uniMajor,uniGrade,careerType,"
 //						+ "companyName,exStartDate,exEndDate,introduce,pic,portfolio");
-				VALUES("name", "#{name}");
-				VALUES("birth", "#{birth}");
-				VALUES("eamil", "#{email}");
+				VALUES("rno", "#{rno}");
+				VALUES("rname", "#{name}");
+				VALUES("rbirth", "#{birth}");
+				VALUES("email", "#{email}");
+				VALUES("mobile", "#{mobile}");
 				VALUES("phone", "#{phone}");
 				VALUES("postcode", "#{postcode}");
 				VALUES("addr", "#{addr}");
-				VALUES("detailaddr", "#{detailaddr}");
+				VALUES("detailAddr", "#{detailAddr}");
 				VALUES("schoolType", "#{schoolType}");
 				VALUES("uniType", "#{uniType}");
 				VALUES("uniName", "#{uniName}");
@@ -54,14 +56,14 @@ public class ResumeQueryProvider {
 		return new SQL() {
 			{
 				UPDATE(table);
-				SET("name = #{name}");
-				SET("birth = #{birth}");
+				SET("rname = #{name}");
+				SET("rbirth = #{birth}");
 				SET("email = #{email}");
 				SET("mobile = #{mobile}");
 				SET("phone = #{phone}");
 				SET("postcode = #{postcode}");
 				SET("addr = #{addr}");
-				SET("dettailaddr = #{detailaddr}");
+				SET("detailAddr = #{detailAddr}");
 				SET("schoolType = #{schoolType}");
 				SET("uniType = #{uniType}");
 				SET("uniName = #{uniName}");

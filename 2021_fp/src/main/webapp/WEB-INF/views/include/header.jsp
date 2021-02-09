@@ -37,8 +37,8 @@
 						Resume
 					</a>
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="${root}/resume">Resume</a></li>
-						<li><a class="dropdown-item" href="${root}/resumeList">Resume List</a></li>
+						<li><a class="dropdown-item" href="${root}/resume/resume">Resume</a></li>
+						<li><a class="dropdown-item" href="${root}/resume/resumeList">Resume List</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">etc</a></li>
 					</ul>

@@ -15,7 +15,7 @@ public class ResumeVO {
 	private String phone;
 	private String postcode;
 	private String addr;
-	private String detailaddr;
+	private String detailAddr;
 	private String schoolType;
 	private String uniType;
 	private String uniName;

@@ -37,8 +37,9 @@ public class ResumeServiceImpl implements ResumeService {
 
 	@Override
 	public void insert(ResumeVO vo) throws Exception {
-		System.out.println("이력서 삽입");
+		System.out.println("이력서 정보 : "+vo);
 		dao.writeResume(vo);
+		System.out.println("이력서 db 삽입 완료");
 	}
 
 	@Override

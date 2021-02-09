@@ -45,5 +45,14 @@
 	<tx:annotation-driven/>
 	
 	<mybatis-spring:scan base-package="net.koreate.*.dao"/>	
+	
+	<!--  =========================이력서=================================== -->
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="c:\\spring\\upload"/>
+	</bean>
 		
+	<bean id="uploadFolder" class="java.lang.String">
+		<constructor-arg value="upload" />
+	</bean>	
+	<!--  =========================이력서=================================== -->
 </beans>
