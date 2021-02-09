@@ -18,7 +18,7 @@ public interface ResumeDAO {
 	
 	//좋아요 순으로 조회
 	@Select("select * from resumetable order by likecnt desc limit 0,9")
-	List<ResumeVO> resumeLikeList(SearchCriteria cri) throws Exception;
+	List<ResumeVO> resumeLikeList() throws Exception;
 	
 	//이력서 총 갯수
 	@Select("select count(*) from resumetable")
@@ -45,9 +45,11 @@ public interface ResumeDAO {
 	void updateResume(ResumeVO vo) throws Exception;
 	
 	//이력서 삭제
-	@Update("update resumetable set show = false where rno = #{rno}")
-	void deleteResume(int rno) throws Exception;
-
+	@Update("update resumetable set showhide = 'n' where rno = #{rno}")
+	void hideResume(int rno) throws Exception;
+	
+	@Update("update resumetable set showhide = 'y' where rno = #{rno}")
+	void showResume(int rno) throws Exception;
 	
 
 

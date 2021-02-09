@@ -8,8 +8,8 @@ import lombok.Data;
 public class ResumeVO {
 	
 	private int rno;
-	private String name;
-	private String birth;
+	private String rname;
+	private String rbirth;
 	private String email;
 	private String mobile;
 	private String phone;
@@ -20,7 +20,7 @@ public class ResumeVO {
 	private String uniType;
 	private String uniName;
 	private String uniMajor;
-	private float uniGrade;
+	private String uniGrade;
 	private String careerType;
 	private String companyName;
 	private String exStartDate;
@@ -32,7 +32,7 @@ public class ResumeVO {
 	private Date updatedate;
 	private int views;
 	private int likecnt;
-	private boolean show;
+	private String showhide;
 	
 }
 

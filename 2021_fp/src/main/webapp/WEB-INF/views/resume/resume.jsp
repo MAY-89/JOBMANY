@@ -24,15 +24,22 @@
 				<span class="h3 resume-subTitle">기본 정보</span>
 			</div>
 			<div class="row mb-3">
+				<div class="col-sm-3 " ><p>증명사진</p></div>
+				<div class="col-md-5" >
+					<img src="${pageContext.request.contextPath }/resources/img/jobmany.jpg" alt="사진" name="profile" id="profile" class="card-img-top"/>
+					<input type="file" name="profilePic" id="profilePic" accept="image/*"/>
+				</div>
+			</div>
+			<div class="row mb-3">
 				<div class="col-sm-3" ><p>이름</p></div>
 				<div class="col-md-5">
-				<input type="text" name="name" id='name' class="form-control" required/>
+				<input type="text" name="rname" id='name' class="form-control" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>생년월일</p></div>
 				<div class="col-md-5">
-				<input type="date" name="birth" id='birth' class="form-control" required/>
+				<input type="date" name="rbirth" id='birth' class="form-control" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -175,7 +182,7 @@
 						<span class="p">회사명</span>
 					</div>
 					<div class='col-md-3'>
-						<input type='text' name='CompanyName' class="form-control"/>
+						<input type='text' name='companyName' class="form-control"/>
 					</div>
 				</div>
 				<div class='row mb-3'>
@@ -235,11 +242,17 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	
-	if(${message != null}){
-		alert(${message});
+	if(${!empty message}){
+		alert("${message}");
 	}
-
-
+	
+	$("#profilePic").on("change",function(){
+		var files = this.files;
+		console.log(files)
+		$("#profile").attr("src",window.URL.createObjectURL(files[0]));
+	});
+	
+	
 	$(document).ready(function () {
 		$("radio").css({
 			display : "none"

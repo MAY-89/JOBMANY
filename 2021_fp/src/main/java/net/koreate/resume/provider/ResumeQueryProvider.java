@@ -2,6 +2,7 @@ package net.koreate.resume.provider;
 
 import org.apache.ibatis.jdbc.SQL;
 
+import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.SearchCriteria;
 
 public class ResumeQueryProvider {
@@ -20,16 +21,13 @@ public class ResumeQueryProvider {
 		}.toString();
 	}
 
-	public String insertVOSQL() {
+	public String insertVOSQL(ResumeVO vo) {
 		return new SQL() {
 			{
 				INSERT_INTO(table);
-//				SET("name,birth,email,mobile,phone,postcode,addr,"
-//						+ "detailaddr,shcoolType,uniType,uniName,uniMajor,uniGrade,careerType,"
-//						+ "companyName,exStartDate,exEndDate,introduce,pic,portfolio");
 				VALUES("rno", "#{rno}");
-				VALUES("rname", "#{name}");
-				VALUES("rbirth", "#{birth}");
+				VALUES("rname", "#{rname}");
+				VALUES("rbirth", "#{rbirth}");
 				VALUES("email", "#{email}");
 				VALUES("mobile", "#{mobile}");
 				VALUES("phone", "#{phone}");
@@ -52,12 +50,12 @@ public class ResumeQueryProvider {
 		}.toString();
 	}
 
-	public String updateResume() {
+	public String updateResume(ResumeVO vo) {
 		return new SQL() {
 			{
 				UPDATE(table);
-				SET("rname = #{name}");
-				SET("rbirth = #{birth}");
+				SET("rname = #{rname}");
+				SET("rbirth = #{rbirth}");
 				SET("email = #{email}");
 				SET("mobile = #{mobile}");
 				SET("phone = #{phone}");
@@ -81,14 +79,14 @@ public class ResumeQueryProvider {
 			}
 		}.toString();
 	}
-
+	
 	public void setSearchWhere(SearchCriteria cri, SQL sql) {
 
 		if (cri.getSearchType() != null) {
 
-			String titleQuery = "title LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
-			String contentQuery = "content LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
-			String writerQuery = "writer LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
+			String titleQuery = "title LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
+			String contentQuery = "content LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
+			String writerQuery = "rname LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
 
 			switch (cri.getSearchType()) {
 
@@ -118,6 +116,8 @@ public class ResumeQueryProvider {
 				break;
 
 			}
+		}else {
+			sql.WHERE("showhide = 'y'");
 		}
 	}
 }
