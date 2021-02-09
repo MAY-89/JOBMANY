@@ -17,6 +17,7 @@
 <body>
 <header>
 	<div class="container">
+	<a href="${root}/error">에러페이지 확인</a>
 	<nav class="navbar navbar-expand-lg header-nav">
  		<a class="navbar-brand header-nav-logo" href="${root}/">
  			<span class="header-nav-logo-front h3">J</span>
@@ -28,7 +29,7 @@
 		<div class="collapse navbar-collapse offset-md-5 header-nav-menu" id="navbarScroll">
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll header-nav-menu-innerBox" style="max-height: 100px;">
 				<li class="nav-item active header-nav-menu-innerBox-home">
-					<a class="nav-link header-nav-menu-innerBox-home-font" href="main">
+					<a class="nav-link header-nav-menu-innerBox-home-font" href="${root}/">
 						Home
 					 <span class="sr-only">(current)</span></a>
 				</li>
@@ -56,16 +57,25 @@
 				</li>
 				<li class="nav-item dropdown header-nav-menu-innerBox-drop">
 					<a class="nav-link dropdown-toggle header-nav-menu-innerBox-home-font" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+					<c:if test="${empty userInfo}">
 						MyPage
+					</c:if>
+					${userInfo.unickname}
 					</a>
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
-						<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
-						<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>
-						<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
-						<li><a class="dropdown-item" href="${root}/member/findUser">ID | PW 찾기</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">로그아웃</a></li>
+						<c:choose>
+							<c:when test="${empty userInfo}">
+								<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
+								<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>
+								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
+								<%-- <li><a class="dropdown-item" href="${root}/member/findUser">ID | PW 찾기</a></li> --%>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="#">로그아웃</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</li>
 			</ul>

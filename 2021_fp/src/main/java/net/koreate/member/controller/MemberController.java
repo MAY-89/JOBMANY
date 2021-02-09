@@ -1,13 +1,14 @@
 package net.koreate.member.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import net.koreate.member.service.MemberService;
 import net.koreate.member.vo.UserVO;
@@ -26,10 +27,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("login")
-	public String login(UserVO user,  String contiLogin, Model model) throws Exception{
-		UserVO vo;
-		vo = service.login(user);
-		model.addAttribute(vo);
+	public String login(UserVO user,  String contiLogin, Model model, HttpServletRequest req) throws Exception{
+		HttpSession session = req.getSession();
+		session.setAttribute("userInfo",service.login(user));
 		return "main";
 	}
 	
@@ -42,19 +42,31 @@ public class MemberController {
 	public String sign(UserVO user, Model model)throws Exception {
 		
 		String message = "환영 합니다."+user.getUnickname();
-		if(service.sign(user)) {
+		if(!service.sign(user)) {
 			message = "이미 등록된 아이디, 또는 닉네임 입니다.";
 			model.addAttribute("message", message);
+			model.addAttribute("userVO",user);
 			return "/member/signMember";
 		}
 		model.addAttribute("message", message);
-		return "redirect:/main";
+		return "/member/login";
 	}
 	
 	@GetMapping("memberInfo")
-	public String info(ModelAndView mav) {
-		
+	public String info() {
 		return "/member/memberInfo";
 	}
+	
+	@PostMapping("modifyMember")
+	public String modify(UserVO user, HttpServletRequest req) throws Exception{
+		
+		System.out.println(user);
+		service.modifyMember(user);
+		req.getSession().setAttribute("userInfo", user);
+		return "/member/memberInfo";
+	}
+	
+	@GetMapping("myList")
+	public void myList() {};
 	
 }

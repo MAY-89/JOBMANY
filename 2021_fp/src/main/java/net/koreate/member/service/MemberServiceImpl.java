@@ -21,8 +21,6 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public boolean sign(UserVO user) throws Exception {
-		String message = "환영 합니다. "+user.getUnickname();
-		
 		UserVO vo = dao.checkID(user);
 		if(vo != null) {
 			return false;
@@ -31,6 +29,10 @@ public class MemberServiceImpl implements MemberService{
 		return true;
 	}
 
-	
-	
+	@Override
+	public void modifyMember(UserVO user) throws Exception{
+		
+	}
+
+
 }

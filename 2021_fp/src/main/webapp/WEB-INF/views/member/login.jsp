@@ -48,20 +48,17 @@
 		 </div>
 	</div>
 </section>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
-
 	var loginForm = $("#loginForm");
 	
 	$("#loginBtn").click(function(){
-		alert("login 해볼게영");
-		
 		loginForm.attr("action", "login");
 		loginForm.attr("method","post").submit();
 	});
-		
-
+	
+	var message = '${message}';
+	if(message != null && !message == ""){
+		alert(message);
+	}
 </script>
-
-
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
