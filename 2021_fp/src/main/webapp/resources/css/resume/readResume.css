@@ -70,6 +70,12 @@ p{
 	margin-left: -5px;
 	border-right: 3px solid rgba(114, 192, 44, 1);
 }
+/* 프로필 사진 */
+.card-img-top{
+	width: 300px;
+	hegiht: 200px;
+}
+
 
 /* 최종학력 */
 .schoolType{

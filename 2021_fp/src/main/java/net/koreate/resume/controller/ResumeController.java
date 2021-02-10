@@ -66,13 +66,20 @@ public class ResumeController {
 	@PostMapping("/resumeWrite")
 	public String resume(ResumeVO vo,RedirectAttributes rttr,HttpServletRequest req, MultipartHttpServletRequest mhsr) throws IOException {
 		HttpSession session = req.getSession();
-		if(!mhsr.getFile("portfoliofile").isEmpty()) {
+		/*
+		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename());
+		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename() != null);
+		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename() != "");
+		System.out.println(mhsr.getFile("profilePic").getOriginalFilename() != null);
+		System.out.println(mhsr.getFile("profilePic").getOriginalFilename() != "");
+		*/
+		if(mhsr.getFile("portfoliofile").getSize() > 0) {
 			MultipartFile portfolio = mhsr.getFile("portfoliofile");
 			String portfolioFileName = ud.uploadFile(uploadFolder,Integer.toString(vo.getRno()), portfolio);
 			vo.setPortfolio(portfolioFileName);
 		}
 		
-		if(!mhsr.getFile("profilePic").isEmpty()) {
+		if(mhsr.getFile("profilePic").getOriginalFilename() != "") {
 			MultipartFile profile = mhsr.getFile("profilePic");
 			String profileName = ud.uploadFile(uploadFolder, Integer.toString(vo.getRno()), profile);
 			vo.setPic(profileName);
@@ -139,14 +146,13 @@ public class ResumeController {
 	}
 	@PostMapping("/updateResume")
 	public ModelAndView updateResume(ResumeVO vo, ModelAndView mav,MultipartHttpServletRequest mhsr) throws Exception {
-		
-		if(!mhsr.getFile("portfoliofile").isEmpty()) {
+		if(mhsr.getFile("portfoliofile").getSize() > 0) {
 			MultipartFile portfolio = mhsr.getFile("portfoliofile");
 			String portfolioFileName = ud.uploadFile(uploadFolder,Integer.toString(vo.getRno()), portfolio);
 			vo.setPortfolio(portfolioFileName);
 		}
 		
-		if(!mhsr.getFile("profilePic").isEmpty()) {
+		if(mhsr.getFile("profilePic").getOriginalFilename() != "") {
 			MultipartFile profile = mhsr.getFile("profilePic");
 			String profileName = ud.uploadFile(uploadFolder, Integer.toString(vo.getRno()), profile);
 			vo.setPic(profileName);
