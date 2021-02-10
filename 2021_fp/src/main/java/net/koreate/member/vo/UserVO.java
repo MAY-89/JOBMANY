@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserVO {
-
+//asdasdtest
 	private int uno;
 	private String uemail;
 	private String upassword;
