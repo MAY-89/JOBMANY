@@ -27,10 +27,8 @@
 						      <input type="email" class="form-control" name="uemail" value="${userInfo.uemail}" id="userEmaill" required="required" readonly />
 						      <!-- 아이디 중복 시에 나타나는 오류 창  -->
 						      <!-- <label class=""  ></label> -->
-						      <div class="hiddenMember">
 						      <label for="password">비밀번호</label>
 						      <input type="password" name="upassword" class="form-control" id="password" required="required" />
-						      </div>
 				      	</div>
 				      	<div class="row">
 				      		<div class="col sign-pimg">
@@ -114,7 +112,18 @@
    
     document.getElementById("modifyMember").addEventListener("click", function(){
     	
-        if(hiddenMember != null){
+    	var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
+			
+			$.getJSON(url,function(data){
+				
+				
+			});
+    	
+    	
+    	
+    	
+    	
+    	if(hiddenMember != null){
             for(var i = 0; i < hiddenMember.length; i++){
             	hiddenMember[i].style.display = 'inline-block';	
            }
@@ -140,27 +149,7 @@
         console.log(upassword +"-"+ uno);
    		
    			
-   			var url = "/members/modifyPWcheck";
-   			
-   			$.ajax({
-   				
-   				type : "GET",
-   				
-   				url : url,
-   				
-   				data : {
-   					
-   					uno : uno,
-   					
-   					upassword : upassword
-   					
-   				},
-   				
-   				success : function(data){
-   					console.log(data);
-   					alert(data);
-   				}
-   			});
+   		
    		
    		/* 
    		signForm.setAttribute("action","modifyMember");

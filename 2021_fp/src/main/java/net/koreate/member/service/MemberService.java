@@ -12,6 +12,6 @@ public interface MemberService {
 	boolean sign(UserVO user) throws Exception;
 
 	// modify member
-	void modifyMember(UserVO user) throws Exception;
+	String modifyMember(UserVO user) throws Exception;
 	
 }
