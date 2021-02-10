@@ -8,9 +8,13 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String main() {
-		
 		return "main";
-		
 	}
 	
+	@RequestMapping("error")
+	public String error() {
+		
+		return "error/error";
+		
+	}
 }

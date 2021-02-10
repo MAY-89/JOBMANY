@@ -67,3 +67,10 @@
 	<hr style="margin-top:80px;"/>
 </section>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
+<script>
+	var message = '${message}';
+	if(message != null && !message == ""){
+		alert(message);
+	}
+</script>

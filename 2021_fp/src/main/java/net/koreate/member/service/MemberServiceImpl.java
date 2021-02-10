@@ -19,19 +19,20 @@ public class MemberServiceImpl implements MemberService{
 		return dao.login(user);
 	}
 	
-	@Transactional
 	@Override
-	public String sign(UserVO user) throws Exception {
-		String message = "환영 합니다. "+user.getUnickname();
-		
+	public boolean sign(UserVO user) throws Exception {
 		UserVO vo = dao.checkID(user);
 		if(vo != null) {
-			return message = "이미 등록된 아이디, 또는 닉네임 입니다.";
+			return false;
 		}
 		dao.sign(user);
-		return message;
+		return true;
 	}
 
-	
-	
+	@Override
+	public void modifyMember(UserVO user) throws Exception{
+		
+	}
+
+
 }
