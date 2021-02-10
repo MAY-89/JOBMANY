@@ -29,7 +29,12 @@ public class MemberController {
 	@PostMapping("login")
 	public String login(UserVO user,  String contiLogin, Model model, HttpServletRequest req) throws Exception{
 		HttpSession session = req.getSession();
-		session.setAttribute("userInfo",service.login(user));
+		UserVO vo = service.login(user);
+		if(vo == null) {
+			model.addAttribute("message","아이디/패스워드를 확인하여 주세요");
+			return "member/login";
+		}
+		session.setAttribute("userInfo",vo);
 		return "main";
 	}
 	

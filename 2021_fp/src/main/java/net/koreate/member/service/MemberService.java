@@ -14,4 +14,7 @@ public interface MemberService {
 	// modify member
 	String modifyMember(UserVO user) throws Exception;
 	
+	// password check
+	String passwordCheck(int uno, String upassword) throws Exception;
+	
 }

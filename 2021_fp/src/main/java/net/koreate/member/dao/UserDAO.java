@@ -1,6 +1,7 @@
 package net.koreate.member.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -22,13 +23,13 @@ public interface UserDAO {
 	void sign(UserVO user) throws Exception;
 
 	// 회원정보 수정시, 비밀번호 체크
-	@Select("SELECT uemail FROM tbl_user WHERE uno = #{uno} and password = #{upassword} ")
-	String modifyPWCheck(int uno, String upassword) throws Exception;
+	@Select("select uemail from tbl_user WHERE uno = #{uno} and upassword = #{upassword}")
+	String modifyPWCheck(@Param("uno") int uno, @Param("upassword") String upassword) throws Exception;
 	
 	// 회원 정보 수정
 	@Update("UPDATE tbl_user SET upassword = #{upassword}, ubirth = #{ubirth}, unickname = #{unickname}, postcode = #{postcode}, addr = #{addr}"
 			+ ", detailAddr = #{detailAddr}, pic = #{pic} WHERE uno = #{uno}")
-	void modifyMember(UserVO user) throws Exception;
+	UserVO modifyMember(UserVO user) throws Exception;
 	
 	
 	

@@ -111,53 +111,39 @@
    var signForm = document.getElementById("signForm"); 
    
     document.getElementById("modifyMember").addEventListener("click", function(){
-    	
-    	var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
-			
-			$.getJSON(url,function(data){
-				
-				
-			});
-    	
-    	
-    	
-    	
-    	
-    	if(hiddenMember != null){
-            for(var i = 0; i < hiddenMember.length; i++){
-            	hiddenMember[i].style.display = 'inline-block';	
-           }
-            for(var i=0; i<clickHidden.length; i++){
-            	clickHidden[i].style.display = 'none';
-           }
-            for(var i=1; i<inputTag.length; i++){
-            	inputTag[i].removeAttribute("disabled",0);    	
-           }
-            password.value = "";
-            password.removeAttribute("required",0);
-            title.innerHTML = "회원 정보 수정";    
-       }
-   });
-    
-    document.getElementById("modify").addEventListener("click",function(){
     	var upassword = document.getElementById("password").value;
     	var uno = document.getElementById("uno").value;
-   		if(password == "" || password == null){
+    	var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
+    	if(upassword == "" || upassword == null){
             alert("비밀번호를 입력해주세요");
             return;
         }
-        console.log(upassword +"-"+ uno);
-   		
-   			
-   		
-   		
-   		/* 
+    	$.getJSON(url,function(data){
+			if(data){
+				if(hiddenMember != null){
+		            for(var i = 0; i < hiddenMember.length; i++){
+		            	hiddenMember[i].style.display = 'inline-block';	
+		           }
+		            for(var i=0; i<clickHidden.length; i++){
+		            	clickHidden[i].style.display = 'none';
+		           }
+		            for(var i=1; i<inputTag.length; i++){
+		            	inputTag[i].removeAttribute("disabled",0);    	
+		           }
+		            password.value = "";
+		            password.removeAttribute("required",0);
+		            title.innerHTML = "회원 정보 수정";    
+		       }
+			}else{
+				alert("비밀번호를 확인해 주십시오");
+			}
+		});
+   });
+    document.getElementById("modify").addEventListener("click",function(){
    		signForm.setAttribute("action","modifyMember");
     	signForm.setAttribute("method", "POST");
-    	signForm.submit(); */
-    	
+    	signForm.submit();
     });
-    
 </script>
 
 

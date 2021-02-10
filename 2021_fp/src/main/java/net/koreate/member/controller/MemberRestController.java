@@ -22,15 +22,17 @@ public class MemberRestController {
 	MemberService service;
 	
 	
-	@GetMapping("/modifyPWcheck")
+	@GetMapping("/modifyPWcheck/{uno}/{upassword}")
 	public ResponseEntity<String> modifyPWcheck(
-				@RequestBody UserVO user) {
+				@PathVariable("uno") int uno,
+				@PathVariable("upassword")String upassword) {
+		
+		System.out.println(uno+" : "+upassword);
 		
 		ResponseEntity<String> entity = null;
-		System.out.println("비동기 왔는데 잘되네?");
 		
 		try {
-			entity = new ResponseEntity<String>(service.modifyMember(user),HttpStatus.OK);
+			entity = new ResponseEntity<String>(service.passwordCheck(uno,upassword),HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>("false",HttpStatus.BAD_REQUEST);
 		}

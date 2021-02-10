@@ -30,7 +30,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	@Transactional
 	public String modifyMember(UserVO user) throws Exception{
 		
 		String message = "true";
@@ -41,6 +40,18 @@ public class MemberServiceImpl implements MemberService{
 			message = "false";
 		}
 		dao.modifyMember(user);
+		return message;
+	}
+	
+	@Override
+	public String passwordCheck(int uno, String upassword) throws Exception{
+		
+		String message = "true";
+		String email = dao.modifyPWCheck(uno,upassword);
+		System.out.println(email);
+		if(email == null) {
+			message = "false";
+		}
 		return message;
 	}
 	
