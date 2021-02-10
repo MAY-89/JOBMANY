@@ -17,11 +17,11 @@ public interface ResumeDAO {
 	List<ResumeVO> resumeList(SearchCriteria cri) throws Exception;
 	
 	//좋아요 순으로 조회
-	@Select("select * from resumeTable order by likecnt desc limit 0,9")
-	List<ResumeVO> resumeLikeList(SearchCriteria cri) throws Exception;
+	@Select("select * from resumetable order by likecnt desc limit 0,9")
+	List<ResumeVO> resumeLikeList() throws Exception;
 	
 	//이력서 총 갯수
-	@Select("select count(*) from resumeTalbel")
+	@Select("select count(*) from resumetable")
 	int getTotalList() throws Exception;
 	
 	//이력서 쓰기
@@ -29,15 +29,15 @@ public interface ResumeDAO {
 	void writeResume(ResumeVO vo) throws Exception;
 	
 	//이력서 읽기
-	@Select("Select * from resumeTabel where rno = #{rno}")
+	@Select("Select * from resumetable where rno = #{rno}")
 	ResumeVO selectOneResume(int rno) throws Exception;
 	
 	//조회수
-	@Update("update resumeTable set views = views +1 where rno = #{rno}")
+	@Update("update resumetable set views = views +1 where rno = #{rno}")
 	void views(int rno) throws Exception;
 	
 	//좋아요
-	@Update("update resumeTable set likecnt = likecnt+1 where rno = #{rno}")
+	@Update("update resumetable set likecnt = likecnt+1 where rno = #{rno}")
 	void likeResume(int rno) throws Exception;
 	
 	//이력서 수정
@@ -45,9 +45,11 @@ public interface ResumeDAO {
 	void updateResume(ResumeVO vo) throws Exception;
 	
 	//이력서 삭제
-	@Update("update resumeTable set show = false where rno = #{rno}")
-	void deleteResume(int rno) throws Exception;
-
+	@Update("update resumetable set showhide = 'n' where rno = #{rno}")
+	void hideResume(int rno) throws Exception;
+	
+	@Update("update resumetable set showhide = 'y' where rno = #{rno}")
+	void showResume(int rno) throws Exception;
 	
 
 

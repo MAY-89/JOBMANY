@@ -2,11 +2,12 @@ package net.koreate.resume.provider;
 
 import org.apache.ibatis.jdbc.SQL;
 
+import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.SearchCriteria;
 
 public class ResumeQueryProvider {
 
-	String table = "resumeTalbe";
+	String table = "resumetable";
 
 	public String list(SearchCriteria cri) {
 		return new SQL() {
@@ -20,20 +21,19 @@ public class ResumeQueryProvider {
 		}.toString();
 	}
 
-	public String insertVOSQL() {
+	public String insertVOSQL(ResumeVO vo) {
 		return new SQL() {
 			{
 				INSERT_INTO(table);
-//				SET("name,birth,email,mobile,phone,postcode,addr,"
-//						+ "detailaddr,shcoolType,uniType,uniName,uniMajor,uniGrade,careerType,"
-//						+ "companyName,exStartDate,exEndDate,introduce,pic,portfolio");
-				VALUES("name", "#{name}");
-				VALUES("birth", "#{birth}");
-				VALUES("eamil", "#{email}");
+				VALUES("rno", "#{rno}");
+				VALUES("rname", "#{rname}");
+				VALUES("rbirth", "#{rbirth}");
+				VALUES("email", "#{email}");
+				VALUES("mobile", "#{mobile}");
 				VALUES("phone", "#{phone}");
 				VALUES("postcode", "#{postcode}");
 				VALUES("addr", "#{addr}");
-				VALUES("detailaddr", "#{detailaddr}");
+				VALUES("detailAddr", "#{detailAddr}");
 				VALUES("schoolType", "#{schoolType}");
 				VALUES("uniType", "#{uniType}");
 				VALUES("uniName", "#{uniName}");
@@ -50,18 +50,18 @@ public class ResumeQueryProvider {
 		}.toString();
 	}
 
-	public String updateResume() {
+	public String updateResume(ResumeVO vo) {
 		return new SQL() {
 			{
 				UPDATE(table);
-				SET("name = #{name}");
-				SET("birth = #{birth}");
+				SET("rname = #{rname}");
+				SET("rbirth = #{rbirth}");
 				SET("email = #{email}");
 				SET("mobile = #{mobile}");
 				SET("phone = #{phone}");
 				SET("postcode = #{postcode}");
 				SET("addr = #{addr}");
-				SET("dettailaddr = #{detailaddr}");
+				SET("detailAddr = #{detailAddr}");
 				SET("schoolType = #{schoolType}");
 				SET("uniType = #{uniType}");
 				SET("uniName = #{uniName}");
@@ -79,14 +79,14 @@ public class ResumeQueryProvider {
 			}
 		}.toString();
 	}
-
+	
 	public void setSearchWhere(SearchCriteria cri, SQL sql) {
 
 		if (cri.getSearchType() != null) {
 
-			String titleQuery = "title LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
-			String contentQuery = "content LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
-			String writerQuery = "writer LIKE CONCAT('%','" + cri.getKeyword() + "','%')";
+			String titleQuery = "title LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
+			String contentQuery = "content LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
+			String writerQuery = "rname LIKE CONCAT('%','" + cri.getKeyword() + "','%') and showhide = 'y'";
 
 			switch (cri.getSearchType()) {
 
@@ -116,6 +116,8 @@ public class ResumeQueryProvider {
 				break;
 
 			}
+		}else {
+			sql.WHERE("showhide = 'y'");
 		}
 	}
 }

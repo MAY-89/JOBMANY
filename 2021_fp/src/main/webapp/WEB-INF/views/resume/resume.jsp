@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/resume/resume.css">
 <!-- 상단 이미지 -->
 <div>
-	<img src="${pageContext.request.contextPath }/resources/img/resume/resume.jpg" class="board-list-top-img" alt="...">
+	<img src="${pageContext.request.contextPath }/resources/img/resume/resume.jpg" class="main-header-top-img" alt="...">
 </div>
 <!-- 본문 -->
-<form action="#" method="post">
+<form action="resumeWrite" method="post" encType="multipart/form-data">
 <div class="container resume">
 	<div class="container resume-top">
 		<div class="row">
@@ -23,15 +24,22 @@
 				<span class="h3 resume-subTitle">기본 정보</span>
 			</div>
 			<div class="row mb-3">
+				<div class="col-sm-3 " ><p>증명사진</p></div>
+				<div class="col-md-5" >
+					<img src="${pageContext.request.contextPath }/resources/img/jobmany.jpg" alt="사진" name="profile" id="profile" class="card-img-top"/>
+					<input type="file" name="profilePic" id="profilePic" accept="image/*"/>
+				</div>
+			</div>
+			<div class="row mb-3">
 				<div class="col-sm-3" ><p>이름</p></div>
 				<div class="col-md-5">
-				<input type="text" name="name" id='name' class="form-control" required/>
+				<input type="text" name="rname" id='name' class="form-control" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>생년월일</p></div>
 				<div class="col-md-5">
-				<input type="date" name="birth" id='birth' class="form-control" required/>
+				<input type="date" name="rbirth" id='birth' class="form-control" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -55,17 +63,17 @@
 			<div class="row mb-3">
 				<div class="col-sm-3" ><p>주소</p></div>
 				<div class="col-md-3 form-floating mb-2 input-group">
-					<input type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control " />
+					<input type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control" required />
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-success" />
 				</div>
 			</div>	
 			<div class="row mb-3">
 				<div class="col-sm-3" ></div><!--  -->
 				<div class="col-md-3 form-floating mb-3">
-					<input type="text" name="addr" id="sample6_address" class="form-control" readonly placeholder="주소">
+					<input type="text" name="addr" id="sample6_address" class="form-control" readonly placeholder="주소" required>
 				</div>
 				<div class="col-md-3 ml-n3 form-floating mb-3">
-					<input type="text" name="detailAddr" id="sample6_detailAddress" placeholder="상세주소" class="form-control">
+					<input type="text" name="detailAddr" id="sample6_detailAddress" placeholder="상세주소" class="form-control" required>
 					<input type="hidden" name="extraAddr" id="sample6_extraAddress" readonly placeholder="참고항목">
 				</div>
 			</div>
@@ -79,7 +87,7 @@
 			<div class='row'>
 				<div class="col-lg schoolType rounded ">
 					<label class="col-lg-12 schoolType pt-3 pb-2" id="labelu" >
-						<input class='radioo' type="radio" name="schoolType" value="primary" class="form-control" />
+						<input class='radioo' type="radio" name="schoolType" value="primary" class="form-control"  />
 						<span class="radio-btn">초등학교</span>
 					</label>
 				</div>
@@ -135,7 +143,7 @@
 					<span class="p">전공</span>
 				</div>
 				<div class='col'>
-					<input type="text" name="major" id="major" class="form-control"/>
+					<input type="text" name="uniMajor" id="major" class="form-control"/>
 				</div>
 			</div>
 			<div class='row mb-3'>
@@ -156,13 +164,13 @@
 				<div class="col careerType" >
 					<label class="col-md-12 pt-3 pb-2">
 						<input type="radio" name="careerType" value="1"/>
-						<span class="p">신입</span>
+						<span class="radio-btn">신입</span>
 					</label>
 				</div>
 				<div class="col careerType" >
 					<label class="col-md-12 pt-3 pb-2">
 						<input type="radio" name="careerType" value="2"/>
-						<span class="p">경력</span>
+						<span class="radio-btn">경력</span>
 					</label>
 				</div>
 				
@@ -174,7 +182,7 @@
 						<span class="p">회사명</span>
 					</div>
 					<div class='col-md-3'>
-						<input type='text' name='CompanyName' class="form-control"/>
+						<input type='text' name='companyName' class="form-control"/>
 					</div>
 				</div>
 				<div class='row mb-3'>
@@ -215,7 +223,7 @@
 			</div>
 			<div class="row">
 				<div class='col'>
-					<input type="file" accept=".zip" name="portfolio" class="form-control col-md-6"/>
+					<input type="file" accept=".zip" name="portfoliofile" class="form-control col-md-6"/>
 				</div>
 			</div>		
 		</div>
@@ -224,7 +232,7 @@
 			<div class="row portfolio-btn-box">
 				<div class="col">
 					<input class="btn btn-outline-success" type="submit" value="작성완료"/>
-					<input class="btn btn-outline-primary" type="button" onclick="#" value="작성글 공개"/>
+					<!-- <input class="btn btn-outline-primary" type="button" value="작성글 공개"/>  --><!-- onclick="#" -->
 					<input class="btn btn-outline-warning" type="reset" value="다시쓰기"/>
 				</div> 
 			</div>
@@ -233,6 +241,18 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	
+	if(${!empty message}){
+		alert("${message}");
+	}
+	
+	$("#profilePic").on("change",function(){
+		var files = this.files;
+		console.log(files)
+		$("#profile").attr("src",window.URL.createObjectURL(files[0]));
+	});
+	
+	
 	$(document).ready(function () {
 		$("radio").css({
 			display : "none"
