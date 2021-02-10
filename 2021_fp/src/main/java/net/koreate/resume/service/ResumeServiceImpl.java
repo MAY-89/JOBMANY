@@ -1,6 +1,8 @@
 package net.koreate.resume.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,55 +14,54 @@ import net.koreate.util.PageMaker;
 import net.koreate.util.SearchCriteria;
 
 @Service
-public class ResumeServiceImpl implements ResumeService {
+public class ResumeServiceImpl {
 	
 	@Inject
 	ResumeDAO dao;
 	
-	@Override
-	public List<ResumeVO> list(SearchCriteria cri) throws Exception {
+	public Map<String,Object> list(SearchCriteria cri) throws Exception {
 		System.out.println("전체 리스트 불러오기");
-		return dao.resumeList(cri);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("list", dao.resumeList(cri));
+		map.put("pm", getPageMaker(cri));
+		map.put("likeList", dao.resumeLikeList());
+		return map;
 	}
-
-	@Override
-	public List<ResumeVO> likeList(SearchCriteria cri) throws Exception {
-		System.out.println("좋아요 순으로 리스트 불러오기");
-		return dao.resumeLikeList(cri);
-	}
-
-	@Override
+	
 	public PageMaker getPageMaker(SearchCriteria cri) throws Exception {
 		int totalcnt = dao.getTotalList();
 		return new PageMaker(cri, totalcnt);
 	}
 
-	@Override
 	public void insert(ResumeVO vo) throws Exception {
-		System.out.println("이력서 삽입");
+		System.out.println("이력서 정보 : "+vo);
 		dao.writeResume(vo);
+		
 	}
 
-	@Override
 	public ResumeVO select(int rno) throws Exception {
-		System.out.println("이력서 하나 불러오기");
+		System.out.println("이력서 하나 불러오기 : "+dao.selectOneResume(rno));
 		return dao.selectOneResume(rno);
 	}
-
-	@Override
-	public ResumeVO update(ResumeVO vo) throws Exception {
+	
+	public void updateViews(int rno)throws Exception{
+		dao.views(rno);
+	}
+	
+	public void update(ResumeVO vo) throws Exception {
 		System.out.println("이력서 수정");
 		dao.updateResume(vo);
-		return dao.selectOneResume(vo.getRno()); 
 	}
 
-	@Override
 	public void showHide(int rno) throws Exception {
 		System.out.println("이력서비공개");
-		dao.deleteResume(rno);
+		if(dao.selectOneResume(rno).getShowhide().equals("y")) {
+			dao.hideResume(rno);	
+		}else {
+			dao.showResume(rno);
+		}
 	}
 
-	@Override
 	public void like(int rno) throws Exception {
 		dao.likeResume(rno);
 	}

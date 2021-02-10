@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/resume/readResume.css">
 <!-- 상단 이미지 -->
 <div>
-	<img src="${pageContext.request.contextPath }/resources/img/resume/resume.jpg" class="board-list-top-img" alt="...">
+	<img src="${pageContext.request.contextPath }/resources/img/resume/resume.jpg" class="main-header-top-img" alt="...">
 </div>
 <div style="margin-top: 180px;"></div>
-<form action="#" method="post">
+<form action="updateResume" method="get">
 <div class="container readResume">
 	<div class="container resume-top">
 		<div class="row">
@@ -24,33 +24,40 @@
 				기본 정보
 			</div>
 			<div class="row mb-3">
+				<div class="col-sm-3 " ><p>증명사진</p></div>
+				<div class="col-md-5" >
+					<img src="${pageContext.request.contextPath}/upload/${resume.pic}" alt="사진" name="profile" id="profile" class="card-img-top"/>
+					<input type="file" name="profilePic" id="profilePic" accept="image/*" disabled/>
+				</div>
+			</div>
+			<div class="row mb-3">
 				<div class="col-sm-3" ><p>이름</p></div>
 				<div class="col-md-5">
-				<input type="text" name="name" id='name' class="form-control" value="${resume.name }"/>
+				<input type="text" name="rname" id='name' class="form-control" value="${resume.rname } " readonly/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>생년월일</p></div>
 				<div class="col-md-5">
-				<input type="date" name="birth" id='birth' class="form-control" value="${resume.birth }"/>
+				<input type="date" name="rbirth" id='birth' class="form-control" value="${resume.rbirth } " readonly/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>이메일</p></div>
 				<div class="col-md-5">
-				<input type="email" name="email" id='email' class="form-control" value="${resume.email }"/>
+				<input type="email" name="email" id='email' class="form-control" value="${resume.email }" readonly />
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>핸드폰번호</p></div>
 				<div class="col-md-5">
-				<input type="text" name="mobile" id='mobile' class="form-control" value="${resume.mobile }"/>
+				<input type="text" name="mobile" id='mobile' class="form-control" value="${resume.mobile }" readonly/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>전화번호</p></div>
 				<div class="col-md-5">
-					<input type="text" name="phone" id='phone' class="form-control" value="${resume.phone }"/>
+					<input type="text" name="phone" id='phone' class="form-control" value="${resume.phone }" readonly />
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -66,7 +73,7 @@
 					<input type="text" name="addr" id="sample6_address" class="form-control" readonly value="${resume.addr }" >
 				</div>
 				<div class="col-md-3 ml-n3 form-floating mb-3">
-					<input type="text" name="detailAddr" id="sample6_detailAddress" value="${resume.detailAddr }" class="form-control">
+					<input type="text" name="detailAddr" id="sample6_detailAddress" value="${resume.detailAddr }" readonly class="form-control">
 					<input type="hidden" name="extraAddr" id="sample6_extraAddress" readonly placeholder="참고항목">
 				</div>
 			</div>
@@ -81,28 +88,28 @@
 				<div class="col-lg schoolType rounded ">
 					<label class="col-lg-12 schoolType pt-3 pb-2" id="labelu" >
 						<input class='radioo' type="radio" name="schoolType" value="primary" class="form-control" 
-						${resume.schoolType == "primary" ? "checked" : "" }	/>
+						${resume.schoolType == "primary" ? "checked" : "" } readonly />
 						<span class="radio-btn">초등학교</span>
 					</label>
 				</div>
 				<div class="col-lg schoolType rounded">
 					<label class="col-lg-12 schoolType pt-3 pb-2" id="labelu" >
 						<input class='radioo' type="radio" name="schoolType" value="middle" class="form-control"  
-						${resume.schoolType == "middle" ? "checked" : "" }/>
+						${resume.schoolType == "middle" ? "checked" : "" } readonly />
 						<span class="radio-btn">중학교</span>
 					</label>
 				</div>
 				<div class="col-lg schoolType rounded">
 					<label class="col-lg-12 schoolType pt-3 pb-2" id="labelu">
 						<input class='radioo' type="radio" name="schoolType" value="high" class="form-control" 
-						${resume.schoolType == "high" ? "checked" : "" }/>
+						${resume.schoolType == "high" ? "checked" : "" } readonly />
 						<span class="radio-btn">고등학교</span>
 					</label>	
 				</div>
 				<div class="col-lg schoolType rounded">
 					<label class="col-lg-12 schoolType pt-3 pb-2" id="labelu">
 						<input class='radioo' type="radio" name="schoolType" value="university" class="form-control" 
-						${resume.schoolType == "university" ? "checked" : "" }/>
+						${resume.schoolType == "university" ? "checked" : "" } readonly />
 						<span class="radio-btn">대학교</span>
 					</label>
 				</div>
@@ -118,7 +125,7 @@
 					<span class="p">대학교이름</span>
 				</div>
 				<div class='col'>
-					<input type="text" name="uniName" id="uniName" class="form-control" value="${resume.uniName }"/>
+					<input type="text" name="uniName" id="uniName" class="form-control" value="${resume.uniName }" readonly/>
 				</div>
 			</div>
 			<div class='row mb-3'>
@@ -126,7 +133,7 @@
 					<span class="p">대학교종류</span>
 				</div>
 				<div class='col'>
-					<select name="uniType" id="uniType" class="form-control">
+					<select name="uniType" id="uniType" class="form-control" readonly>
 						<option value="">대학교종류를 골라주세요</option>
 						<option value="college" ${resume.uniType == "college" ? "selected" : "" }>대학(2/3년)</option>
 						<option value="University" ${resume.uniType == "University" ? "selected" : "" }>대학(4년)</option>
@@ -140,7 +147,7 @@
 					<span class="p">전공</span>
 				</div>
 				<div class='col'>
-					<input type="text" name="major" id="major" value="${resume.major }" class="form-control"/>
+					<input type="text" name="uniMajor" id="uniMajor" value="${resume.uniMajor }" class="form-control" readonly/>
 				</div>
 			</div>
 			<div class='row mb-3'>
@@ -148,7 +155,7 @@
 					<span class="p">평균학점</span>
 				</div>
 				<div class='col'>
-					<input type="number" name="uniGrade" id="uniGrade" value="${resume.uniGrade }" class="form-control"/>
+					<input type="number" name="uniGrade" id="uniGrade" value="${resume.uniGrade }" class="form-control" readonly/>
 				</div>
 			</div>
 		</div>
@@ -160,13 +167,13 @@
 			<div class='row mb-3'>
 				<div class="col careerType" >
 					<label class="col-md-12 pt-3 pb-2">
-						<input type="radio" name="careerType" value="1" ${resume.careerType == 1 ? "checked" : "" }/>
+						<input type="radio" name="careerType" value="1" ${resume.careerType == 1 ? "checked" : "" } readonly/>
 						<span class="radio-btn">신입</span>
 					</label>
 				</div>
 				<div class="col careerType" >
 					<label class="col-md-12 pt-3 pb-2">
-						<input type="radio" name="careerType" value="2" ${resume.careerType == 2 ? "checked" : "" }/> 
+						<input type="radio" name="careerType" value="2" ${resume.careerType == 2 ? "checked" : "" } readonly/> 
 						<span class="radio-btn">경력</span>
 					</label>
 				</div>
@@ -179,7 +186,7 @@
 						<span class="p">회사명</span>
 					</div>
 					<div class='col-md-3'>
-						<input type='text' name='CompanyName' value="${resume.CompanyName }" class="form-control"/>
+						<input type='text' name='companyName' value="${resume.companyName }" class="form-control" readonly/>
 					</div>
 				</div>
 				<div class='row mb-3'>
@@ -187,13 +194,13 @@
 						<span class="p">경력기간</span>
 					</div>
 					<div class='col-md-2'>
-						<input type='date' id='exStartDate' name='exStartDate' value="${resume.exStartDate }" class="form-control"/>
+						<input type='date' id='exStartDate' name='exStartDate' value="${resume.exStartDate }" class="form-control" readonly/>
 					</div>
 					<div class='col-sm-1'>
 						<span>~</span>
 					</div>
 					<div class='col-md-2 ml-n5'>
-						<input type='date' id='exEndDate' name='exEndDate' value="${resume.exEndDate }" class="form-control"/>
+						<input type='date' id='exEndDate' name='exEndDate' value="${resume.exEndDate }" class="form-control" readonly/>
 					</div>
 				</div>
 			</div>
@@ -207,7 +214,7 @@
 			</div>
 			<div class="row">
 				<div class='col justify-content-center'>
-					<textarea name="introduce" class="form-control col-md-8 mb-5 d-flex justify-content-center ml-3" rows="10" cols="100" maxlength="200">
+					<textarea readonly name="introduce" class="form-control col-md-8 mb-5 d-flex justify-content-center ml-3" rows="10" cols="100" maxlength="200">
 						${resume.introduce }
 					</textarea>
 				</div>
@@ -222,7 +229,8 @@
 			</div>
 			<div class="row">
 				<div class='col'>
-					<input type="file" name="portfolio" class="form-control col-md-6" value="${resume.portfolio }"/>
+					<input type="file" name="portfolio" class="form-control col-md-6" value="${resume.portfolio }" disabled/>
+					<input type="text" value="${pageContext.request.contextPath}/upload/${resume.portfolio }" readonly/>
 				</div>
 			</div>		
 		</div>
@@ -230,23 +238,39 @@
 		<div class="container">
 			<div class='row d-flex mb-2 portfolio-btn-box'>
 				<div class="col">
-					<input class="btn btn-outline-success" type="submit" value="수정완료"/>
-					<input class="btn btn-outline-primary" type="button" onclick="#" value="작성글 공개"/>
-					<input class="btn btn-outline-danger" type="reset" value="삭제"/>
+					<c:choose>
+						<c:when test="${userInfo.uno eq rno }">
+							<input class="btn btn-outline-danger" type="button" value="${resume.showhide eq 'y' ? '비공개' : '공개'}" id="showhideBtn"/>	
+							<input class="btn btn-outline-success" type="submit" value="수정" />
+						</c:when>
+						<c:otherwise>
+							<input class="btn btn-outline-success" type="button" value="좋아요" id="likeBtn"/>	
+						</c:otherwise>
+					</c:choose>
+					<input class="btn btn-outline-primary" type="button" onclick="location.href='resumeList'" value="글목록"/>
 				</div> 
 			</div>
 		</div>
-		
+		<input type="hidden" name="rno" id="rno" value="${resume.rno}">
+		<input type="hidden" name="page" value="${cri.page }">
+		<input type="hidden" name="perPageNum" value="${cri.perPageNum }">
 </form>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	$(document).ready(function () {
-		$("radio").css({
-			display : "none"
-		});
+	
+	$("#profilePic").on("change",function(){
+		var files = this.files;
+		console.log(files)
+		$("#profile").attr("src",window.URL.createObjectURL(files[0]));
 	});
-
+	
+	$("#showhideBtn").on("click",function(){
+		var form = $("form");
+		form.
+	});
+	
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -348,7 +372,7 @@
 	  	}
     });
      
-    
+     
     
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
