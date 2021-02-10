@@ -28,7 +28,7 @@
 					<span class="h3 main-header-top-img-text-top2">이용에 불편을 드려 죄송합니다.</span>
 				</div>
 				<div class="col">
-					<a href="main">
+					<a href="${pageContext.request.contextPath}/">
 						<button type="button" class="btn btn-warning">돌아가기</button>
 					</a>
 				</div>
