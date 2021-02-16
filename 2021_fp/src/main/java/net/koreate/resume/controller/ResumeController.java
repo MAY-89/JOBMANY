@@ -47,16 +47,14 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumeWrite")
-	public String resume(ResumeVO vo,RedirectAttributes rttr,HttpServletRequest req, MultipartHttpServletRequest mhsr) throws Exception {
+	public String resume(ResumeVO vo,RedirectAttributes rttr,HttpServletRequest req, MultipartHttpServletRequest mhsr,Model model) throws Exception {
 		HttpSession session = req.getSession();
 		UserVO user = (UserVO) session.getAttribute("userInfo");
 		//후에 인터셉터로 만들면 좋을꺼같습니다.
+		SearchCriteria cri = new SearchCriteria();
 		if(rs.select(user.getUno()) != null) {
-			
-		}else {
-			System.out.println("회원가입 먼저");
-			return "redirect:/member/login";
-		}
+	         return readResume(user.getUno(),model,cri);
+	      }
 		
 		try {
 			rs.insert(vo,mhsr,user);
