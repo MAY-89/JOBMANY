@@ -99,4 +99,11 @@ input[type='radio']:checked {
 	margin-left: 15px;
 }
 
-
+/*  */
+.moblieSelect{
+	width: 80px;
+}
+#mobile2{
+	position: relative;
+	left: 8px;
+}

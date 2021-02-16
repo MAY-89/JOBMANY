@@ -51,33 +51,115 @@ public class ResumeQueryProvider {
 	}
 
 	public String updateResume(ResumeVO vo) {
-		return new SQL() {
-			{
-				UPDATE(table);
-				SET("rname = #{rname}");
-				SET("rbirth = #{rbirth}");
-				SET("email = #{email}");
-				SET("mobile = #{mobile}");
-				SET("phone = #{phone}");
-				SET("postcode = #{postcode}");
-				SET("addr = #{addr}");
-				SET("detailAddr = #{detailAddr}");
-				SET("schoolType = #{schoolType}");
-				SET("uniType = #{uniType}");
-				SET("uniName = #{uniName}");
-				SET("uniMajor = #{uniMajor}");
-				SET("uniGrade = #{uniGrade}");
-				SET("careerType = #{careerType}");
-				SET("companyName = #{companyName}");
-				SET("exStartDate = #{exStartDate}");
-				SET("exEndDate = #{exEndDate}");
-				SET("introduce = #{introduce}");
-				SET("pic = #{pic}");
-				SET("portfolio = #{portfolio}");
-				SET("updatedate = now()");
-				WHERE("rno = #rno");
-			}
-		}.toString();
+		if(vo.getPic() != null && vo.getPortfolio() != null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("pic = #{pic}");
+					SET("portfolio = #{portfolio}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else if(vo.getPic() == null && vo.getPortfolio() != null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("portfolio = #{portfolio}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else if(vo.getPic() != null && vo.getPortfolio() == null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("pic = #{pic}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}
 	}
 	
 	public void setSearchWhere(SearchCriteria cri, SQL sql) {
