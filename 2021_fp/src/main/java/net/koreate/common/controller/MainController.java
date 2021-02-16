@@ -13,8 +13,12 @@ public class MainController {
 	
 	@RequestMapping("error")
 	public String error() {
-		
 		return "error/error";
 		
+	}
+	
+	@RequestMapping("myList")
+	public String myList() {
+		return "memeber/myList";
 	}
 }
