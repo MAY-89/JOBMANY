@@ -45,7 +45,7 @@
 										<div class="col-md-9 overflow-hidden item1-content">
 											<span>
 												문장 테스트
-												Since Bootstrap is develodped to be mobile first,
+												Since Bootstrap is developed to be mobile first,
 												we use a handful of media queries to create sensible
 												breakpoints for our layouts and interfaces.
 												Since Bootstrap is developed to be mobile first,
