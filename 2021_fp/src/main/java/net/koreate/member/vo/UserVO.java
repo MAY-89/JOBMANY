@@ -16,13 +16,35 @@ public class UserVO {
 	private String upassword;
 	private String uname;
 	private String unickname;
-	private int ubirth;
+	private String ubirth;
 	private Date uregdate;
 	private String pic;
 	private char ischeck;
 	private String addr;
 	private String postcode;
 	private String detailAddr;
+	
+	private boolean autoLogin;
+	
+	public String memberNullCheck() {
+		String check = "";
+		if(upassword == null) {
+			check = "p";
+		}if(uname == null) {
+			check += "n";
+		}if(unickname == null) {
+			check += "k";
+		}if(pic == null) {
+			check += "p";
+		}if(detailAddr == null) {
+			check += "d";
+		}
+		if(upassword != null || uname != null || unickname != null || pic != null || detailAddr != null) {
+			check = "all";
+		}
+		return check;
+	}
+	
 }
 
 
