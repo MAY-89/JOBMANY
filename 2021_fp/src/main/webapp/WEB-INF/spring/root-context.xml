@@ -55,4 +55,10 @@
 		<constructor-arg value="upload" />
 	</bean>	
 	<!--  =========================이력서=================================== -->
+	
+	<!--  =========================메일 전송=================================== -->
+	<bean id="sendMail" class="net.koreate.util.SendMail" />
+	<!-- ==========================쿠키 암호화 / 복호화 / 생성====================== -->
+	<bean class="net.koreate.util.CreateMemberCookie" />
+	
 </beans>
