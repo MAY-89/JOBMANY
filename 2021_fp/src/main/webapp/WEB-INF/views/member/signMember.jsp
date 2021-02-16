@@ -54,7 +54,7 @@
 				      	</div>
 				      	<div class="form-group col-md-6">
 				      		<label for="userAge">생년월일</label>
-					      	<input type="number" value="${userVO.ubirth}" name="ubirth" class="form-control" id="userAge">	
+					      	<input type="text" onkeyup="inputYMDNumber(this)" value="${userVO.ubirth}" name="ubirth" class="form-control" id="userAge">	
 				      	</div>
 			     	</div>
 				</div>
@@ -98,7 +98,7 @@
 				alert("비밀번호를 확인 해주세요");
 				return false;
 			}
-			if (user_age.length != 8) {
+			if (user_age.length != 10) {
 				alert("생년월일이 잘못 되었습니다");
 				return false;
 			} 

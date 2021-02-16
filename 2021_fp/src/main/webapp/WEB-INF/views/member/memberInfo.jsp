@@ -17,7 +17,7 @@
 	<div class="container">
 	<div class="m-auto w-75 info-box">
 			<div class="shadow p-3 pl-3 mb-5 rounded w-75 m-auto memberBoxing" >
-				<form id="signForm">
+				<form id="signForm" action="modifyMember" method="post">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12 mb-0">
 				    	<div class="row align-items-center">
@@ -27,10 +27,8 @@
 						      <input type="email" class="form-control" name="uemail" value="${userInfo.uemail}" id="userEmaill" required="required" readonly />
 						      <!-- 아이디 중복 시에 나타나는 오류 창  -->
 						      <!-- <label class=""  ></label> -->
-						      <div class="hiddenMember">
 						      <label for="password">비밀번호</label>
 						      <input type="password" name="upassword" class="form-control" id="password" required="required" />
-						      </div>
 				      	</div>
 				      	<div class="row">
 				      		<div class="col sign-pimg">
@@ -50,7 +48,7 @@
 				      		<input type="text" value="${userInfo.uname}" name="uname" class="form-control" id="userName" disabled required="required">
 				      	</div>
 				      	<div class="form-group col-md-5 btnFile">
-				      		<input type="file" accept="image/*" class="custom-file-input" id="validatedInputGroupCustomFile" disabled required>
+				      		<input type="file" accept="image/*" class="custom-file-input" id="validatedInputGroupCustomFile" disabled />
 					     	<label class="custom-file-label hiddenMember" for="validatedInputGroupCustomFile">Choose</label>
 				      	</div>
 				     </div>
@@ -92,7 +90,7 @@
 			  <button type="button" class="btn member-btn mr-2" id="withdraw"> 회원탈퇴 </button>
 			 </div>
 			 <div class="hiddenMember">
-			  <button type="button" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
+			  <button type="submit" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
 			 </div>
 			 	<input type="hidden" id="uno" name="uno" value="${userInfo.uno}"/>
 			</form>
@@ -113,61 +111,58 @@
    var signForm = document.getElementById("signForm"); 
    
     document.getElementById("modifyMember").addEventListener("click", function(){
-    	
-        if(hiddenMember != null){
-            for(var i = 0; i < hiddenMember.length; i++){
-            	hiddenMember[i].style.display = 'inline-block';	
-           }
-            for(var i=0; i<clickHidden.length; i++){
-            	clickHidden[i].style.display = 'none';
-           }
-            for(var i=1; i<inputTag.length; i++){
-            	inputTag[i].removeAttribute("disabled",0);    	
-           }
-            password.value = "";
-            password.removeAttribute("required",0);
-            title.innerHTML = "회원 정보 수정";    
-       }
-   });
-    
-    document.getElementById("modify").addEventListener("click",function(){
     	var upassword = document.getElementById("password").value;
     	var uno = document.getElementById("uno").value;
-   		if(password == "" || password == null){
+    	var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
+    	if(upassword == "" || upassword == null){
             alert("비밀번호를 입력해주세요");
             return;
         }
-        console.log(upassword +"-"+ uno);
+    	$.getJSON(url,function(data){
+			if(data){
+				if(hiddenMember != null){
+		            for(var i = 0; i < hiddenMember.length; i++){
+		            	hiddenMember[i].style.display = 'inline-block';	
+		           }
+		            for(var i=0; i<clickHidden.length; i++){
+		            	clickHidden[i].style.display = 'none';
+		           }
+		            for(var i=1; i<inputTag.length; i++){
+		            	inputTag[i].removeAttribute("disabled",0);    	
+		           }
+		            password.value = "";
+		            password.removeAttribute("required",0);
+		            title.innerHTML = "회원 정보 수정";    
+		       }
+			}else{
+				alert("비밀번호를 확인해 주십시오");
+			}
+		});
+   });
+    
+    document.getElementById("withdraw").addEventListener("click", function(){
+   		var upassword = document.getElementById("password").value;	
+   		var uno = document.getElementById("uno").value;
+   		var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
+
+   		if(upassword == null || upassword == "") {
+   			alert("비밀번호를 입력 해주세요");
+   			return;
+   		}
    		
+   		$.getJSON(url,function(data){
    			
-   			var url = "/members/modifyPWcheck";
+   			if(!data){
+   				alert("비밀번호를 다시 한번 확인 해주십시오");
+   				return;
+   			}
    			
-   			$.ajax({
-   				
-   				type : "GET",
-   				
-   				url : url,
-   				
-   				data : {
-   					
-   					uno : uno,
-   					
-   					upassword : upassword
-   					
-   				},
-   				
-   				success : function(data){
-   					console.log(data);
-   					alert(data);
-   				}
-   			});
-   		
-   		/* 
-   		signForm.setAttribute("action","modifyMember");
-    	signForm.setAttribute("method", "POST");
-    	signForm.submit(); */
-    	
-    });
+   			if(confirm("정말로 삭제 하시겠습니까?")){
+   				signForm.setAttribute("action","deleteMember");
+   				signForm.submit();
+   			}
+   		});
+   	});
     
 </script>
 
