@@ -33,27 +33,39 @@
 			<div class="row mb-3">
 				<div class="col-sm-3" ><p>이름</p></div>
 				<div class="col-md-5">
-				<input type="text" name="rname" id='name' class="form-control" required/>
+				<input type="text" name="rname" id='name' class="form-control" value="${userInfo.uname}" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>생년월일</p></div>
 				<div class="col-md-5">
-				<input type="date" name="rbirth" id='birth' class="form-control" required/>
+				<input type="text" name="rbirth" id='birth' onkeyup="inputYMDNumber(this)" maxlength="10" class="form-control date" value="${userInfo.ubirth}" placeholder="YYYY-MM-DD" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>이메일</p></div>
 				<div class="col-md-5">
-				<input type="email" name="email" id='email' class="form-control" required/>
+				<input type="email" name="email" id='email' class="form-control" value="${userInfo.uemail}" required/>
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>핸드폰번호</p></div>
-				<div class="col-md-5">
-				<input type="text" name="mobile" id='mobile' class="form-control" required/>
+				<div class="col-sm-1" >
+				<select id="mobile1" class="custom-select moblieSelect" >
+					<option value='010' selected>010</option>
+					<option value='016'>016</option>
+					<option value='017'>017</option>
+					<option value='018'>018</option>
+				</select>
 				</div>
-			</div>
+				<div class="col-md-2">
+				<input type="text" id='mobile2' maxlength="4" class="form-control" required/>
+				</div>
+				<div class="col-md-2">
+				<input type="text" id='mobile3' maxlength="4" class="form-control" required/>
+				</div>
+				<input type="hidden" name="mobile" id='mobile' class="form-control" required/>
+			</div>	
 			<div class="row mb-3">
 				<div class="col-sm-3"><p>전화번호</p></div>
 				<div class="col-md-5">
@@ -63,18 +75,18 @@
 			<div class="row mb-3">
 				<div class="col-sm-3" ><p>주소</p></div>
 				<div class="col-md-3 form-floating mb-2 input-group">
-					<input type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control" required />
+					<input type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control" value="${userInfo.postcode}" required />
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-success" />
 				</div>
 			</div>	
 			<div class="row mb-3">
 				<div class="col-sm-3" ></div><!--  -->
 				<div class="col-md-3 form-floating mb-3">
-					<input type="text" name="addr" id="sample6_address" class="form-control" readonly placeholder="주소" required>
+					<input type="text" name="addr" id="sample6_address" class="form-control" readonly placeholder="주소" required value="${userInfo.addr}"/>
 				</div>
 				<div class="col-md-3 ml-n3 form-floating mb-3">
-					<input type="text" name="detailAddr" id="sample6_detailAddress" placeholder="상세주소" class="form-control" required>
-					<input type="hidden" name="extraAddr" id="sample6_extraAddress" readonly placeholder="참고항목">
+					<input type="text" name="detailAddr" id="sample6_detailAddress" placeholder="상세주소" class="form-control" required value="${userInfo.detailAddr}" />
+					<input type="hidden" name="extraAddr" id="sample6_extraAddress" readonly placeholder="참고항목" />
 				</div>
 			</div>
 		</div>
@@ -151,7 +163,7 @@
 					<span class="p">평균학점</span>
 				</div>
 				<div class='col'>
-					<input type="number" name="uniGrade" id="uniGrade" class="form-control"/>
+					<input type="text" name="uniGrade" id="uniGrade" class="form-control"/>
 				</div>
 			</div>
 		</div>
@@ -190,13 +202,13 @@
 						<span class="p">경력기간</span>
 					</div>
 					<div class='col-md-2'>
-						<input type='date' id='exStartDate' name='exStartDate' class="form-control"/>
+						<input type='text' onkeyup="inputYMDNumber(this)" maxlength="10" placeholder="YYYY-MM-DD" id='exStartDate' name='exStartDate' class="form-control"/>
 					</div>
 					<div class='col-sm-1'>
 						<span>~</span>
 					</div>
 					<div class='col-md-2 ml-n5'>
-						<input type='date' id='exEndDate' name='exEndDate' class="form-control"/>
+						<input type='text' onkeyup="inputYMDNumber(this)" maxlength="10" placeholder="YYYY-MM-DD" id='exEndDate' name='exEndDate' class="form-control"/>
 					</div>
 				</div>
 			</div>
@@ -242,6 +254,23 @@
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
+	
+	$("#mobile1").on("change",function(){
+		$("#mobile2").focus();
+	});
+	
+	$("#mobile2").on("keyup",function(){
+		if(this.value.length == 4){
+			$("#mobile3").focus();
+		}
+	});
+	$("#mobile3").on("keyup",function(){
+		if(this.value.length == 4){
+			$("#mobile").val($("#mobile1").val() +"-"+ $("#mobile2").val() +"-"+ $("#mobile3").val());
+			console.log($("#mobile").val());
+		}
+	});
+	
 	
 	if(${!empty message}){
 		alert("${message}");

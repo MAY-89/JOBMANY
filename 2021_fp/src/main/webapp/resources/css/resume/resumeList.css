@@ -65,6 +65,9 @@ section .resume-top{
 }
 
 /* 카드식 게시글 */
+.hotcard:hover{
+	cursor: pointer;
+}
 
 
 

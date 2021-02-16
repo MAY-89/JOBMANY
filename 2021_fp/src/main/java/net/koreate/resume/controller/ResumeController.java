@@ -1,19 +1,12 @@
 package net.koreate.resume.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import net.koreate.resume.service.ResumeServiceImpl;
-import net.koreate.resume.util.UploadData;
+import net.koreate.member.vo.UserVO;
+import net.koreate.resume.service.ResumeService;
 import net.koreate.resume.vo.ResumeVO;
+import net.koreate.util.Criteria;
 import net.koreate.util.SearchCriteria;
 
 @Controller
@@ -38,70 +30,40 @@ import net.koreate.util.SearchCriteria;
 public class ResumeController {
 
 	@Inject
-	ResumeServiceImpl rs;
-	@Resource(name = "uploadFolder")
-	String uploadFolder;
-	@Autowired
-	ServletContext context;
-	UploadData ud;
-	
-	@PostConstruct
-	public void initController() {
-		ud = new UploadData();
-		uploadFolder = context.getRealPath(File.separator + uploadFolder);
-		System.out.println("업로드 경로 : "+uploadFolder);
-		File file = new File(uploadFolder);
-		if (!file.exists()) {
-			file.mkdirs();
-			System.out.println("파일 경로 생성완료");
-		}
-	}
+	ResumeService rs;
 
 	@GetMapping("/resume")
-	public String resume() {
-		System.out.println("resume 쓰기");
+	public String resume(HttpSession session,Model model) throws Exception {
+		UserVO user = (UserVO)session.getAttribute("userInfo");
+		if(user == null) {
+			return "redirect:/member/login";
+		}
+		ResumeVO resume = rs.select(user.getUno());
+		if(resume != null) {
+			SearchCriteria cri = new SearchCriteria();
+			return readResume(resume.getRno(), model, cri);
+		}
 		return "resume/resume";
 	}
 
 	@PostMapping("/resumeWrite")
-	public String resume(ResumeVO vo,RedirectAttributes rttr,HttpServletRequest req, MultipartHttpServletRequest mhsr) throws IOException {
+	public String resume(ResumeVO vo,RedirectAttributes rttr,HttpServletRequest req, MultipartHttpServletRequest mhsr) throws Exception {
 		HttpSession session = req.getSession();
-		/*
-		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename());
-		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename() != null);
-		System.out.println(mhsr.getFile("portfoliofile").getOriginalFilename() != "");
-		System.out.println(mhsr.getFile("profilePic").getOriginalFilename() != null);
-		System.out.println(mhsr.getFile("profilePic").getOriginalFilename() != "");
-		*/
-		if(mhsr.getFile("portfoliofile").getSize() > 0) {
-			MultipartFile portfolio = mhsr.getFile("portfoliofile");
-			String portfolioFileName = ud.uploadFile(uploadFolder,Integer.toString(vo.getRno()), portfolio);
-			vo.setPortfolio(portfolioFileName);
-		}
-		
-		if(mhsr.getFile("profilePic").getOriginalFilename() != "") {
-			MultipartFile profile = mhsr.getFile("profilePic");
-			String profileName = ud.uploadFile(uploadFolder, Integer.toString(vo.getRno()), profile);
-			vo.setPic(profileName);
-		}
-		
+		UserVO user = (UserVO) session.getAttribute("userInfo");
 		//후에 인터셉터로 만들면 좋을꺼같습니다.
-		if(session.getAttribute("userInfo") != null) {
-//			UserVO user = (UserVO) session.getAttribute("userInfo");
-//			vo.setRno(user.getUno());
+		if(rs.select(user.getUno()) != null) {
+			
 		}else {
-//			System.out.println("로그인 정보 없시 로그인 화면으로 리다이렉트");
-//			return "redirect:/member/login";
+			System.out.println("회원가입 먼저");
+			return "redirect:/member/login";
 		}
 		
 		try {
-			vo.setRno(11111);//로그인 된 아이디가 있으면 필요없음
-			rs.insert(vo);
+			rs.insert(vo,mhsr,user);
 			System.out.println("이력서 db 삽입 완료");
 		} catch (Exception e) {
 			rttr.addFlashAttribute("message", "입력에 실패하였습니다.");
-			System.out.println("이력서 db 삽입 실패");
-			e.printStackTrace();
+			System.out.println("이력서 삽입 실패");
 			return "redirect:/resume/resume";
 		}
 		
@@ -145,21 +107,17 @@ public class ResumeController {
 		return mav;
 	}
 	@PostMapping("/updateResume")
-	public ModelAndView updateResume(ResumeVO vo, ModelAndView mav,MultipartHttpServletRequest mhsr) throws Exception {
-		if(mhsr.getFile("portfoliofile").getSize() > 0) {
-			MultipartFile portfolio = mhsr.getFile("portfoliofile");
-			String portfolioFileName = ud.uploadFile(uploadFolder,Integer.toString(vo.getRno()), portfolio);
-			vo.setPortfolio(portfolioFileName);
+	public ModelAndView updateResume(ResumeVO vo, ModelAndView mav,MultipartHttpServletRequest mhsr) throws IOException {
+		try {
+			rs.update(vo,mhsr);
+			mav.addObject("resume", vo);
+			mav.addObject("message", "회원 수정 완료 되었습니다.");
+			mav.setViewName("resume/readResume");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("message", "회워수정 실패");
+			mav.setViewName("resume/updateResume");
 		}
-		
-		if(mhsr.getFile("profilePic").getOriginalFilename() != "") {
-			MultipartFile profile = mhsr.getFile("profilePic");
-			String profileName = ud.uploadFile(uploadFolder, Integer.toString(vo.getRno()), profile);
-			vo.setPic(profileName);
-		}
-		
-		mav.addObject("resume", vo);
-		mav.setViewName("resume/updateResume");
 		return mav;
 	}
 	
