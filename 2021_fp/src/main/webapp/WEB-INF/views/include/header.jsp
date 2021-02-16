@@ -74,7 +74,7 @@
 								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 								<%-- <li><a class="dropdown-item" href="${root}/member/findUser">ID | PW 찾기</a></li> --%>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">로그아웃</a></li>
+								<li><a class="dropdown-item" href="${root}/member/logout">로그아웃</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

@@ -17,7 +17,7 @@
 	<div class="container">
 	<div class="m-auto w-75 info-box">
 			<div class="shadow p-3 pl-3 mb-5 rounded w-75 m-auto memberBoxing" >
-				<form id="signForm">
+				<form id="signForm" action="modifyMember" method="post">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12 mb-0">
 				    	<div class="row align-items-center">
@@ -48,7 +48,7 @@
 				      		<input type="text" value="${userInfo.uname}" name="uname" class="form-control" id="userName" disabled required="required">
 				      	</div>
 				      	<div class="form-group col-md-5 btnFile">
-				      		<input type="file" accept="image/*" class="custom-file-input" id="validatedInputGroupCustomFile" disabled required>
+				      		<input type="file" accept="image/*" class="custom-file-input" id="validatedInputGroupCustomFile" disabled />
 					     	<label class="custom-file-label hiddenMember" for="validatedInputGroupCustomFile">Choose</label>
 				      	</div>
 				     </div>
@@ -90,7 +90,7 @@
 			  <button type="button" class="btn member-btn mr-2" id="withdraw"> 회원탈퇴 </button>
 			 </div>
 			 <div class="hiddenMember">
-			  <button type="button" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
+			  <button type="submit" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
 			 </div>
 			 	<input type="hidden" id="uno" name="uno" value="${userInfo.uno}"/>
 			</form>
@@ -139,11 +139,31 @@
 			}
 		});
    });
-    document.getElementById("modify").addEventListener("click",function(){
-   		signForm.setAttribute("action","modifyMember");
-    	signForm.setAttribute("method", "POST");
-    	signForm.submit();
-    });
+    
+    document.getElementById("withdraw").addEventListener("click", function(){
+   		var upassword = document.getElementById("password").value;	
+   		var uno = document.getElementById("uno").value;
+   		var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
+
+   		if(upassword == null || upassword == "") {
+   			alert("비밀번호를 입력 해주세요");
+   			return;
+   		}
+   		
+   		$.getJSON(url,function(data){
+   			
+   			if(!data){
+   				alert("비밀번호를 다시 한번 확인 해주십시오");
+   				return;
+   			}
+   			
+   			if(confirm("정말로 삭제 하시겠습니까?")){
+   				signForm.setAttribute("action","deleteMember");
+   				signForm.submit();
+   			}
+   		});
+   	});
+    
 </script>
 
 

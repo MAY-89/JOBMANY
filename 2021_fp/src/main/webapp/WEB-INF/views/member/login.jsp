@@ -19,6 +19,8 @@
 							    <input type="email" class="form-control" id="userEmaill" required="required" name="uemail" placeholder="아이디를 입력해주세요"/>
 							    <label for="password">비밀번호</label>
 							    <input type="password" class="form-control" id="password" required="required" name="upassword" placeholder="비밀번호를 입력해주세요" />
+				      			<input type="checkbox" name="autoLogin" id="autoLogin"  />
+							    <label for="autoLogin">자동 로그인</label>
 				      		</div>
 				   			<div class="form-group">
 				   				<button type="button" class="form-control btn font-weight-bold mr-2 member-btn" id="loginBtn">
@@ -29,7 +31,7 @@
 				   				<div class="form-group col-md-12 mb-0">
 				   					<div class="row">
 				   						<div class="form-group col-md-6 mb-0">
-				   							<button type="button" class="form-control btn font-weight-bold member-btn" id="withdraw">
+				   							<button type="button" class="form-control btn font-weight-bold member-btn" id="signIn">
 				   							 	회원가입
 				   							 </button>
 				   						</div>
@@ -53,12 +55,22 @@
 	var loginForm = $("#loginForm");
 	
 	$("#loginBtn").click(function(){
-		loginForm.attr("action", "login");
+		loginForm.attr("action", "loginUp");
 		loginForm.attr("method","post").submit();
 	});
 	
 	var message = '${message}';
-	if(message != null && !message == ""){
+	if(message != null && message != ""){
 		alert(message);
 	}
+	
+	$("#signIn").click(function(){
+		location.href="signMember";
+	});
+	
+	
+	$("#modify").click(function(){
+		location.href="findUser";
+	});
+	
 </script>

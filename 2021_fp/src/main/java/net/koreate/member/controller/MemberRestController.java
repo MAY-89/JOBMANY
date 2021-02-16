@@ -6,13 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.koreate.member.service.MemberService;
-import net.koreate.member.vo.UserVO;
 
 @RestController
 @RequestMapping("/members")
@@ -33,6 +30,35 @@ public class MemberRestController {
 		
 		try {
 			entity = new ResponseEntity<String>(service.passwordCheck(uno,upassword),HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>("false",HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	// 아이디 찾기
+	@GetMapping("findID/{uname}/{ubirth}")
+	public ResponseEntity<String> findID(@PathVariable("uname") String uname, @PathVariable("ubirth") int ubirth) {
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			entity = new ResponseEntity<String>(service.findID(uname,ubirth),HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	// 비밀번호 찾기
+	@GetMapping("findPW/{uemail}/")
+	public ResponseEntity<String> findPW(@PathVariable("uemail")String uemail){
+		
+		System.out.println(uemail);
+		
+		ResponseEntity<String> entity = null;
+		try {
+			entity = new ResponseEntity<String>(service.findPW(uemail), HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>("false",HttpStatus.BAD_REQUEST);
 		}
