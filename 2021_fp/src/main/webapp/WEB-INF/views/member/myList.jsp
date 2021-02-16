@@ -16,158 +16,260 @@
 			</div>
 		</div>
 	</div>
-	<!-- 중단 게시글 목록  -->
-	<div class="container board-list">
-		<div class="row board-list-size">
-			<!-- 왼쪽 -->
-			<div class="col-lg-3 board-list-size-left">
-				<div class="row board-list-size-left-top">
-					<div class="col top-box">
-						<span class="h3">Category</span>
-						<!-- Category 카테고리 옵션 목록 -->
-						<select name="searchType" class="from-control top-box-select" multiple>
-							<option class="top-box-select-title" value="title">TITLE</option>
-							<option class="top-box-select-content" value="content">CONTENT</option>
-							<option class="top-box-select-writer" value="writer">WRITER</option>
-						</select>
-					</div>
-					<div class="col center-box">
-						
-					</div>
-					<div class="col bottom-box">
-						<div class="row searchZone">
-							<input type="text" name="keyword" class="form-control search-bar" value="" />
-							<input type="submit" class="form-control search-btn" value="SEARCH" />
+	<!-- 중단 본문 -->
+	<div class="container">
+		<ul class="nav nav-tabs tabs-width">
+	 		<li class="nav-item">
+				<a class="nav-link active fav-comm-list" data-toggle="tab" href="#comm">커뮤니티</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link fav-resume-list" data-toggle="tab" href="#resu">이력서</a>
+			</li>
+		</ul>
+	</div>
+	<form action="">
+	<div class="container">
+		<div class="tab-content">
+			<!-- 커뮤니티 -->
+			<div class="tab-pane fade show active " id="comm">
+				<div class="col board-list-size-right">
+					<div class="container board-list-size-right-boxing">
+						<div class="row board-list-size-right-box">
+						<!-- 게시글 리스트(목록) 4개 -->
+							<div class="col list-box">
+								<div class="row list-box-item1">
+									<div class="item1-title">
+										<span class="h5"><a href="#">취업</a></span>
+									</div>
+									<div class="row mt-0 item1-content-box">
+										<div class="col-md-9 overflow-hidden item1-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item1-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col list-box">
+								<div class="row list-box-item2">
+									<div class="item2-title">
+										<span class="h5"><a href="#">할 수</a></span>
+									</div>
+									<div class="row mt-0">
+										<div class="col-md-9 overflow-hidden item2-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item2-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col list-box">
+								<div class="row list-box-item3">
+									<div class="item3-title">
+										<span class="h5"><a href="#">있다!</a></span>
+									</div>
+									<div class="row mt-0">
+										<div class="col-md-9 overflow-hidden item3-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item3-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
+									</div>
+								</div>
+							</div> <!-- 리스트 박스 끝 -->
 						</div>
 					</div>
 				</div>
+				<div class="container text-center paging-block">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="#">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<!-- 오른쪽 -->
-			<div class="col-lg-9 board-list-size-right">
-				<div class="container board-list-size-right-boxing">
-					<div class="row board-list-size-right-box">
+			<!-- 이력서 -->
+			<div class="tab-pane fade" id="resu">
+		    	<div class="col board-list-size-right">
+					<div class="container board-list-size-right-boxing">
+						<div class="row board-list-size-right-box">
 						<!-- 게시글 리스트(목록) 4개 -->
-						<div class="col list-box">
-							<div class="row list-box-item1">
-								<div class="item1-title">
-									<span class="h5">Title</span>
-								</div>
-								<div class="row mt-0 item1-content-box">
-									<div class="col-md-9 overflow-hidden item1-content">
-										<span>
-											<!-- 문장 테스트 -->
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-										</span>
+							<div class="col list-box">
+								<div class="row list-box-item1">
+									<div class="item1-title">
+										<span class="h5"><a href="#">하다보면 된다!</a></span>
 									</div>
-									<div class="col item1-footer">
-										<span><i class="bi bi-calendar3">&nbsp;2021.02.06</i></span>
-										<span><i class="bi bi-pencil">&nbsp;writer</i></span>
-										<span><i class="bi bi-person-plus">&nbsp;views.</i></span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col list-box">
-							<div class="row list-box-item2">
-								<div class="item2-title">
-									<span class="h5">Title</span>
-								</div>
-								<div class="row mt-0">
-									<div class="col-md-9 overflow-hidden item2-content">
-										<span>
-											<!-- 문장 테스트 -->
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-										</span>
-									</div>
-									<div class="col item2-footer">
-										<span><i class="bi bi-calendar3">&nbsp;2021.02.06</i></span>
-										<span><i class="bi bi-pencil">&nbsp;writer</i></span>
-										<span><i class="bi bi-person-plus">&nbsp;views.</i></span>
+									<div class="row mt-0 item1-content-box">
+										<div class="col">
+											<ul>
+												<li class="resume-info">이름 :<span> 양명안</span></li>
+												<li class="resume-info">직종 :<span> 사장</span></li>
+												<li class="resume-info">경력 :<span> 10년</span></li>
+											</ul>
+										</div>
+										<div class="col-md-6 overflow-hidden item1-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item1-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col list-box">
-							<div class="row list-box-item3">
-								<div class="item3-title">
-									<span class="h5">Title</span>
-								</div>
-								<div class="row mt-0">
-									<div class="col-md-9 overflow-hidden item3-content">
-										<span>
-											<!-- 문장 테스트 -->
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-										</span>
+							<div class="col list-box">
+								<div class="row list-box-item1">
+									<div class="item1-title">
+										<span class="h5"><a href="#">성장하는 괴물입니다.!</a></span>
 									</div>
-									<div class="col item3-footer">
-										<span><i class="bi bi-calendar3">&nbsp;2021.02.06</i></span>
-										<span><i class="bi bi-pencil">&nbsp;writer</i></span>
-										<span><i class="bi bi-person-plus">&nbsp;views.</i></span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col list-box">
-							<div class="row list-box-item4 ">
-								<div class="item4-title">
-									<span class="h5">Title</span>
-								</div>
-								<div class="row mt-0">
-									<div class="col-md-9 overflow-hidden item4-content">
-										<span>
-											<!-- 문장 테스트 -->
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-											Since Bootstrap is developed to be mobile first,
-											we use a handful of media queries to create sensible
-											breakpoints for our layouts and interfaces.
-										</span>
-									</div>
-									<div class="col item4-footer">
-										<span><i class="bi bi-calendar3">&nbsp;2021.02.06</i></span>
-										<span><i class="bi bi-pencil">&nbsp;writer</i></span>
-										<span><i class="bi bi-person-plus">&nbsp;views.</i></span>
+									<div class="row mt-0 item1-content-box">
+										<div class="col">
+											<ul>
+												<li class="resume-info">이름 :<span> 장인제</span></li>
+												<li class="resume-info">직종 :<span> 부사장</span></li>
+												<li class="resume-info">경력 :<span> 7년</span></li>
+											</ul>
+										</div>
+										<div class="col-md-6 overflow-hidden item1-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item1-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col list-box">
+								<div class="row list-box-item1">
+									<div class="item1-title">
+										<span class="h5"><a href="#">부숴져도 앞으로만 가지!</a></span>
+									</div>
+									<div class="row mt-0 item1-content-box">
+										<div class="col">
+											<ul>
+												<li class="resume-info">이름 :<span> 권민규</span></li>
+												<li class="resume-info">직종 :<span> 상무</span></li>
+												<li class="resume-info">경력 :<span> 6년</span></li>
+											</ul>
+										</div>
+										<div class="col-md-6 overflow-hidden item1-content">
+											<span>
+												문장 테스트
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+												Since Bootstrap is developed to be mobile first,
+												we use a handful of media queries to create sensible
+												breakpoints for our layouts and interfaces.
+											</span>
+										</div>
+										<div class="col item1-footer">
+											<span>📅<i>&nbsp;2021.02.06</i></span>
+											<span>🖋<i>&nbsp;writer</i></span>
+											<span>✔️<i>&nbsp;스크랩</i></span>
+										</div>
+									</div>
+								</div>
+							</div><!-- 리스트 끝  -->
 						</div>
 					</div>
+				</div>
+				<div class="container text-center paging-block">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="#">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 	<!-- 보드 끝 -->
-	<div class="container text-center paging-block">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item">
-	      <a class="page-link" href="#">Previous</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li><!--  aria-current="page" 페이지 선택시 -->
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item"><a class="page-link" href="#">4</a></li>
-	    <li class="page-item"><a class="page-link" href="#">5</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Next</a>
-	    </li>
-	  </ul>
-	</div>
+	<!-- <div class="container text-center paging-block">
+		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<a class="page-link" href="#">Previous</a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">4</a></li>
+			<li class="page-item"><a class="page-link" href="#">5</a></li>
+			<li class="page-item">
+				<a class="page-link" href="#">Next</a>
+			</li>
+		</ul>
+	</div> -->
 </section>
 <script>
 	var btnList = document.getElementById("btnList");
