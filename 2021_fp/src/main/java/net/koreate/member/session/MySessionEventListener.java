@@ -57,7 +57,7 @@ public class MySessionEventListener implements HttpSessionListener, HttpSessionA
 				if(!session.getId().equals(sessionid)) {
 					System.out.println("invalidate된 session id "+session.getId());
 					session.invalidate();
-					System.out.println("다른 브라우저에서 재접속 시도/ 기존 로그인 상태 로그아웃");
+					System.out.println("다른 브라우저에서 재접속 시도 / 기존 로그인 상태 로그아웃");
 					return true;
 				}
 			}

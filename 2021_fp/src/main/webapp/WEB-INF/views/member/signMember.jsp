@@ -3,6 +3,12 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/member/signMember.css">
 <!-- 상단 이미지 -->
+<style>
+	.imgView{
+		width: 200px;
+		border: 1px solid #ccc;
+	}
+</style>
 <div class="top-img">
 	<img src="${pageContext.request.contextPath }/resources/img/member/loginImg.jpg" class="sign-header-top-img" alt="...">
 </div>
@@ -10,25 +16,32 @@
 	<div class="container">
 	<div class="m-auto w-75 ">
 			<div class="shadow p-3 pl-3 mb-5 rounded w-75 m-auto memberBoxing" >
-				<form id="signForm" action="signMember" method="post">
+				<form id="form" action="signMemberUp" method="post">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12 mb-0">
 				    	<div class="row align-items-center">
 				    		<div class="form-group col-md-6 sign-epw">
 							<h1 class="title">회원 가입</h1>
+							<div>
 						      <label for="userEmaill">Email</label>
-						      <input type="email" name="uemail" class="form-control" id="userEmaill" required="required" value="${userVO.uemail}"  >
-						      <!-- 아이디 중복 시에 나타나는 오류 창  -->
-						      <!-- <label class=""  ></label> -->
+						      <input type="email" name="uemail" class="form-control" id="uemail" required="required" value="${userVO.uemail}" autocomplete="off"  >
+						      <label class="result"></label>
+						    </div>
+						    <div>
 						      <label for="password">비밀번호</label>
-						      <input type="password" name="upassword" class="form-control" id="password" required="required">
+						      <input type="password" name="upassword" class="form-control" id="upassword" required="required" autocomplete="off"/>
+						      <label class="result"></label>
+						    </div>
+						    <div>
 						      <label for="passwordRe">비밀번호 확인</label>
-						      <input type="password" class="form-control" id="passwordRe" required="required">
+						      <input type="password" class="form-control" id="passwordRe" required="required" autocomplete="off"/>
+						      <label class="result"></label>
+						    </div>
 				      	</div>
-				      	<div class="row">
+				      	<div class="row m-3">
 				      		<div class="col sign-pimg">
-						    <div class="shadow bg-white rounded sign-img-bg">
-						    	<img src="${pageContext.request.contextPath }/resources/img/test.png" class="rounded img-fluid " alt="짱구">
+						    <div class="shadow rounded m-auto">
+						    	<img src="${pageContext.request.contextPath }/resources/img/test.png" id="imgView" class="imgView" alt="짱구">
 						    </div>
 						    </div>
 						</div>
@@ -40,21 +53,23 @@
 					<label for="userName">이름</label>
 				    <div class="row">
 				    	<div class="form-group col-md-6">
-				      		<input value="${userVO.uname}" type="text" name="uname" class="form-control" id="userName" required="required">
+				      		<input value="${userVO.uname}" type="text" name="uname" class="form-control" id="uname" required="required" autocomplete="off">
+				      		<label class="result"></label>
 				      	</div>
-				      	<div class="form-group col-md-5 btnFile">
-				      		<input type="file" accept="image/*" name="pic" class="custom-file-input" id="validatedInputGroupCustomFile">
-					     	<label class="custom-file-label" for="validatedInputGroupCustomFile">Choose</label>
+				      	<div class="form-group col-md-6">
+				      		<input type="file" accept="image/*" name="pic" class="m-auto btn member-btn form-control" id="profileImage"  />
 				      	</div>
 				     </div>
 				     <div class="row">
 				     	<div class="form-group col-md-6">
 				      		<label for="nickName">닉네임</label>
-					      	<input value="${userVO.unickname}" type="text" name="unickname" class="form-control" id="nickName" required="required">	
+					      	<input value="${userVO.unickname}" type="text" name="unickname" class="form-control" id="unickname" required="required" autocomplete="off">
+					      	<label class="result"></label>	
 				      	</div>
 				      	<div class="form-group col-md-6">
 				      		<label for="userAge">생년월일</label>
-					      	<input type="text" onkeyup="inputYMDNumber(this)" value="${userVO.ubirth}" name="ubirth" class="form-control" id="userAge">	
+					      	<input type="text" value="${userVO.ubirth}" name="ubirth" class="form-control" id="ubirth" autocomplete="off">
+					      	<label class="result"></label>	
 				      	</div>
 			     	</div>
 				</div>
@@ -64,10 +79,10 @@
 			      <label for="sample4_postcode">주소</label>
 			      <div class="row">
 			      	<div class="form-group col-md-6">
-			      		<input value="${userVO.postcode}" type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control " />
+			      		<input value="${userVO.postcode}" type="text" name="postcode" id="sample6_postcode" readonly placeholder="우편번호" class="form-control" />
 			      	</div>
 			      	<div class="form-group col-md-6">
-			      		<input type="text" name="addr" value="${userVO.addr}" id="sample6_address" class="form-control" readonly placeholder="주소">
+			      		<input type="text" name="addr" value="${userVO.addr}" id="sample6_address" class="form-control" readonly placeholder="주소" />
 			      	</div>
 			      </div>
 			       <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn member-btn" />
@@ -79,7 +94,7 @@
 			    <input type="hidden" name="extraAddr" id="sample6_extraAddress" readonly placeholder="참고항목">
 			  </div>
 				<div class="form-group">
-					<button type="submit" class="m-auto btn member-btn signUp-btn" id="signSubmit"> 회원가입 </button>
+					<button type="button" class="m-auto btn member-btn signUp-btn" id="signSubmit"> 회원가입 </button>
 				</div>
 			</form>
 		</div>
@@ -87,22 +102,31 @@
 	</div>
 </section>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<script >var root = "${root}"</script>
+<script src="${root}/resources/js/memberInfo.js"></script>
 <script>
-		var user_age = 0;
-		/* 버튼 클릭시 생년월일 일치 확인 */
-		document.getElementById("signSubmit").onclick = function() {
-			user_age = document.getElementById('userAge').value;
-			var password = document.getElementById("password").value;
-			var passwordre = document.getElementById("passwordRe").value;
-			if(password != passwordre){
-				alert("비밀번호를 확인 해주세요");
-				return false;
+	
+		var imgTemp = $("#imgView").attr("src");
+		
+		$("#profileImage").on("change",function(){
+			
+			var files = $(this)[0].files[0];
+			
+			if(!files.type.startsWith("image/")){
+				alert("이미지 파일을 선택해 주세요");
+				removeFileInfo();
+			}else{
+				var path = window.URL.createObjectURL(files);
+				console.log(path);
+				$("#imgView").attr("src",path);
 			}
-			if (user_age.length != 10) {
-				alert("생년월일이 잘못 되었습니다");
-				return false;
-			} 
-	}
+		});
+		
+		function removeFileInfo(){
+			$("#imgFileName").val("");
+			$("imgView").attr("src",imgTemp);
+		}
+		
 		var message = '${message}';
 		if(message != null && message != ""){
 			alert(message);

@@ -65,25 +65,6 @@
 		</div>
 	</div>
 	<hr style="margin-top:80px;"/>
-	<div class="row">
-		<div class="col-md-6">
-			<h5>최근 인기 게시글</h5>
-		</div>
-		<div class="col-md-6">
-			<h5>최근 인기 이력서</h5>
-			<div></div>
-			<div>
-				<table>
-					<tr>
-						<th>글번호</th>
-						<th>작성자</th>
-						<th>좋아요</th>
-					</tr>
-				</table>
-				
-			</div>
-		</div>
-	</div>
 </section>
 <section class="like-board">
 	<div class="container">

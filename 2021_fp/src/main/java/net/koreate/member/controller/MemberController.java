@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.koreate.member.service.MemberService;
 import net.koreate.member.vo.UserVO;
@@ -25,8 +27,9 @@ public class MemberController {
 	@Inject
 	MemberService service;
 	
+	// 로그인 페이지로
 	@RequestMapping("login")
-	public String login() {
+	public String login() throws Exception{
 		return "member/login";
 	}
 	
@@ -39,39 +42,38 @@ public class MemberController {
 			model.addAttribute("userInfo",vo);
 		}
 		model.addAttribute("tryLoginUser",user.getUemail());
-		
 		return "main";
 	}
 	
 	// 회원 가입 페이지 이동
 	@GetMapping("signMember")
-	public String sign() {
+	public String sign() throws Exception{
 		return "/member/signMember";
 	}
 	
 	
 	// 회원 가입
-	@PostMapping("signMember")
-	public String sign(UserVO user, Model model)throws Exception {
-		
-		String message = "환영 합니다."+user.getUnickname();
-		if(!service.sign(user)) {
-			message = "이미 등록된 아이디, 또는 닉네임 입니다.";
-			model.addAttribute("message", message);
-			model.addAttribute("userVO",user);
-			return "/member/signMember";
-		}
-		model.addAttribute("message", message);
-		return "/member/login";
+	@PostMapping("signMemberUp")
+	public void sign(UserVO user, Model model)throws Exception {
+		model.addAttribute("userVO",user);
 	}
 	
+	// 회원 singCode 인증
+	@PostMapping("signOK")
+	public String sign(String uemail, String signCode, RedirectAttributes rttr) throws Exception{
+		
+		System.out.println("uno : "+uemail);
+		System.out.println("signCode : "+signCode);
+		String message = service.signOK(uemail,signCode);
+		rttr.addFlashAttribute("message", message);
+		return "redirect:/member/login";
+	}
 	
 	// 회원 정보 보기
 	@GetMapping("memberInfo")
-	public String info() {
+	public String info() throws Exception{
 		return "/member/memberInfo";
 	}
-	
 	
 	// 회원정보 수정
 	@PostMapping("modifyMember")
@@ -82,21 +84,21 @@ public class MemberController {
 		req.getSession().setAttribute("userInfo", user);
 		return "/member/memberInfo";
 	}
-	
+
 	// 내 글 보기
 	@GetMapping("myList")
-	public void myList() {}
+	public void myList() throws Exception{}
 	
 	// 회원 정보 찾기 페이지로 이동
 	@GetMapping("findUser")
-	public void findUser() {}
+	public void findUser() throws Exception{}
 		
 	// 로그아웃 (session 삭제, cookie 삭제)
 	@GetMapping("logout")
 	public String logout(HttpSession session,
 						HttpServletResponse res,
 						@SessionAttribute(name="userInfo", required = false)UserVO vo,
-						@CookieValue(name="jobmanyCookie",required=false)Cookie loginCookie) {
+						@CookieValue(name="jobmanyCookie",required=false)Cookie loginCookie) throws Exception{
 				if(vo != null)session.invalidate();
 				if(loginCookie != null) {
 					loginCookie.setMaxAge(0);

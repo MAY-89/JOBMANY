@@ -9,7 +9,26 @@ import net.koreate.member.vo.UserVO;
 public class memberQueryProvider {
 
 	
-	  public String modifyUpdateSQL(UserVO vo) {
+	public String userCheckSql(String data) {
+		
+		SQL sql = new SQL() {
+			
+			{
+				SELECT("count(*)");
+				FROM("tbl_user");
+				if(data.contains("@")) {
+					WHERE("uemail = #{'"+data+"'}");
+				}else {
+					WHERE("unickname = #{'"+data+"'}");
+				}
+			}
+		};
+		
+		String query = sql.toString();
+		return query;
+	}
+	
+	public String modifyUpdateSQL(UserVO vo) {
 		  
 		  SQL sql = new SQL() {
 			  
@@ -25,7 +44,10 @@ public class memberQueryProvider {
 			  }
 		  };
 		  String query = sql.toString();
-		  System.out.println(query);
 		  return query;
 	  }
+	  
+	  
+	  
+	  
 }
