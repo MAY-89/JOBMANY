@@ -1,5 +1,9 @@
 package net.koreate.resume.provider;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.ibatis.javassist.runtime.Desc;
 import org.apache.ibatis.jdbc.SQL;
 
 import net.koreate.resume.vo.ResumeVO;
@@ -51,33 +55,115 @@ public class ResumeQueryProvider {
 	}
 
 	public String updateResume(ResumeVO vo) {
-		return new SQL() {
-			{
-				UPDATE(table);
-				SET("rname = #{rname}");
-				SET("rbirth = #{rbirth}");
-				SET("email = #{email}");
-				SET("mobile = #{mobile}");
-				SET("phone = #{phone}");
-				SET("postcode = #{postcode}");
-				SET("addr = #{addr}");
-				SET("detailAddr = #{detailAddr}");
-				SET("schoolType = #{schoolType}");
-				SET("uniType = #{uniType}");
-				SET("uniName = #{uniName}");
-				SET("uniMajor = #{uniMajor}");
-				SET("uniGrade = #{uniGrade}");
-				SET("careerType = #{careerType}");
-				SET("companyName = #{companyName}");
-				SET("exStartDate = #{exStartDate}");
-				SET("exEndDate = #{exEndDate}");
-				SET("introduce = #{introduce}");
-				SET("pic = #{pic}");
-				SET("portfolio = #{portfolio}");
-				SET("updatedate = now()");
-				WHERE("rno = #rno");
-			}
-		}.toString();
+		if(vo.getPic() != null && vo.getPortfolio() != null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("pic = #{pic}");
+					SET("portfolio = #{portfolio}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else if(vo.getPic() == null && vo.getPortfolio() != null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("portfolio = #{portfolio}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else if(vo.getPic() != null && vo.getPortfolio() == null) {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("pic = #{pic}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}else {
+			return new SQL() {
+				{
+					UPDATE(table);
+					SET("rname = #{rname}");
+					SET("rbirth = #{rbirth}");
+					SET("email = #{email}");
+					SET("mobile = #{mobile}");
+					SET("phone = #{phone}");
+					SET("postcode = #{postcode}");
+					SET("addr = #{addr}");
+					SET("detailAddr = #{detailAddr}");
+					SET("schoolType = #{schoolType}");
+					SET("uniType = #{uniType}");
+					SET("uniName = #{uniName}");
+					SET("uniMajor = #{uniMajor}");
+					SET("uniGrade = #{uniGrade}");
+					SET("careerType = #{careerType}");
+					SET("companyName = #{companyName}");
+					SET("exStartDate = #{exStartDate}");
+					SET("exEndDate = #{exEndDate}");
+					SET("introduce = #{introduce}");
+					SET("updatedate = now()");
+					WHERE("rno = #{rno}");
+				}
+			}.toString();
+		}
 	}
 	
 	public void setSearchWhere(SearchCriteria cri, SQL sql) {
@@ -120,4 +206,38 @@ public class ResumeQueryProvider {
 			sql.WHERE("showhide = 'y'");
 		}
 	}
+	
+	public String mainList(){
+		String month = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 month),'%Y%m%d')";
+		String week = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 week),'%Y%m%d')";
+		String day = "date_format(regdate,'%Y%m%d') = date_format(now(),'%Y%m%d')";
+		
+			return new SQL() {
+			{
+				SELECT("*");
+				FROM(table);
+				WHERE("showhide = 'y'");
+ 				AND();
+				WHERE(month);
+				ORDER_BY("likecnt desc");
+				LIMIT("5");
+			}
+		}.toString();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

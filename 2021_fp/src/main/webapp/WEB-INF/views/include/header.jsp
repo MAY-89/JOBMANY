@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="root" value="${pageContext.request.contextPath}" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,13 +68,14 @@
 							<c:when test="${empty userInfo}">
 								<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
 								<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
+								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>
 								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 								<%-- <li><a class="dropdown-item" href="${root}/member/findUser">ID | PW 찾기</a></li> --%>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">로그아웃</a></li>
+								<li><a class="dropdown-item" href="${root}/member/logout">로그아웃</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

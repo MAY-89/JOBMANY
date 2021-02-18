@@ -24,6 +24,15 @@
     font-weight: normal;
     font-style: normal;
 }
+/* a공통태그  */
+a{
+	color: black;
+}
+a:hover{
+	color: rgba(114, 192, 44, 1);
+	text-decoration: none;
+}
+
 /* 리스트 */
 section {
 	margin-top: 550px;
@@ -86,59 +95,36 @@ section .board-SearchBar {
 .board-list-size{
 	
 }
-/* --------------------------------------------------------------------------------------- */
-	/* 왼쪽 */
-.board-list-size-left{
-	height: 500px;
-	border-right: 1px solid rgba(173, 173, 173, 0.3);
-}
-		/* 상단 박스 */
-.top-box {
-	margin-left: 25px;
-	text-decoration: none;
-}
-.top-box .h3{
-	color: gray;
-}
-.top-box-select{
-	margin-top: 5px;
-	margin-left: 40px;
-	width: 100px;
-	text-align: center;
-	border: none;
-}
-.top-box-select::-webkit-scrollbar{
-	display: none;
-}
-.top-box-select-title{
-	margin-top: 5px;
-	font-family: 'NanumBarunGothic';
-	font-weight: bold;
-}
-.top-box-select-title:hover{
-	background: rgba(114, 192, 44, 1);
-}
-.top-box-select-content{
-	margin-top: 5px;
-	font-family: 'NanumBarunGothic';
-	font-weight: bold;
-}
-.top-box-select-content:hover{
-	background: rgba(114, 192, 44, 1);
-}
-.top-box-select-writer{
-	margin-top: 5px;
-	font-family: 'NanumBarunGothic';
-	font-weight: bold;
-}
-.top-box-select-writer:hover{
-	background: rgba(114, 192, 44, 1);
-}
 /* 중단 박스 */
 .center-box{
 	height: 400px;
 }
-
+.fav-comm-list{
+	color: gray;
+	font-family: 'GmarketSansBold';
+	font-size: 30px;
+}
+.fav-comm-list:hover{
+	color: rgba(114, 192, 44, 1);
+	transition: all ease 1s 0s;
+}
+.fav-comm-list:active{
+	color: rgba(114, 192, 44, 1);
+	transition: all ease 1s 0s;
+}
+.fav-resume-list{
+	color: gray;
+	font-family: 'GmarketSansBold';
+	font-size: 30px;
+}
+.fav-resume-list:hover{
+	color: rgba(114, 192, 44, 1);
+	transition: all ease 1s 0s;
+}
+.fav-resume-list:active{
+	color: rgba(114, 192, 44, 1);
+	transition: all ease 1s 0s;
+}
 
 /* 하단 박스 */
 			/* 검색창 */
@@ -152,6 +138,12 @@ section .board-SearchBar {
 	
 }
 	/* 오른쪽 */
+.flexBox{
+	
+}
+.board-list-size-right{
+	
+}
 .board-list-size-right-boxing{
 	width: 800px;
 	height: 500px;
@@ -164,6 +156,7 @@ section .board-SearchBar {
 		/* 게시물 목록 */
 			/* 공통 */
 .list-box{
+	margin-top: 20px;
 	margin-bottom: 10px;
 }
 .list-box .row{
@@ -177,6 +170,7 @@ section .board-SearchBar {
 	margin-left: 20px;
 	padding-left: 10px;
 	border-left: 1px solid rgba(114, 192, 44, 1);
+	font-weight: bold;
 }
 .item1-content{
 	height: 50px;
@@ -197,6 +191,7 @@ section .board-SearchBar {
 	margin-left: 20px;
 	padding-left: 10px;
 	border-left: 1px solid rgba(114, 192, 44, 1);
+	font-weight: bold;
 }
 .item2-content{
 	height: 50px;
@@ -217,6 +212,7 @@ section .board-SearchBar {
 	margin-left: 20px;
 	padding-left: 10px;
 	border-left: 1px solid rgba(114, 192, 44, 1);
+	font-weight: bold;
 }
 .item3-content{
 	height: 50px;
@@ -254,17 +250,38 @@ section .board-SearchBar {
 }
 /* --------------------------------------------------------------------------------------- */
 
+/* 우측 이미지 */
+.right-img-box{
+	
+}
+.right-img{
+	background: red;
+	width: 200px;
+}
+
+
 /* 검색바 */
 
 /* 페이징블럭 */
 .paging-block{
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
+/* 네비탭 */
+.tabs-width{
+}
 
-
-
-
+/* ul */
+li{
+	display: inline-block;
+	list-style: none;
+}
+.resume-info{
+	font-weight: bold;
+}
+li span{
+	font-weight: normal;	
+}
 
 
 
