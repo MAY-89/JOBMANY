@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import net.koreate.cboard.vo.CommunityCommentVO;
+import net.koreate.util.Criteria;
 
 public interface CommunityCommentDAO {
 	// 댓글 삽입
@@ -15,24 +16,20 @@ public interface CommunityCommentDAO {
 	void addComment(CommunityCommentVO vo) throws Exception;
 
 	// 댓글 origin 수정
-	@Update("UPDATE tbl_community_comment SET ccorigin = LAST_INSERT_ID WHERE ccno = LAST_INSERT_ID()")
+	@Update("UPDATE tbl_community_comment SET ccorigin = LAST_INSERT_ID() WHERE ccno = LAST_INSERT_ID()")
 	void updateOrigin() throws Exception;
 
 	// 게시물 번호의 댓글 리스트 - 전체 리스트
-	@Select("SELECT * FROM tbl_community_comment WHERE cbno = #{cbno} ORDER BY ccno DESC")
+	@Select("SELECT * FROM tbl_community_comment WHERE cbno = #{cbno} ORDER BY ccorigin desc, ccdepth asc, ccregdate asc")
 	List<CommunityCommentVO> commentList(int cbno) throws Exception;
 
 	// 댓글 수정
 	@Update("UPDATE tbl_community_comment SET cccontent = #{cccontent} WHERE ccno = #{ccno}")
 	void update(CommunityCommentVO vo) throws Exception;
 
-	// 정렬값 수정
-	@Update("UPDATE tbl_community_comment SET ccseq = ccseq + 1 WHERE ccorigin = #{ccorigin} AND ccseq > #{ccseq}")
-	void updateReply(CommunityCommentVO vo) throws Exception;
-
 	// 대댓글 등록
-	@Insert("INSERT INTO tbl_community_comment(cccontent, ccwriter, ccorigin, ccdepth, ccseq, uno)"
-			+ " VALUES(#{cccontent},#{ccwriter},#{ccorigin},#{ccdepth},#{ccseq},#{uno})")
+	@Insert("INSERT INTO tbl_community_comment(cbno, cccontent, ccwriter, ccorigin, ccdepth, uno)"
+			+ " VALUES(#{cbno},#{cccontent},#{ccwriter},#{ccorigin},#{ccdepth},#{uno})")
 	void replyRegist(CommunityCommentVO vo) throws Exception;
 
 	// 댓글 삭제

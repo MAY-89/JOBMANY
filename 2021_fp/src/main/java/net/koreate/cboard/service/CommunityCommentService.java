@@ -15,13 +15,14 @@ public interface CommunityCommentService {
 	void delete(int ccno) throws Exception;
 	
 	// 게시물 번호의 댓글 리스트
-	List<CommunityCommentVO> commentList(int bno) throws Exception;
+	List<CommunityCommentVO> commentList(int cbno) throws Exception;
 	
 	// 대댓글 등록
 	void replyRegister(CommunityCommentVO vo) throws Exception;
 	
 	// 삭제 - showboard = 'N'
-	void remove(int bno) throws Exception;
-		
+	void remove(int cbno) throws Exception;
 	
+	// 댓글 개수 파악
+	int listCount(int cbno) throws Exception;	
 }
