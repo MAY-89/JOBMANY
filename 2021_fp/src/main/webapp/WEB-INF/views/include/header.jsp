@@ -50,8 +50,8 @@
 						Community
 					</a>
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="${root}/write">Write</a></li>
-						<li><a class="dropdown-item" href="${root}/list">List</a></li>
+						<li><a class="dropdown-item" href="${root}/community/write">Write</a></li>
+						<li><a class="dropdown-item" href="${root}/community/list">List</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item text-black-50" href="#">Talk</a></li>
 					</ul>

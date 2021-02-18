@@ -13,7 +13,6 @@ public class CommunityCommentVO {
 	private Date ccregdate;
 	private int ccorigin;
 	private int ccdepth;
-	private int ccseq;
 	private String ccshowboard; // 추가
 	private int uno;
 }
