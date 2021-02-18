@@ -6,28 +6,27 @@
 	<div class="container">
 		<div class="row footer-top">
 			<div class="col footer-body-box">
-				Among Us.
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
+				<a href="#" class="userInfos">회원약관</a>
+				<div class="row footer-logo">
+					<span class="footer-logo-front h2">J</span>
+ 					<span class="footer-logo-tail h2">ob Many</span>
+				</div>
 			</div>
 			<div class="col footer-body-box">
-				Imposter.
+				<a href="#">개인정보처리방침</a>
 				<div class="row">test</div>
 				<div class="row">test text shot</div>
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
-			</div>
-			<div class="col footer-body-box">
-				GoSleep.
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
 				<div class="row">test</div>
 				<div class="row">test text shot</div>
 			</div>
 			<div class="col footer-body-box">
-				.Where is?
+				<a href="#">이메일무단수집거부</a>
+				<div class="row">test text shot</div>
+				<div class="row">test</div>
+				<div class="row">test</div>
+				<div class="row">test text shot</div>
+			</div>
+			<div class="col footer-body-box">
 				<div class="row">test</div>
 				<div class="row">test text shot</div>
 				<div class="row">test text shot</div>
@@ -36,10 +35,9 @@
 		</div>
 	</div>
 	<div class="row footer-bottom">
-			<span>Copyright super.</span>
+			<span>Copyright 2021. ㈜Jobmany. All rights reserved.</span>
 	</div>
 </footer>
-
 
 
 <!-- 스크립트 -->

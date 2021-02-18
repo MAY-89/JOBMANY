@@ -27,249 +27,134 @@
 			</li>
 		</ul>
 	</div>
-	<form action="">
-	<div class="container">
-		<div class="tab-content">
-			<!-- 커뮤니티 -->
-			<div class="tab-pane fade show active " id="comm">
-				<div class="col board-list-size-right">
-					<div class="container board-list-size-right-boxing">
-						<div class="row board-list-size-right-box">
-						<!-- 게시글 리스트(목록) 4개 -->
-							<div class="col list-box">
-								<div class="row list-box-item1">
-									<div class="item1-title">
-										<span class="h5"><a href="#">취업</a></span>
-									</div>
-									<div class="row mt-0 item1-content-box">
-										<div class="col-md-9 overflow-hidden item1-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item1-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
+	<form action="" method="POST">
+		<div class="container">
+			<div class="tab-content">
+				<!-- 커뮤니티 -->
+				<div class="tab-pane fade show active " id="comm">
+					<div class="col board-list-size-right">
+						<div class="container board-list-size-right-boxing">
+							<div class="row board-list-size-right-box">
+							<!-- 게시글 리스트(목록) 4개 -->
+								<c:choose>
+									<c:when test="<%-- ${not empty 게시글 정보 } --%>">
+										<c:forEach var="<%-- 사용할 변수 --%>" items="<%-- ${넘어온 모델 } --%>">
+										<div class="col list-box">
+											<div class="row list-box-item3">
+												<div class="item3-title">
+													<span class="h5">
+														<a href="<%-- ${쿼리스트링 } --%>"><!-- ${커뮤니티 게시글 타이틀 } --></a>
+													</span>
+												</div>
+												<div class="row mt-0">
+													<div class="col-md-9 overflow-hidden item3-content">
+														<span>
+															<!-- ${커뮤니티 게시글 본문 } -->
+														</span>
+													</div>
+													<div class="col item3-footer">
+														<span>📅<i>&nbsp;<%-- ${커뮤니티 게시글 날짜 } --%></i></span>
+														<span>🖋<i>&nbsp;<%-- ${커뮤니티 게시글 작성자 } --%></i></span>
+														<span>✔️<i>&nbsp;<%-- ${커뮤니티 게시글 스크랩 여부 } --%></i></span>
+													</div>
+												</div>
+											</div>
+										</div> <!-- 리스트 박스 끝 -->
+										</c:forEach>
+									</c:when>
+								</c:choose>
 							</div>
-							<div class="col list-box">
-								<div class="row list-box-item2">
-									<div class="item2-title">
-										<span class="h5"><a href="#">할 수</a></span>
-									</div>
-									<div class="row mt-0">
-										<div class="col-md-9 overflow-hidden item2-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item2-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col list-box">
-								<div class="row list-box-item3">
-									<div class="item3-title">
-										<span class="h5"><a href="#">있다!</a></span>
-									</div>
-									<div class="row mt-0">
-										<div class="col-md-9 overflow-hidden item3-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item3-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
-							</div> <!-- 리스트 박스 끝 -->
 						</div>
 					</div>
-				</div>
-				<div class="container text-center paging-block">
-					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<a class="page-link" href="#">Previous</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- 이력서 -->
-			<div class="tab-pane fade" id="resu">
-		    	<div class="col board-list-size-right">
-					<div class="container board-list-size-right-boxing">
-						<div class="row board-list-size-right-box">
-						<!-- 게시글 리스트(목록) 4개 -->
-							<div class="col list-box">
-								<div class="row list-box-item1">
-									<div class="item1-title">
-										<span class="h5"><a href="#">하다보면 된다!</a></span>
-									</div>
-									<div class="row mt-0 item1-content-box">
-										<div class="col">
-											<ul>
-												<li class="resume-info">이름 :<span> 양명안</span></li>
-												<li class="resume-info">직종 :<span> 사장</span></li>
-												<li class="resume-info">경력 :<span> 10년</span></li>
-											</ul>
-										</div>
-										<div class="col-md-6 overflow-hidden item1-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item1-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col list-box">
-								<div class="row list-box-item1">
-									<div class="item1-title">
-										<span class="h5"><a href="#">성장하는 괴물입니다.!</a></span>
-									</div>
-									<div class="row mt-0 item1-content-box">
-										<div class="col">
-											<ul>
-												<li class="resume-info">이름 :<span> 장인제</span></li>
-												<li class="resume-info">직종 :<span> 부사장</span></li>
-												<li class="resume-info">경력 :<span> 7년</span></li>
-											</ul>
-										</div>
-										<div class="col-md-6 overflow-hidden item1-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item1-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col list-box">
-								<div class="row list-box-item1">
-									<div class="item1-title">
-										<span class="h5"><a href="#">부숴져도 앞으로만 가지!</a></span>
-									</div>
-									<div class="row mt-0 item1-content-box">
-										<div class="col">
-											<ul>
-												<li class="resume-info">이름 :<span> 권민규</span></li>
-												<li class="resume-info">직종 :<span> 상무</span></li>
-												<li class="resume-info">경력 :<span> 6년</span></li>
-											</ul>
-										</div>
-										<div class="col-md-6 overflow-hidden item1-content">
-											<span>
-												문장 테스트
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-												Since Bootstrap is developed to be mobile first,
-												we use a handful of media queries to create sensible
-												breakpoints for our layouts and interfaces.
-											</span>
-										</div>
-										<div class="col item1-footer">
-											<span>📅<i>&nbsp;2021.02.06</i></span>
-											<span>🖋<i>&nbsp;writer</i></span>
-											<span>✔️<i>&nbsp;스크랩</i></span>
-										</div>
-									</div>
-								</div>
-							</div><!-- 리스트 끝  -->
-						</div>
+					<!-- 페이징 블럭 -->
+					<div class="container text-center paging-block">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pm.first }">
+								<li class="page-item">
+									<a class="page-link" href="myList${pm.makeQuery(1) }">Previous</a>
+								</li>
+							</c:if>
+							<c:forEach var="i" begin="${pm.startPage }" end="${pm.endPage }">
+								<li class="page-item ${pm.cri.page == i ? 'class=active' : '' }">
+									<a class="page-link" href="myList${pm.makeQuery(i) }">${i }</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pm.next }">
+								<li class="page-item">
+									<a class="page-link" href="myList${pm.makeQuery(pm.endPage+1) }">Next</a>
+								</li>
+							</c:if>
+						</ul>
 					</div>
 				</div>
-				<div class="container text-center paging-block">
-					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<a class="page-link" href="#">Previous</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
-						</li>
-					</ul>
+				<!-- 이력서 -->
+				<div class="tab-pane fade" id="resu">
+			    	<div class="col board-list-size-right">
+						<div class="container board-list-size-right-boxing">
+							<div class="row board-list-size-right-box">
+							<!-- 게시글 리스트(목록) 4개 -->
+							<c:choose>
+								<c:when test="<%-- ${not empty 이력서 게시글 정보 } --%>">
+									<c:forEach var="<%-- 사용할 변수 --%>" items="<%-- ${넘어온 이력서 모델 } --%>">
+									<div class="col list-box">
+										<div class="row list-box-item1">
+											<div class="item1-title">
+												<span class="h5">
+													<a href="<%-- ${쿼리스트링 } --%>"><!-- ${이력서 게시글 타이틀 } --></a>
+												</span>
+											</div>
+											<div class="row mt-0 item1-content-box">
+												<div class="col">
+													<ul>
+														<li class="resume-info">이름 :<span><%-- ${이력서 게시글 작성자 } --%></span></li>
+														<li class="resume-info">직종 :<span><%-- ${이력서 게시글 직종 } --%></span></li>
+														<li class="resume-info">경력 :<span><%-- ${이력서 게시글 경력 } --%></span></li>
+													</ul>
+												</div>
+												<div class="col-md-6 overflow-hidden item1-content">
+													<span>
+														<!-- ${이력서 게시글 본문 } -->
+													</span>
+												</div>
+												<div class="col item1-footer">
+													<span>📅<i>&nbsp;<%-- ${이력서 게시글 날짜 } --%></i></span>
+													<span>🖋<i>&nbsp;<%-- ${이력서 게시글 닉네임 } --%></i></span>
+													<span>✔️<i>&nbsp;<%-- ${이력서 게시글 스크랩 여부 } --%></i></span>
+												</div>
+											</div>
+										</div>
+									</div> <!-- 리스트 끝 -->
+									</c:forEach>
+								</c:when>
+							</c:choose>
+							</div>
+						</div>
+					</div>
+					<!-- 페이징 블럭 -->
+					<div class="container text-center paging-block">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pm.first }">
+								<li class="page-item">
+									<a class="page-link" href="myList${pm.makeQuery(1) }">Previous</a>
+								</li>
+							</c:if>
+							<c:forEach var="i" begin="${pm.startPage }" end="${pm.endPage }">
+								<li class="page-item ${pm.cri.page == i ? 'class=active' : '' }">
+									<a class="page-link" href="myList${pm.makeQuery(i) }">${i }</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pm.next }">
+								<li class="page-item">
+									<a class="page-link" href="myList${pm.makeQuery(pm.endPage+1) }">Next</a>
+								</li>
+							</c:if>
+						</ul>
+					</div> <!-- 페이징 블럭 끝 -->
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	<!-- 보드 끝 -->
-	<!-- <div class="container text-center paging-block">
-		<ul class="pagination justify-content-center">
-			<li class="page-item">
-				<a class="page-link" href="#">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-			</li>
-		</ul>
-	</div> -->
 </section>
 <script>
 	var btnList = document.getElementById("btnList");

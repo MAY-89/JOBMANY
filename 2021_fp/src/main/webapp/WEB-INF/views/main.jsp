@@ -24,7 +24,7 @@
 		</div>
 	</div>
 </header>
-<section>
+<section class="bravo-text">
 	<div class="container section-main">
 		<div class="row section-main-body">
 			<div class="col align-items-center">
@@ -66,6 +66,150 @@
 	</div>
 	<hr style="margin-top:80px;"/>
 </section>
+<section class="like-board">
+	<div class="container">
+		<div class="row">
+			<!-- 커뮤니티 -->
+			<div class="col cboard">
+				<div class="container">
+					<h1 class="title">커뮤니티</h1>
+					<hr/>
+				</div>
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#cmonth">
+						월간
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#cweek">
+						주간
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#cday">
+						일간
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="cmonth">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">제목</a>
+								</td>
+								<td>🖋<i>writer</i></td>
+								<td class="tview">💬<i>view</i></td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="cweek">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">제목</a>
+								</td>
+								<td>🖋<i>writer</i></td>
+								<td class="tview">💬<i>view</i></td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="cday">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">제목</a>
+								</td>
+								<td>🖋<i>writer</i></td>
+								<td class="tview">💬<i>view</i></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- 이력서 -->
+			<div class="col rboard">
+				<div class="container">
+					<h1 class="title">이력서</h1>
+					<hr/>
+				</div>
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#rmonth">
+						월간
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#rweek">
+						주간
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#rday">
+						일간
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="rmonth">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">
+									🖋<i>writer</i>
+									</a>님의 이력서
+								</td>
+								<td class="tlike">📬<i>like</i></td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="rweek">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">
+									🖋<i>writer</i>
+									</a>님의 이력서
+								</td>
+								<td class="tlike">📬<i>like</i></td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="rday">
+						<table>
+							<tr>
+								<th>1</th>
+								<td class="ttile">
+									<a href="#">
+									🖋<i>writer</i>
+									</a>님의 이력서
+								</td>
+								<td class="tlike">📬<i>like</i></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- <div class="overflow-hidden cb-content">
+	<span>
+	문장 테스트
+		Since Bootstrap is developed to be mobile first,
+		we use a handful of media queries to create sensible
+		breakpoints for our layouts and interfaces.
+		Since Bootstrap is developed to be mobile first,
+		we use a handful of media queries to create sensible
+		breakpoints for our layouts and interfaces.
+	</span>
+</div> -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 <script>
