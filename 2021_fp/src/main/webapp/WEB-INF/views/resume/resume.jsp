@@ -266,7 +266,7 @@
 	});
 	$("#mobile3").on("keyup",function(){
 		if(this.value.length == 4){
-			$("#mobile").val($("#mobile1").val() +"-"+ $("#mobile2").val() +"-"+ $("#mobile3").val());
+			$("#mobile").val($("#mobile1").val() + $("#mobile2").val() + $("#mobile3").val());
 			console.log($("#mobile").val());
 		}
 	});

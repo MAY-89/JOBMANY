@@ -26,8 +26,14 @@
 			<div class="row mb-3">
 				<div class="col-sm-3 " ><p>증명사진</p></div>
 				<div class="col-md-5" >
-					<img src="${pageContext.request.contextPath}/upload/${resume.pic}" alt="사진" name="profile" id="profile" class="card-img-top"/>
-					<input type="file" name="profilePic" id="profilePic" accept="image/*" disabled/>
+					<c:choose>
+						<c:when test="${empty resume.pic }">
+							<img src="${pageContext.request.contextPath }/resources/img/resume/resume-default-img.png" class="card-img-top" alt="기본사진"/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/upload/${resume.pic}" alt="사진" class="card-img-top" />	
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -133,7 +139,7 @@
 					<span class="p">대학교종류</span>
 				</div>
 				<div class='col'>
-					<select name="uniType" id="uniType" class="form-control" readonly>
+					<select name="uniType" id="uniType" class="form-control" onFocus='this.initialSelect = this.selectedIndex;' onChange='this.selectedIndex = this.initialSelect;' >
 						<option value="">대학교종류를 골라주세요</option>
 						<option value="college" ${resume.uniType == "college" ? "selected" : "" }>대학(2/3년)</option>
 						<option value="University" ${resume.uniType == "University" ? "selected" : "" }>대학(4년)</option>
@@ -227,8 +233,7 @@
 			</div>
 			<div class="row">
 				<div class='col'>
-					<input type="file" name="portfolio" class="form-control col-md-6" value="${resume.portfolio }" disabled/>
-					<input type="text" value="${pageContext.request.contextPath}/upload/${resume.portfolio }" readonly/>
+					<input type="text" value="${resume.portfolio}" readonly/>
 				</div>
 			</div>		
 		</div>
@@ -236,14 +241,19 @@
 		<div class="container">
 			<div class='row d-flex mb-2 portfolio-btn-box'>
 				<div class="col">
-					
 					<c:choose>
 						<c:when test="${userInfo.uno eq resume.rno }">
-							<input class="btn btn-outline-danger" type="button" value="${resume.showhide eq 'y' ? '비공개' : '공개'}" id="showhideBtn"/>	
 							<input class="btn btn-outline-success" type="submit" value="수정" />
 						</c:when>
 						<c:otherwise>
-							<input class="btn btn-outline-success" type="button" value="❤" id="likeBtn"/>
+							<c:choose>
+								<c:when test="${likeYN }">
+									<input class="btn btn-outline-success" type="button" value="🖤 " id="likeBtn" aria-label="${resume.likecnt}명이 좋아합니다."/>
+								</c:when>
+								<c:otherwise>
+									<input class="btn btn-outline-success" type="button" value="❤" id="likeBtn" aria-label="${resume.likecnt}명이 좋아합니다."/>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 					<input class="btn btn-outline-primary" type="button" onclick="location.href='resumeList'" value="글목록"/>
@@ -259,10 +269,30 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
+	$("#likeBtn").on("click",function(){
+		var url = "like/"+$("#rno").val();
+		$.ajax({
+	         type : "POST",
+	         url : url,
+	         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	         success : function(data){
+	            alert(data);
+	            if(data === "로그인 후 이용해주시기 바랍니다."){
+	            	location.href="${root}/member/login";
+	            }
+	            if($("#likeBtn").val() === "❤"){
+            		$("#likeBtn").val('🖤');
+            	}else{
+            		$("#likeBtn").val('❤');
+            	}
+	         }
+	      });
+	});
+	
 	if(${!empty message}){
 		alert("${message}");
 	}	
-	
+
 	$("#profilePic").on("change",function(){
 		var files = this.files;
 		$("#profile").attr("src",window.URL.createObjectURL(files[0]));
@@ -279,7 +309,7 @@
 	   	}); 
      })
      
-     
+   
      
     
 </script>

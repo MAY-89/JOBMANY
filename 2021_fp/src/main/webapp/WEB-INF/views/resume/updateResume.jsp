@@ -257,12 +257,17 @@
 		$("#profile").attr("src",window.URL.createObjectURL(files[0]));
 	});
 	
-	$("#updateBtn").click(function(){
-		alert("수정버튼 클릭");
-	});
-	
 	$("#showhideBtn").click(function(){
-		alert("공개버튼 클릭");
+		var rno = ${resume.rno}
+		console.log(rno);
+			$.ajax({
+				type : "post",
+				url : "showhide/"+rno,
+				contentType : "application/x-www-fromurlencoded; charset=utf-8",
+				success : function(data){
+					alert(data+"으로 변경하였습니다.")
+				}
+			});
 	});
 	
     

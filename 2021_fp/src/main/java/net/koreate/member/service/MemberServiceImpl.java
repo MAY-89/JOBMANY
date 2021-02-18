@@ -100,7 +100,6 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("uemail : "+uemail);
 		UserVO user = dao.findUser(uemail);
 		if(user == null || uemail.equals("")) {
-			
 			isCheck = "false";
 			return isCheck;
 		}

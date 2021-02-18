@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-
+	
+	
 	@RequestMapping("/")
 	public String main() {
 		return "main";
@@ -14,7 +15,6 @@ public class MainController {
 	@RequestMapping("error")
 	public String error() {
 		return "error/error";
-		
 	}
 	
 	@RequestMapping("myList")

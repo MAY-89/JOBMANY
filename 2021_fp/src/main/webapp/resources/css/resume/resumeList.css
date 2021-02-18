@@ -67,6 +67,7 @@ section .resume-top{
 /* 카드식 게시글 */
 .hotcard:hover{
 	cursor: pointer;
+	background-color: #f2f2f2;
 }
 
 
@@ -86,6 +87,7 @@ section .resume-top{
 .listBoard table thead{
 	font-family: 'NotoSerifKR';
 	color: gray;
+	background-color: #f8f9fa;
 }
 
 .listBoard table thead tr th{
@@ -102,6 +104,11 @@ section .resume-top{
 }
 .listBoard table tbody tr td{
 	border: none;
+}
+
+.tabledata:hover{
+	cursor: pointer;
+	background-color: #D8D8D8;
 }
 	
 
