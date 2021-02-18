@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/member/myList.css">
-<!-- 상단 이미지 -->
+<!-- 상단 이미지  -->
 <div class="top-img">
 	<img src="${pageContext.request.contextPath }/resources/img/member/loginImg.jpg" class="main-header-top-img" alt="...">
 </div>
