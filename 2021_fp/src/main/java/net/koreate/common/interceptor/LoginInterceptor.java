@@ -47,7 +47,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		BanIDVO banIDVO = dao.getBanIDVO(tryEmail);
 		
 		if(banIDVO != null && banIDVO.getCount() >= 5) {
-			
 			long saveTime = getTime(banIDVO.getBandate());
 			if(saveTime > 0) {
 				
@@ -55,35 +54,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				request.setAttribute("message", tryEmail+ "아이디는 5회 이상 로그인 실패 하여 일정시간 동안 로그인 할수 없습니다.");
 				request.setAttribute("time", saveTime);
 				rd.forward(request, response);
-				
+				return;
 			}else {
 				dao.removeBanID(tryEmail);
 			}
 		}
 		
-		if(vo != null) {
-			System.out.println(vo);
-			HttpSession session = request.getSession();
-			
-			boolean result = 
-					MySessionEventListener.expireDuplicatedSession(vo.getUemail(), session.getId());
-			if(result) {
-				System.out.println("중복 로그인 제거");
-			}else {
-				System.out.println("첫 로그인");
-			}
-			
-			session.setAttribute("userInfo", vo);
-			
-			if(vo.isAutoLogin()) {
-				createCookie.createCookie(vo.getUemail(),response);
-			}
-			if(banIDVO != null) {
-				System.out.println("로그인 성공 ban id 에서 삭제");
-				dao.removeBanID(tryEmail);
-			}
-		}
-		else if(vo == null || vo.getIscheck() == 'N') {
+		if(vo == null || vo.getIscheck() == 'N') {
 			
 			int count = 5;
 			
@@ -109,6 +86,28 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			mav.setViewName("/member/login");
 		}
 		
+		else if(vo != null) {
+			HttpSession session = request.getSession();
+			
+			boolean result = 
+					MySessionEventListener.expireDuplicatedSession(vo.getUemail(), session.getId());
+			if(result) {
+				System.out.println("중복 로그인 제거");
+			}else {
+				System.out.println("첫 로그인");
+			}
+			
+			session.setAttribute("userInfo", vo);
+			
+			if(vo.isAutoLogin()) {
+				createCookie.createCookie(vo.getUemail(),response);
+			}
+			if(banIDVO != null) {
+				System.out.println("로그인 성공 ban id 에서 삭제");
+				dao.removeBanID(tryEmail);
+			}
+		}
+		
 	}
 	
 	public long getTime(Date bandate) {
@@ -116,6 +115,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		return limit -(System.currentTimeMillis() - bandate.getTime());
 		
 	}
-	
-	
 }

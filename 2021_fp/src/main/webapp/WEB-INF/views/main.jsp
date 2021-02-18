@@ -70,7 +70,13 @@
 
 <script>
 	var message = '${message}';
+	var wrongAccept = '${wrongAccept}';
 	if(message != null && !message == ""){
 		alert(message);
 	}
+	if(wrongAccept != null && !wrongAccept == ""){
+		alert(wrongAccept);
+		
+	}
+	
 </script>

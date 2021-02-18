@@ -15,6 +15,15 @@
 			<bean class="net.koreate.common.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
+			<mvc:mapping path="/member/signMember"/>
+			<mvc:mapping path="/member/login"/>
+			<bean class="net.koreate.common.interceptor.WrongAcceptInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/member/signMemberUp"/>
+			<bean class="net.koreate.common.interceptor.SignInterceptord" />
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/member/login"/>
 			<mvc:exclude-mapping path="/member/signMember"/>
@@ -23,7 +32,4 @@
 			<bean class="net.koreate.common.interceptor.CookieCheckInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-
-
 </beans>

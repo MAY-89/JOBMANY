@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
@@ -22,13 +23,21 @@ public interface UserDAO {
 	UserVO getUserById(String uemail);
 	
 	// 회원 가입  중복 아이디 , 닉네임 체크
-	@Select("SELECT * FROM tbl_user WHERE uemail = #{uemail} or unickname = #{unickname}")
-	UserVO checkID(UserVO user) throws Exception;
+	@SelectProvider(type = memberQueryProvider.class, method = "userCheckSql")
+	int checkUser(String data) throws Exception;
 
 	// 회원가입 성공
-	@Insert("insert into tbl_user(uemail,upassword,uname,unickname,ubirth,postcode,addr,detailAddr,pic) " + 
-			"values(#{uemail},#{upassword},#{uname},#{unickname},#{ubirth},#{postcode},#{addr},#{detailAddr},#{pic})")
-	void sign(UserVO user) throws Exception;
+	@Insert("insert into tbl_user(uemail,upassword,uname,unickname,ubirth,postcode,addr,detailAddr,pic,signCode) " + 
+			"values(#{user.uemail},#{user.upassword},#{user.uname},#{user.unickname},#{user.ubirth},#{user.postcode},#{user.addr},#{user.detailAddr},#{user.pic},#{signCode})")
+	void sign(@Param("user")UserVO user, @Param("signCode")String signCode) throws Exception;
+	
+	// 회원 코드를 통해 회원 확인
+	@Select("SELECT count(*) FROM tbl_user WHERE uemail=#{uemail} and signCode = #{signCode}")
+	int getUser(@Param("uemail")String uemail, @Param("signCode")String signCode) throws Exception;
+	
+	// 회원 가입 인증
+	@Update("UPDATE tbl_user SET signCode='', ischeck='Y' WHERE uemail = #{uemail}")
+	void signCodeCheck(@Param("uemail")String uemail, @Param("signCode")String signCode);
 
 	// 회원정보 수정시, 비밀번호 체크
 	@Select("select uemail from tbl_user WHERE uno = #{uno} and upassword = #{upassword}")
@@ -65,6 +74,9 @@ public interface UserDAO {
 	
 	@Delete("DELETE FROM tbl_banID WHERE uemail = #{tryEmail}")
 	void removeBanID(String tryEmail) throws Exception;
+
+	
+	
 	
 	
 }

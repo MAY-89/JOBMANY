@@ -18,6 +18,23 @@ public class MemberRestController {
 	@Inject
 	MemberService service;
 	
+	// 회원 아이디 찾기
+	@GetMapping("/checkUser")
+	public ResponseEntity<Boolean> checkUser(String user) throws Exception{
+		ResponseEntity<Boolean> entity = null;
+		
+		System.out.println(user);
+		
+		entity = new ResponseEntity<Boolean>(
+				(service.checkUser(user) > 0 ? false : true),HttpStatus.OK);
+		return entity;
+	}
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/modifyPWcheck/{uno}/{upassword}")
 	public ResponseEntity<String> modifyPWcheck(

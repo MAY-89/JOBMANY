@@ -1,5 +1,7 @@
 package net.koreate.member.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import net.koreate.member.vo.UserVO;
 
 public interface MemberService {
@@ -12,7 +14,7 @@ public interface MemberService {
 	UserVO getUserById(String id) throws Exception;
 	
 	// 회원가입
-	boolean sign(UserVO user) throws Exception;
+	boolean sign(UserVO user, HttpServletRequest request) throws Exception;
 
 	// modify member
 	String modifyMember(UserVO user) throws Exception;
@@ -28,5 +30,10 @@ public interface MemberService {
 
 	// 회원 아이디가 있는지 체크
 	String findPW(String uemail)throws Exception;
+
+	// 회원 가입 인증 메일로 코드 확인
+	String signOK(String uemail, String signCode) throws Exception;
+	
+	int checkUser(String data)throws Exception;
 	
 }
