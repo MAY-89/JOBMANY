@@ -1,5 +1,9 @@
 package net.koreate.resume.provider;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.ibatis.javassist.runtime.Desc;
 import org.apache.ibatis.jdbc.SQL;
 
 import net.koreate.resume.vo.ResumeVO;
@@ -202,4 +206,38 @@ public class ResumeQueryProvider {
 			sql.WHERE("showhide = 'y'");
 		}
 	}
+	
+	public String mainList(){
+		String month = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 month),'%Y%m%d')";
+		String week = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 week),'%Y%m%d')";
+		String day = "date_format(regdate,'%Y%m%d') = date_format(now(),'%Y%m%d')";
+		
+			return new SQL() {
+			{
+				SELECT("*");
+				FROM(table);
+				WHERE("showhide = 'y'");
+ 				AND();
+				WHERE(month);
+				ORDER_BY("likecnt desc");
+				LIMIT("5");
+			}
+		}.toString();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

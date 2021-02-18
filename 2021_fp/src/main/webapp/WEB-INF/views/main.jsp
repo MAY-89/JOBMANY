@@ -65,6 +65,25 @@
 		</div>
 	</div>
 	<hr style="margin-top:80px;"/>
+	<div class="row">
+		<div class="col-md-6">
+			<h5>최근 인기 게시글</h5>
+		</div>
+		<div class="col-md-6">
+			<h5>최근 인기 이력서</h5>
+			<div></div>
+			<div>
+				<table>
+					<tr>
+						<th>글번호</th>
+						<th>작성자</th>
+						<th>좋아요</th>
+					</tr>
+				</table>
+				
+			</div>
+		</div>
+	</div>
 </section>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
@@ -73,4 +92,32 @@
 	if(message != null && !message == ""){
 		alert(message);
 	}
+	/*
+	$(function(){
+		
+		$.ajax({
+			method : "get",
+			url : "resume/mainList",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			success : function(data) {
+				console.log(data);
+				$(data).each(function(){
+					var html = "";
+					html += "<tr>";
+					html += "<td>"+this.rno;
+					html += "</td>";
+					html += "<td>"+this.rname+"님의 이력서";
+					html += "</td>";
+					html += "<td>"+this.likecnt;
+					html += "</td>";
+					html += "</tr>";
+					$("table").append(html);
+				});
+			}
+		});
+	
+	});
+	*/
+	
+	
 </script>

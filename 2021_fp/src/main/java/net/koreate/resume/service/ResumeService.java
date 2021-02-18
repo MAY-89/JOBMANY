@@ -2,16 +2,17 @@ package net.koreate.resume.service;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -21,16 +22,19 @@ import net.koreate.resume.util.UploadData;
 import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.PageMaker;
 import net.koreate.util.SearchCriteria;
+import net.koreate.util.SendMail;
 
 @Service
 public class ResumeService {
 	
-	
+	@Inject
+	SendMail sendmail;
 	@Resource(name = "uploadFolder")
 	String uploadFolder;
 	@Autowired
 	ServletContext context;
 	UploadData ud;
+	
 	
 	@PostConstruct
 	public void initService() {
@@ -74,9 +78,7 @@ public class ResumeService {
 			String profileName = ud.uploadFile(uploadFolder, Integer.toString(vo.getRno()), profile);
 			vo.setPic(profileName);
 		}
-		
 		dao.writeResume(vo);
-		
 	}
 
 	public ResumeVO select(int rno) throws Exception {
@@ -101,17 +103,40 @@ public class ResumeService {
 		dao.updateResume(vo);
 	}
 
-	public void showHide(int rno) throws Exception {
+	public boolean showHide(int rno) throws Exception {
 		System.out.println("이력서비공개");
 		if(dao.selectOneResume(rno).getShowhide().equals("y")) {
-			dao.hideResume(rno);	
+			dao.hideResume(rno);
+			return true;
 		}else {
 			dao.showResume(rno);
 		}
+		return false;
+	}
+	
+	@Transactional
+	public boolean like(int rno, int uno) throws Exception {
+		if(dao.selectLike(rno,uno) == 0) {
+			dao.addLike(rno,uno);
+			dao.likeResume(rno);
+			return true;
+		}else {
+			dao.delLike(rno, uno);
+			dao.dislikeResume(rno);
+			return false;
+		}
 	}
 
-	public void like(int rno) throws Exception {
-		dao.likeResume(rno);
+	public boolean likeYN(int rno, int uno) {
+		int result = dao.selectLike(rno, uno);
+		if(result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public List<ResumeVO> mainList() {
+		return dao.mainList();
 	}
 
 }

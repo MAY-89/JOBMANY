@@ -40,7 +40,7 @@
 						      <div class="card-body" style="max-height: 200px;">
 						        <h5 class="card-title">${r.rname }님의<br/> 이력서</h5>
 						        <p class="card-text">${r.introduce }</p>
-						        <p class="card-text"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="long"/></small></p>
+						        <p class="card-text"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="medium"/></small></p>
 						        <p class="card-text"><small class="text-muted">👍 ${r.likecnt}&nbsp;&nbsp;&nbsp;조회수 ${r.views}</small></p>
 						      </div>
 						    </div>
@@ -83,7 +83,7 @@
 	</div>
 	<div class="listBoard">
 		<table class="table">
-		  <thead >
+		  <thead>
 		    <tr>
 		      <th scope="col">작성자</th>
 		      <th scope="col">등록일</th>
@@ -92,8 +92,8 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  <jsp:useBean id="now" class="java.util.Date" />
-		  <f:formatDate value="${now }" pattern="yyyy-MM-dd"/>
+		  <%-- <jsp:useBean id="now" class="java.util.Date" />
+		  <f:formatDate value="${now }" pattern="yyyy-MM-dd"/> --%>
 		  <c:choose>
 		  	<c:when test="${empty list }">
 		  		<tr>
@@ -102,8 +102,8 @@
 		  	</c:when>
 		  	<c:otherwise>
 		  		<c:forEach var="r" items="${list}">
-			  		<tr>
-			  			<td><a href="readResume${pm.makeQuery(cri.page)}&rno=${r.rno}">${r.rname }</a></td>
+			  		<tr onclick="location.href='readResume${pm.makeQuery(cri.page)}&rno=${r.rno}'" class="tabledata">
+			  			<td>${r.rname }</td>
 			  			<f:formatDate value="${r.regdate }" var="reg" pattern="yyyy-MM-dd"/>
 			  			<c:choose>
 			  				<c:when test="${now eq reg}">
