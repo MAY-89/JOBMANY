@@ -16,7 +16,7 @@ public class BoardQueryProvider {
 				
 				setSearchWhere(cri, this);
 				
-				
+				ORDER_BY("cbregdate DESC");
 				LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
 				
 			}
@@ -51,15 +51,15 @@ public class BoardQueryProvider {
 			
 			switch(cri.getSearchType()) {
 			
-			case "t" :
+			case "title" :
 				sql.WHERE(titleQuery);
 				break;
 				
-			case "c" :
+			case "content" :
 				sql.WHERE(contentQuery);
 				break;
 								
-			case "w" :
+			case "writer" :
 				sql.WHERE(writerQuery);	
 				break;
 					

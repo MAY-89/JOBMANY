@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
-<c:set var="root" value="${pageContext.request.contextPath}" scope="session" />
+<c:set var="root" value="${pageContext.request.contextPath}" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +50,8 @@
 						Community
 					</a>
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="${root}/write">Write</a></li>
-						<li><a class="dropdown-item" href="${root}/list">List</a></li>
+						<li><a class="dropdown-item" href="${root}/community/write">Write</a></li>
+						<li><a class="dropdown-item" href="${root}/community/list">List</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item text-black-50" href="#">Talk</a></li>
 					</ul>
@@ -68,6 +68,7 @@
 							<c:when test="${empty userInfo}">
 								<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
 								<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
+								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>

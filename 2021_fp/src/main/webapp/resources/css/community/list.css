@@ -25,7 +25,14 @@
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
-
+/* a태그 공통 */
+a{
+	color: rgba(114, 192, 44, 1);
+}
+a:hover{
+	text-decoration: none;
+	color: rgba(114, 192, 44, 0.3);
+}
 
 /* 리스트 */
 section {
@@ -91,7 +98,8 @@ section .board-SearchBar {
 }
 /* --------------------------------------------------------------------------------------- */
 	/* 왼쪽 */
-.board-list-size-left{
+.board-list-size-left-top{
+	width: 250px;
 	height: 500px;
 	border-right: 1px solid rgba(173, 173, 173, 0.3);
 }
@@ -105,7 +113,7 @@ section .board-SearchBar {
 }
 .top-box-select{
 	margin-top: 5px;
-	margin-left: 40px;
+	margin-left: 10px;
 	width: 100px;
 	text-align: center;
 	border: none;
@@ -180,9 +188,11 @@ section .board-SearchBar {
 	margin-left: 20px;
 	padding-left: 10px;
 	border-left: 1px solid rgba(114, 192, 44, 1);
+	font-weight: bold;
 }
 .item1-content{
 	height: 50px;
+	margin-top: 20px;
 	margin-left: 40px;
 }
 .item1-content span{
@@ -258,7 +268,9 @@ section .board-SearchBar {
 /* --------------------------------------------------------------------------------------- */
 
 /* 검색바 */
-
+.search-btn{
+	width: 200px;
+}
 /* 페이징블럭 */
 .paging-block{
 	margin-top: 40px;

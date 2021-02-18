@@ -25,7 +25,22 @@
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'DOSMyungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'D2Coding';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
+.WIFI{
+	margin-bottom: 80px;
+}
 
 /* section 공통 */
 section{
@@ -75,12 +90,23 @@ section .read-top {
 	font-size: 17px;
 	
 }
+.comment-format{
+	color: rgba(195,128,59,1);
+	font-family: 'D2Coding';
+	font-size: 14px;
+}
+.comment-content{
+	font-family: 'NotoSerifKR';
+	color: gray;
+}
 
 
 
 
 
 /* 댓글작성 */
+
+
 .read-post-title{
 	color: rgba(114, 192, 44, 1);
 }
@@ -105,7 +131,12 @@ section .read-top {
 	color:white;
 	box-shadow: 140px 0 0 0 rgba(255,255,255,0.25) inset;
 }
+.read-btns{
+	display: flex;
+	flex-direction: row-reverse;
+}
 .read-btn-list{
+	margin-left: 10px;
 	font-family: 'NotoSerifKR';
 	color: white;
 	font-weight: 500;
@@ -115,13 +146,15 @@ section .read-top {
 	color:white;
 	box-shadow: 60px 0 0 0 rgba(255,255,255,0.25) inset;
 }
-.reply-btn{
+.reply-btn, .delete-btn{
 	float: right;
 	text-decoration: none !important;
 	font-family: 'NotoSerifKR';
 	color: rgba(114, 192, 44, 1);
 	font-weight: 500;
 }
-.reply-btn:hover{
+
+.reply-btn:hover, .delete-btn:hover{
 	color: rgba(114, 192, 44, 0.5);
+	cursor: pointer;
 }

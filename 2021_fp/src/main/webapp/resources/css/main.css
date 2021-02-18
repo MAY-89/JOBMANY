@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* 폰트 */
+/* 폰트  */
 @font-face {
     font-family: 'GmarketSansBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
@@ -26,8 +26,7 @@
 }
 
 /* 메인 컨텐츠 */
-section{
-	height: 1200px;
+.bravo-text{
 	margin-top: 500px;
 	font-family: 'Jaemin';
 }
@@ -123,11 +122,82 @@ section{
 	left: 5px;
 }
 
+/* =================================================================== */
+/* 하단 공통 */
+.like-board{
+	padding-top: 50px;
+	height: 600px;
+}
+	/* 탭 메뉴 */
+	.like-board .nav-link{
+		font-family: 'NotoSerifKR';
+		color: black;
+		border: none;
+	}
+	.like-board .nav-link:hover{
+		color: rgba(114, 192, 44, 1);
+	}
+	.like-board .nav-link:focus{
+		font-family: 'NotoSerifKR';
+		color: rgba(114, 192, 44, 1);
+		border-bottom: 2px solid rgba(114, 192, 44, 1);
+	}
+	/* 본문 */
+	.tab-content{
+		padding-top: 25px;
+	}
+	.like-board table{
+		width: 100%;
+	}
+	.like-board table tr th{
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	.like-board table .ttile{
+		padding-left: 10px;
+		width: 300px;
+	}
+	.like-board table .tview, .tlike{
+		text-align: right;
+	}
+	
+	
+	
+/* 하단 커뮤니티  */
+.cboard{
+	margin-right: 100px;
+}
+.cboard .title{
+	font-family: 'GmarketSansBold';
+	color: gray;
+	font-weight: bold;
+	text-align: center;
+}
+.cboard hr{
+	width: 80px;
+	background: rgba(114, 192, 44, 0.5);
+}
+	
 
 
 
 
 
+
+/* 하단 이력서  */
+.rboard{
+	margin-left: 100px;
+}
+.rboard .title{
+	font-family: 'GmarketSansBold';
+	color: gray;
+	font-weight: bold;
+	text-align: center;
+}
+.rboard hr{
+	width: 80px;
+	background: rgba(114, 192, 44, 0.5);
+}
 
 
 

@@ -7,8 +7,10 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.koreate.cboard.dao.CommunityBoardDAO;
+import net.koreate.cboard.dao.CommunityCommentDAO;
 import net.koreate.cboard.vo.CommunityBoardVO;
 import net.koreate.util.PageMaker;
 import net.koreate.util.SearchCriteria;
@@ -18,6 +20,8 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
 	@Inject
 	CommunityBoardDAO dao;
+	@Inject
+	CommunityCommentDAO	cdao;
 	
 	@Override
 	public void regist(CommunityBoardVO vo) throws Exception {
@@ -27,6 +31,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 	@Override
 	public List<CommunityBoardVO> listReplyCriteria(SearchCriteria cri) throws Exception {
 		List<CommunityBoardVO> list = dao.listCriteria(cri);
+		
 		return list;
 	}
 
@@ -64,8 +69,11 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 	}
 
 	@Override
+	@Transactional
 	public void removeBoard(int cbno) throws Exception {
+		cdao.delete(cbno);
 		dao.removeBoard(cbno);
+		
 	}
 
 }

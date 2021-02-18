@@ -29,7 +29,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="r" items="${likeList }" >
-				<div class="col-sm-4 " >
+				<div class="col-sm-4 hotcard" onclick="location.href='readResume${pm.makeQuery(cri.page)}&rno=${r.rno}'">
 					<div class="shadow p-2 mb-4 bg-white rounded">
 						<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
 						  <div class="row no-gutters">
@@ -38,9 +38,10 @@
 						    </div>
 						    <div class="col-sm-7" >
 						      <div class="card-body" style="max-height: 200px;">
-						        <h5 class="card-title">${r.rname }님의 이력서</h5>
+						        <h5 class="card-title">${r.rname }님의<br/> 이력서</h5>
 						        <p class="card-text">${r.introduce }</p>
-						        <p class="card-text"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="long"/></small></p>
+						        <p class="card-text"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="medium"/></small></p>
+						        <p class="card-text"><small class="text-muted">👍 ${r.likecnt}&nbsp;&nbsp;&nbsp;조회수 ${r.views}</small></p>
 						      </div>
 						    </div>
 						  </div>
@@ -51,173 +52,6 @@
 		</c:otherwise>
 	</c:choose>
 	</div>
-	<%-- 
-		<div class="row">
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-			<div class="col-sm-4 " >
-				<div class="shadow p-2 mb-4 bg-white rounded">
-					<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
-					  <div class="row no-gutters">
-					    <div class="col-sm-5 hidden-xs hidden-sm">
-					      <img style="width:100px; height:200px; "src="${pageContext.request.contextPath}/resources/img/gyubin.jpg" alt="...">
-					    </div>
-					    <div class="col-sm-7" >
-					      <div class="card-body" style="max-height: 200px;">
-					        <h5 class="card-title">Card title</h5>
-					        <p class="card-text">This content is a little bit longer.</p>
-					        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div><!-- col-sm-4 END -->
-		</div><!-- row END  -->
-	</div>
-	 --%>
 </section>
 <hr/>
 <section class="container resume-board" style="width: 1000px;">
@@ -249,7 +83,7 @@
 	</div>
 	<div class="listBoard">
 		<table class="table">
-		  <thead >
+		  <thead>
 		    <tr>
 		      <th scope="col">작성자</th>
 		      <th scope="col">등록일</th>
@@ -258,8 +92,8 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  <jsp:useBean id="now" class="java.util.Date" />
-		  <f:formatDate value="${now }" pattern="yyyy-MM-dd"/>
+		  <%-- <jsp:useBean id="now" class="java.util.Date" />
+		  <f:formatDate value="${now }" pattern="yyyy-MM-dd"/> --%>
 		  <c:choose>
 		  	<c:when test="${empty list }">
 		  		<tr>
@@ -268,8 +102,8 @@
 		  	</c:when>
 		  	<c:otherwise>
 		  		<c:forEach var="r" items="${list}">
-			  		<tr>
-			  			<td><a href="readResume${pm.makeQuery(cri.page)}&rno=${r.rno}">${r.rname }</a></td>
+			  		<tr onclick="location.href='readResume${pm.makeQuery(cri.page)}&rno=${r.rno}'" class="tabledata">
+			  			<td>${r.rname }</td>
 			  			<f:formatDate value="${r.regdate }" var="reg" pattern="yyyy-MM-dd"/>
 			  			<c:choose>
 			  				<c:when test="${now eq reg}">
@@ -285,39 +119,40 @@
 		  		</c:forEach>
 		  	</c:otherwise>
 		  </c:choose>
-		    <!-- 
-		    <tr>
-		      <th scope="row">1</th>
-		      <td><a href="readResume">권민규의 이력서</a></td>
-		      <td>권민규</td>
-		      <td>오늘</td>
-		      <td>5</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td><a href="readResume">Jacob</a></td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		      <td>7</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		      <td>65</td>
-		    </tr>
-		     -->
 		  </tbody>
 		</table>
 	</div>
 	<div class="container text-center">
 	  <ul class="pagination justify-content-center">
+		<c:if test="${pm.first }">
+			<li class="page-item"><a href="resumeList${pm.makeQuery(1)}">&laquo;&laquo;</a></li>
+		</c:if>
+		<c:if test="${pm.prev}">
+			<li class="page-item">
+				<a href="resumeList${pm.makeQuery(pm.startPage-1)}">&laquo;</a>
+			</li>
+		</c:if>
+		<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}">
+			<li class="page-item" ${pm.cri.page == i ? ' class=active' : ''}>
+				<a href="resumeList${pm.makeQuery(i)}">${i}</a>
+			</li>
+		</c:forEach>
+		<c:if test="${pm.next}">
+			<li class="page-item">
+				<a href="resumeList${pm.makeQuery(pm.endPage+1)}">&raquo;</a>
+			</li>
+		</c:if>
+		<c:if test="${pm.last }">
+			<li class="page-item"><a href="resumeList${pm.makeQuery(pm.maxPage)}">&raquo;&raquo;</a></li>
+		</c:if>						
+	</ul>
+	  <!-- 
+	  <ul class="pagination justify-content-center">
 	    <li class="page-item">
 	      <a class="page-link" href="#">Previous</a>
 	    </li>
 	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li><!--  aria-current="page" 페이지 선택시 -->
+	    <li class="page-item"><a class="page-link" href="#">2</a></li> aria-current="page" 페이지 선택시
 	    <li class="page-item"><a class="page-link" href="#">3</a></li>
 	    <li class="page-item"><a class="page-link" href="#">4</a></li>
 	    <li class="page-item"><a class="page-link" href="#">5</a></li>
@@ -325,6 +160,7 @@
 	      <a class="page-link" href="#">Next</a>
 	    </li>
 	  </ul>
+	   -->
 	</div>
 </section>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -334,6 +170,9 @@
 		var keyword = $("#keyword").val();
 		location.href="resumeList?searchType="+searchType+"&keyword="+keyword;
 	});
+	
+	
+	
 	
 </script>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

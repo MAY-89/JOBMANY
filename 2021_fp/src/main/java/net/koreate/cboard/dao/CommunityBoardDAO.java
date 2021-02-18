@@ -35,7 +35,7 @@ public interface CommunityBoardDAO {
 	void updateCnt(int cbno) throws Exception;
 
 	// 게시글 수정
-	@Update("UPDATE tbl_community_board SET cbtitle = #{cbtitle} , cbcontent = #{cbcontent}, cbwriter = #{cbwriter}, cbupdatedate = now() where cbno = #{cbno} ")
+	@Update("UPDATE tbl_community_board SET cbtitle = #{cbtitle}, cbcontent = #{cbcontent}, cbupdatedate = now() where cbno = #{cbno} ")
 	void modify(CommunityBoardVO vo) throws Exception;
 	
 	// 게시글 삭제
