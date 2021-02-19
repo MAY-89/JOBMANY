@@ -24,6 +24,20 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+ font-family: 'NanumBarunGothic';
+ font-style: normal;
+ font-weight: 300;
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+ src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
 /* 공통 */
 section{
 	padding-top: 35px;
@@ -32,11 +46,13 @@ section{
 }
 
 /* 상단 텍스트 */
+.titleBox{
+	display: flex;
+	justify-content: center;
+}
 .title{
-	font-family: 'GmarketSansBold';
-	font-size: 100px;
+	font-family: 'GmarketSansMedium';
 	color: black;
-	background: rgba(255,255,255, 0.7);
 	text-align: center;
 	border-bottom: 1px solid rgba(114, 192, 44, 1);
 }
@@ -49,6 +65,7 @@ label{
 
 /* 버튼 */
 .member-btn{
+	font-family: 'NanumBarunGothic	';
 	color: white;
 	background: rgba(114, 192, 44, 1);
 }
