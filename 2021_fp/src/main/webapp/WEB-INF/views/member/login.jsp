@@ -13,7 +13,9 @@
 				<form id="loginForm" action="#">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12">
-				    	<h1 class="title">로그인</h1>
+				    	<div class="titleBox">
+				    		<span class="h4 title">로그인</span>
+				    	</div>
 				    		<div class="form-group">
 							    <label for="userEmaill">Email</label>
 							    <input type="email" class="form-control" id="userEmaill" required="required" name="uemail" placeholder="아이디를 입력해주세요"/>
