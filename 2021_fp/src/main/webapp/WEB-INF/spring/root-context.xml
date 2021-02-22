@@ -50,6 +50,10 @@
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="c:\\spring\\upload"/>
 	</bean>
+	
+	<bean id="uploadPath1" class="java.lang.String">
+		<constructor-arg value="d:\\spring\\upload"/>
+	</bean>
 		
 	<bean id="uploadFolder" class="java.lang.String">
 		<constructor-arg value="upload" />

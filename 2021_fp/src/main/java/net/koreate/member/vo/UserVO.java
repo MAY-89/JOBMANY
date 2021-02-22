@@ -28,18 +28,23 @@ public class UserVO {
 	
 	public String memberNullCheck() {
 		String check = "";
-		if(upassword == null) {
-			check = "p";
-		}if(uname == null) {
-			check += "n";
-		}if(unickname == null) {
-			check += "k";
+		if(upassword.equals("")) {
+			check = "u";
 		}if(pic == null) {
-			check += "p";
-		}if(detailAddr == null) {
-			check += "d";
+			check = "p";
+		}if(addr.equals("")) {
+			check = "a";
+		}if(upassword.equals("") && pic == null) {
+			check = "up";
+		}if(pic == null && addr.equals("")) {
+			check = "ua";
+		}if(upassword.equals("") && addr.equals("")) {
+			check = "pa";
 		}
-		if(upassword != null || uname != null || unickname != null || pic != null || detailAddr != null) {
+		if(upassword.equals("") && pic == null && addr.equals("")) {
+			check = "upa";
+		}
+		if(!upassword.equals("") && pic != null && !detailAddr.equals("")) {
 			check = "all";
 		}
 		return check;

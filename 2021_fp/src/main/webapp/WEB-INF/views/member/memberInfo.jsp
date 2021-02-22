@@ -11,13 +11,19 @@
 	.hiddenMember{
 		display: none;
 	}
+	.imgView{
+		width: 200px;
+	}
 	
 </style>
+<div class="top-img">
+	<img src="${pageContext.request.contextPath}/resources/img/member/loginImg.jpg" class="sign-header-top-img" alt="...">
+</div>
 <section>
 	<div class="container">
 	<div class="m-auto w-75 info-box">
 			<div class="shadow p-3 pl-3 mb-5 rounded w-75 m-auto memberBoxing" >
-				<form id="signForm" action="modifyMember" method="post">
+				<form id="signForm" action="modifyMember" method="post" encType="multipart/form-data">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12 mb-0">
 				    	<div class="row align-items-center">
@@ -25,15 +31,23 @@
 							<h2 id="title">회원 정보 확인</h2>
 						      <label for="userEmaill">Email</label>
 						      <input type="email" class="form-control" name="uemail" value="${userInfo.uemail}" id="userEmaill" required="required" readonly />
-						      <!-- 아이디 중복 시에 나타나는 오류 창  -->
-						      <!-- <label class=""  ></label> -->
+						      <div>
 						      <label for="password">비밀번호</label>
-						      <input type="password" name="upassword" class="form-control" id="password" required="required" />
+						      <input type="password" name="upassword" class="form-control upassword" id="upassword" required="required"  autocomplete="off"/>
+					      	  <label class="result"></label>
+							  </div>
 				      	</div>
-				      	<div class="row">
+				      	<div class="row ml-5">
 				      		<div class="col sign-pimg">
-						    <div class="shadow bg-white rounded sign-img-bg">
-						    	<img src="${pageContext.request.contextPath}/resources/img/test.png" class="rounded img-fluid " alt="짱구">
+						    <div class="rounded m-auto">
+						    <c:choose>
+						    	<c:when test="${empty userInfo.pic}">
+						    	<img src="${pageContext.request.contextPath}/resources/img/resume/resume-default-img.png" id="imgView" class="imgView" alt="profile">
+						    	</c:when>
+						    	<c:otherwise>
+						    	<img src= "${pageContext.request.contextPath}/upload/${userInfo.pic}"     id="imgView" class="imgView" alt="profile">
+						    	</c:otherwise>
+						    </c:choose>
 						    </div>
 						    </div>
 						</div>
@@ -45,21 +59,23 @@
 					<label for="userName">이름</label>
 				    <div class="row">
 				    	<div class="form-group col-md-6">
-				      		<input type="text" value="${userInfo.uname}" name="uname" class="form-control" id="userName" disabled required="required">
+				      		<input type="text" value="${userInfo.uname}" name="uname" class="form-control" id="uname" disabled required="required">
+				      		<label class="result"></label>
 				      	</div>
-				      	<div class="form-group col-md-5 btnFile">
-				      		<input type="file" accept="image/*" class="custom-file-input" id="validatedInputGroupCustomFile" disabled />
-					     	<label class="custom-file-label hiddenMember" for="validatedInputGroupCustomFile">Choose</label>
+				      	<div class="form-group col-md-6">
+				      		<input type="file" accept="image/*" name="file" class="m-auto btn member-btn form-control hiddenMember" id="profileImage" value="${userInfo.pic}" />
 				      	</div>
 				     </div>
 				     <div class="row">
 				     	<div class="form-group col-md-6">
 				      		<label for="nickName">닉네임</label>
-					      	<input type="text" name="unickname" value="${userInfo.unickname}" class="form-control" id="nickName" disabled required="required">	
+					      	<input type="text" name="unickname" value="${userInfo.unickname}" class="form-control" id="unickname" disabled required="required">
+					      	<label class="result"></label>		
 				      	</div>
 				      	<div class="form-group col-md-6">
 				      		<label for="userAge">생년월일</label>
-					      	<input type="number" class="form-control" value="${userInfo.ubirth}" name="ubirth"  disabled id="userAge">	
+					      	<input type="text" class="form-control" value="${userInfo.ubirth}" name="ubirth" id="ubirth" disabled >
+					      	<label class="result"></label>
 				      	</div>
 			     	</div>
 				</div>
@@ -90,9 +106,10 @@
 			  <button type="button" class="btn member-btn mr-2" id="withdraw"> 회원탈퇴 </button>
 			 </div>
 			 <div class="hiddenMember">
-			  <button type="submit" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
+			  <button type="button" class="btn member-btn mt-2 mr-2" id="modify"> 수정완료 </button>
 			 </div>
 			 	<input type="hidden" id="uno" name="uno" value="${userInfo.uno}"/>
+			 	<input type="hidden" name="csrf_token" value="${csrf_token}"/>
 			</form>
 		</div>
 		 </div>
@@ -101,70 +118,8 @@
 </section>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
-<script>
-   var modifyBtn = document.getElementById("modify");
-   var modifyClick = document.getElementById("modifyMember");
-   var title = document.getElementById("title");
-   var inputTag = document.getElementsByTagName("input");
-   var hiddenMember = document.getElementsByClassName('hiddenMember');
-   var clickHidden = document.getElementsByClassName('clickHidden');
-   var signForm = document.getElementById("signForm"); 
-   
-    document.getElementById("modifyMember").addEventListener("click", function(){
-    	var upassword = document.getElementById("password").value;
-    	var uno = document.getElementById("uno").value;
-    	var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
-    	if(upassword == "" || upassword == null){
-            alert("비밀번호를 입력해주세요");
-            return;
-        }
-    	$.getJSON(url,function(data){
-			if(data){
-				if(hiddenMember != null){
-		            for(var i = 0; i < hiddenMember.length; i++){
-		            	hiddenMember[i].style.display = 'inline-block';	
-		           }
-		            for(var i=0; i<clickHidden.length; i++){
-		            	clickHidden[i].style.display = 'none';
-		           }
-		            for(var i=1; i<inputTag.length; i++){
-		            	inputTag[i].removeAttribute("disabled",0);    	
-		           }
-		            password.value = "";
-		            password.removeAttribute("required",0);
-		            title.innerHTML = "회원 정보 수정";    
-		       }
-			}else{
-				alert("비밀번호를 확인해 주십시오");
-			}
-		});
-   });
-    
-    document.getElementById("withdraw").addEventListener("click", function(){
-   		var upassword = document.getElementById("password").value;	
-   		var uno = document.getElementById("uno").value;
-   		var url = "${pageContext.request.contextPath}/members/modifyPWcheck/"+uno+"/"+upassword;
-
-   		if(upassword == null || upassword == "") {
-   			alert("비밀번호를 입력 해주세요");
-   			return;
-   		}
-   		
-   		$.getJSON(url,function(data){
-   			
-   			if(!data){
-   				alert("비밀번호를 다시 한번 확인 해주십시오");
-   				return;
-   			}
-   			
-   			if(confirm("정말로 삭제 하시겠습니까?")){
-   				signForm.setAttribute("action","deleteMember");
-   				signForm.submit();
-   			}
-   		});
-   	});
-    
-</script>
+<script >var root = "${root}"</script>
+<script src="${root}/resources/js/memberInfo.js"></script>
 
 
 

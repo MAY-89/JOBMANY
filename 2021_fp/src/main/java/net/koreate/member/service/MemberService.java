@@ -1,7 +1,5 @@
 package net.koreate.member.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import net.koreate.member.vo.UserVO;
 
 public interface MemberService {
@@ -13,9 +11,6 @@ public interface MemberService {
 	// cookie 값이 존재하는 id 값으로 자동 로그인
 	UserVO getUserById(String id) throws Exception;
 	
-	// 회원가입
-	boolean sign(UserVO user, HttpServletRequest request) throws Exception;
-
 	// modify member
 	String modifyMember(UserVO user) throws Exception;
 	

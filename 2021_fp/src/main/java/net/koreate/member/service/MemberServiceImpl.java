@@ -1,12 +1,11 @@
 package net.koreate.member.service;
 
 
-import java.util.Random;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.koreate.member.dao.UserDAO;
 import net.koreate.member.vo.UserVO;
@@ -28,6 +27,7 @@ public class MemberServiceImpl implements MemberService{
 	// 로그인
 	@Override
 	public UserVO login(UserVO user) throws Exception {
+		
 		return dao.login(user);
 	}
 	
@@ -44,23 +44,6 @@ public class MemberServiceImpl implements MemberService{
 		return dao.checkUser(data);
 	}
 
-	// 회원 가입
-	@Override
-	public boolean sign(UserVO user, HttpServletRequest request) throws Exception {
-		String signCode ="";
-		int signCodeInt = 0;
-		int ten = 10;
-		Random random = new Random();
-		for(int i =0; i<4; i++) {
-			signCodeInt = random.nextInt(ten)+1;
-			signCode += signCodeInt;
-		}
-		dao.sign(user,signCode);
-		sendMail.signInSend(user, request, signCode);
-		System.out.println(signCode+" : signCode");
-		return true;
-	}
-	
 	// 회원가입 인증 메일 통해 사용자 인증
 	@Override
 	public String signOK(String uemail, String signCode) throws Exception{
@@ -73,12 +56,12 @@ public class MemberServiceImpl implements MemberService{
 			message = "회원 가입이 정상적으로 처리 되었습니다";
 			return message;
 		}
-		
 		return message;
 	}
 	
 	// 회원 정보 수정
 	@Override
+	@Transactional
 	public String modifyMember(UserVO user) throws Exception{
 		
 		String message = "true";
@@ -98,7 +81,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		String message = "true";
 		String email = dao.modifyPWCheck(uno,upassword);
-		System.out.println(email);
 		if(email == null) {
 			message = "false";
 		}

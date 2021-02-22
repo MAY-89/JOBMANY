@@ -189,6 +189,13 @@
 	background: rgba(114, 192, 44, 0.8);
 }
 
+/* 회원 프로필 사진 */
+.myPic{
+	width:25px;
+	height: 25px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 3px rgba(114, 192, 44, 1);
+}
 
 
 
