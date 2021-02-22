@@ -34,7 +34,16 @@
 						${communityBoardVO.cbviewcnt}</i>
 				</li>
 				<li class="list-group-item read read-day">📅<i>
-						${communityBoardVO.cbregdate}</i>
+				<f:formatDate var="reg" pattern="yyyy.MM.dd HH:mm" value="${communityBoardVO.cbregdate}"/>
+					<c:choose>
+						<c:when test="${now eq reg}">
+							<f:formatDate pattern="HH:mm" value=""/>
+						</c:when>
+						<c:otherwise>
+							${reg}
+						</c:otherwise>
+					</c:choose>
+				</i>
 				</li>
 				<li class="list-group-item read read-comments"><i
 					class="bi bi-chat-right-dots"> ${commentCount}</i></li>
@@ -56,7 +65,7 @@
 			<!-- 내 글일 때 -->
 			
 				<c:if test="${not empty userInfo}">
-					<c:if test="${userInfo.uno eq communityBoardVO.uno}"> --%>
+					<c:if test="${userInfo.uno eq communityBoardVO.uno}">
 						<input type="button" id="removeBtn" class="btn read-btn-list" value="삭제" />
 						<input type="button" id="modifyBtn" class="btn read-btn-list" value="수정" />
 						<c:choose>
@@ -89,7 +98,7 @@
 	<div class="container read-post">
 		<p class="h3 read-post-title">Post a Comment</p>
 		<hr />
-		<form class="writeComment">
+		<form class="writeComment commentWrap">
 			<div class="row">
 				<div class="form-group col-sm-2">
 					<label for="">name</label> <input type="email" class="form-control"
@@ -106,7 +115,7 @@
 			<div class="col-md-12 read-btn">
 				<input type="button" class="btn read-btn-send sendMessage" value="Send Message"/>
 				<input type="hidden" name="cbno" value="${communityBoardVO.cbno}" />
-				
+				<input type="hidden" class="commentPosition" name="position" value="${communityCommentVO.position}"/>
 			</div>
 		</form>
 	</div>
@@ -124,28 +133,36 @@
 		<c:forEach var="communityCommentVO" items="${list}">
 		<div class="commentWrap">
 			<div class="row read-comment-item">
-				<div class="col-sm-1"></div>
-				<c:if test="${communityCommentVO.ccdepth eq 1}">
-				<div class="col-sm-1"></div>
-				</c:if>
-				
-				<div class="col-sm-10">
-					<div class="row">
-						<p class="comment-writer col-sm-10">${communityCommentVO.ccwriter}</p>
-						<span class="col-sm-2 comment-format">
-							<f:formatDate value="${communityCommentVO.ccregdate}" pattern="yyyy.MM.dd HH:mm"/>						
-						</span>
-					</div>
-					<p class="comment-content">${communityCommentVO.cccontent}</p>
-					<c:if test="${communityCommentVO.ccdepth eq 0}">
-						<a class="reply-btn"> <i class="bi bi-reply-fill">Reply</i></a>
+				<c:choose>
+				<c:when test="${communityCommentVO.ccshowboard ne 'N'}">
+					<div class="col-sm-1"></div>
+					<c:if test="${communityCommentVO.ccdepth eq 1}">
+					<div class="col-sm-1"></div>
 					</c:if>
-					<c:if test="${not empty userInfo}">
-						<c:if test="${userInfo.uno eq communityCommentVO.uno}">
-						<a class="delete-btn"> ❌<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
+					
+					<div class="col-sm-10">
+						<div class="row">
+							<p class="comment-writer col-sm-10">${communityCommentVO.ccwriter}</p>
+							<span class="col-sm-2 comment-format">
+								<f:formatDate value="${communityCommentVO.ccregdate}" pattern="yyyy.MM.dd HH:mm"/>						
+							</span>
+						</div>
+						<p class="comment-content">${communityCommentVO.cccontent}</p>
+						<c:if test="${communityCommentVO.ccdepth eq 0}">
+							<a class="reply-btn"> <i class="bi bi-reply-fill">Reply</i></a>
 						</c:if>
-					</c:if>
-				</div>
+						<c:if test="${not empty userInfo}">
+							<c:if test="${userInfo.uno eq communityCommentVO.uno}">
+							<a class="delete-btn"> ❌<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
+							</c:if>
+						</c:if>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10">삭제된 댓글입니다.</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 			<form class="WIFI writeComment" style="display:none;">
 				<div class="row">
@@ -165,8 +182,11 @@
 					<input type="button" class="btn read-btn-send sendMessage" value="Send Message"/>
 				</div>
 				<input type="hidden" class="boardCbno" name="cbno" value="${communityBoardVO.cbno}" />
-				<input type="hidden" name="ccdepth" value="1" />
-				<input type="hidden" class="commentCcno" name="ccorigin" value="${communityCommentVO.ccno}" />
+				<input type="hidden" name="ccdepth" value=1 />
+				<input type="hidden" class="commentCcno" name="ccno" value="${communityCommentVO.ccno}" />
+				<input type="hidden" class="commentCcorigin" name="ccorigin" value="${communityCommentVO.ccorigin}" />
+				<input type="hidden" class="commentCCdepth" value="${communityCommentVO.ccdepth}"/>
+				<input type="hidden" class="commentPosition" name="position" value="${communityCommentVO.position}"/>
 				</form>
 			<hr/>
 		</div>
@@ -183,6 +203,12 @@
 
 <script>
 	$(function(){
+		if('${position}'>=1){
+			window.scrollTo(0,'${position}');
+		}
+		
+		
+			
 		
 		var formObj = $("#readForm");
 		
@@ -213,18 +239,32 @@
 		});
 		
 		$(".sendMessage").click(function(){
+			var position = $(window).scrollTop(); 
+	        console.log(position);
+	        
+	       $(this).closest(".commentWrap").find(".commentPosition").val(position);
+	       // el에 set으로 값을 주는 방법.
+	        
 			var obj = $(this).closest(".writeComment");
 			obj.attr("action", "writeComment");
 			obj.attr("method", "post");
 			obj.submit();
+			
 		});
 		
 		$(".delete-btn").click(function(event){
 			event.preventDefault();
 			var obj = $(this).closest(".commentWrap").find(".boardCbno");
 			var obj2 = $(this).closest(".commentWrap").find(".commentCcno");
+			var obj3 = $(this).closest(".commentWrap").find(".commentCcorigin");
+			var obj4 = $(this).closest(".commentWrap").find(".commentCcdepth");
+	          
+			var position = $(window).scrollTop(); 
+	        console.log(position);
+
 			
-			location.href="removeComment?ccno="+obj2.val()+"&cbno="+obj.val();
+			
+			location.href="removeComment?ccno="+obj2.val()+"&cbno="+obj.val()+"&ccorigin="+obj3.val()+"&ccdepth="+obj4.val()+"&position="+position;
 		})
 		
 		$("#likeBtn").on("click",function(){

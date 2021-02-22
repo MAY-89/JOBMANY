@@ -32,7 +32,7 @@ public class MySendMail extends SendMail{
 		message.append("<body>");
 		message.append(user.getUname()+"님 환영 합니다.");
 		message.append("아래 버튼을 클릭 하시면 회원 가입이 완료 됩니다");
-		message.append("<form  method='post' action='http://192.168.1.11:8080"+req.getContextPath()+"/member/signOK'>");
+		message.append("<form  method='post' action='http://localhost:8080"+req.getContextPath()+"/member/signOK'>");
 		message.append("<input type='hidden' name='signCode' value='"+signCode+"' />");
 		message.append("<input type='hidden' name='uemail' value='"+user.getUemail()+"'/>");
 		message.append("<input type='submit' value='가입 완료 버튼'/>");
