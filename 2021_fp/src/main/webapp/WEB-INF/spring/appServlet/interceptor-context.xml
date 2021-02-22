@@ -8,21 +8,45 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- interceptor-context -->
-
+<!-- 로그인 인터셉터 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/member/loginUp"/>
 			<bean class="net.koreate.common.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
+<!-- 잘못된 접근시 요청 제한 -->		
 		<mvc:interceptor>
 			<mvc:mapping path="/member/signMember"/>
 			<mvc:mapping path="/member/login"/>
 			<bean class="net.koreate.common.interceptor.WrongAcceptInterceptor" />
 		</mvc:interceptor>
+<!-- 회원 가입 인터셉터 -->		
 		<mvc:interceptor>
 			<mvc:mapping path="/member/signMemberUp"/>
-			<bean class="net.koreate.common.interceptor.SignInterceptord" />
+			<bean class="net.koreate.common.interceptor.SignInterceptor" />
 		</mvc:interceptor>
+<!-- 회원 정보 수정 인터셉터 -->		
+		<mvc:interceptor>
+			<mvc:mapping path="/member/modifyMember"/>
+			<bean class="net.koreate.common.interceptor.ModifyMemberInterceptor" />
+		</mvc:interceptor>
+<!-- 회원 정보 수정 시 토큰 생성 -->		
+		<mvc:interceptor>
+			<mvc:mapping path="/member/signMember"/>
+			<mvc:mapping path="/member/memberInfo"/>
+			<bean class="net.koreate.common.interceptor.CreateTokenInterceptor" />
+		</mvc:interceptor>
+<!-- 토큰 체크하여 post method 진행 -->		
+		<mvc:interceptor>
+			<mvc:mapping path="/member/signMemberUp"/>
+			<mvc:mapping path="/member/signOK"/>
+			<mvc:mapping path="/member/modifyMember"/>
+			<mvc:mapping path="/member/deleteMember"/>
+			<bean class="net.koreate.common.interceptor.CheckTokenInterceptor" />
+		</mvc:interceptor>
+		
+		
+<!-- cookie 체크 자동 로그인 -->		
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/member/login"/>

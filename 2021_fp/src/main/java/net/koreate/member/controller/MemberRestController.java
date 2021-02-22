@@ -30,18 +30,10 @@ public class MemberRestController {
 		return entity;
 	}
 	
-	
-	
-	
-	
-	
-	
 	@GetMapping("/modifyPWcheck/{uno}/{upassword}")
 	public ResponseEntity<String> modifyPWcheck(
 				@PathVariable("uno") int uno,
 				@PathVariable("upassword")String upassword) {
-		
-		System.out.println(uno+" : "+upassword);
 		
 		ResponseEntity<String> entity = null;
 		

@@ -32,15 +32,15 @@ public class FileUtil {
 	
 	public String uploadFile(MultipartFile file, String folder) throws Exception{
 		
-		String uploadFolder = getDateFoler()+folder;
+		String uploadFolder = folder+File.separator+getDateFoler();
 		String originalName = file.getOriginalFilename();
 		UUID uid = UUID.randomUUID();
 		String saveName = uid.toString().replace("-", "")+"_"+originalName;
-		
 		File uploadFileFolder = new File(uploadPath,uploadFolder);
 		if(!uploadFileFolder.exists())uploadFileFolder.mkdirs();
 		
-		File upload = new File(uploadPath, uploadFolder);
+		String path = uploadPath+File.separator+uploadFolder;
+		File upload = new File(path, saveName);
 		
 		byte[] bytes = file.getBytes();
 		FileCopyUtils.copy(bytes, upload);
@@ -68,6 +68,7 @@ public class FileUtil {
 		
 		file = new File(uploadName);
 		ImageIO.write(souceImage, ext, file);
+		uploadName = uploadName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 		
 		return uploadName;
 	}

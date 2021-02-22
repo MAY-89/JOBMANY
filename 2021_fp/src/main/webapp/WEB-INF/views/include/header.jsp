@@ -58,10 +58,21 @@
 				</li>
 				<li class="nav-item dropdown header-nav-menu-innerBox-drop">
 					<a class="nav-link dropdown-toggle header-nav-menu-innerBox-home-font" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-					<c:if test="${empty userInfo}">
-						MyPage
-					</c:if>
-					${userInfo.unickname}
+					<c:choose>
+						<c:when test="${empty userInfo}">
+							MyPage
+						</c:when>
+						<c:otherwise>
+								<c:if test="${empty userInfo.pic}">
+									<img class="myPic" src="${pageContext.request.contextPath}/resources/img/resume/resume-default-img.png" />
+								</c:if>
+								<c:if test="${!empty userInfo.pic}">
+									<img class="myPic" src = "${pageContext.request.contextPath}/upload/${userInfo.pic}" />
+								</c:if>
+								${userInfo.unickname} 
+							
+						</c:otherwise>
+					</c:choose>
 					</a>
 					<ul class="dropdown-menu header-nav-menu-innerBox-drop-ul" aria-labelledby="navbarScrollingDropdown">
 						<c:choose>

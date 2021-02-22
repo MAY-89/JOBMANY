@@ -10,7 +10,7 @@
 	<div class="container">
 	<div class="">
 			<div class="p-3 pl-3 mb-5 bg-white rounded m-auto login-box" >
-				<form id="loginForm" action="#">
+				<form id="loginForm" action="loginUp" method="post" >
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12">
 				    	<div class="titleBox">
@@ -25,7 +25,7 @@
 							    <label for="autoLogin">자동 로그인</label>
 				      		</div>
 				   			<div class="form-group">
-				   				<button type="button" class="form-control btn font-weight-bold mr-2 member-btn" id="loginBtn">
+				   				<button type="submit" class="form-control btn font-weight-bold mr-2 member-btn" id="loginBtn">
 				   					로그인
 				   				</button>
 				   			</div>
@@ -55,11 +55,6 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 	var loginForm = $("#loginForm");
-	
-	$("#loginBtn").click(function(){
-		loginForm.attr("action", "loginUp");
-		loginForm.attr("method","post").submit();
-	});
 	
 	var message = '${message}';
 	if(message != null && message != ""){

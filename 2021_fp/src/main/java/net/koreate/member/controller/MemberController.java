@@ -42,7 +42,7 @@ public class MemberController {
 			model.addAttribute("userInfo",vo);
 		}
 		model.addAttribute("tryLoginUser",user.getUemail());
-		return "main";
+		return "redirect:/";
 	}
 	
 	// 회원 가입 페이지 이동
@@ -50,7 +50,6 @@ public class MemberController {
 	public String sign() throws Exception{
 		return "/member/signMember";
 	}
-	
 	
 	// 회원 가입
 	@PostMapping("signMemberUp")
@@ -62,8 +61,6 @@ public class MemberController {
 	@PostMapping("signOK")
 	public String sign(String uemail, String signCode, RedirectAttributes rttr) throws Exception{
 		
-		System.out.println("uno : "+uemail);
-		System.out.println("signCode : "+signCode);
 		String message = service.signOK(uemail,signCode);
 		rttr.addFlashAttribute("message", message);
 		return "redirect:/member/login";
@@ -77,11 +74,9 @@ public class MemberController {
 	
 	// 회원정보 수정
 	@PostMapping("modifyMember")
-	public String modify(UserVO user, HttpServletRequest req) throws Exception{
+	public String modify(UserVO user, Model model) throws Exception{
 		
-		System.out.println(user);
-		service.modifyMember(user);
-		req.getSession().setAttribute("userInfo", user);
+		model.addAttribute("user",user);
 		return "/member/memberInfo";
 	}
 

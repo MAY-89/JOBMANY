@@ -6,7 +6,6 @@
 <style>
 	.imgView{
 		width: 200px;
-		border: 1px solid #ccc;
 	}
 </style>
 <div class="top-img">
@@ -16,7 +15,7 @@
 	<div class="container">
 	<div class="m-auto w-75 ">
 			<div class="shadow p-3 pl-3 mb-5 rounded w-75 m-auto memberBoxing" >
-				<form id="form" action="signMemberUp" method="post">
+				<form id="form" action="signMemberUp" method="post" encType="multipart/form-data">
 				 <div class="form-row inline">
 				    <div class="form-group col-md-12 mb-0">
 				    	<div class="row align-items-center">
@@ -38,10 +37,10 @@
 						      <label class="result"></label>
 						    </div>
 				      	</div>
-				      	<div class="row m-3">
+				      	<div class="row ml-3">
 				      		<div class="col sign-pimg">
-						    <div class="shadow rounded m-auto">
-						    	<img src="${pageContext.request.contextPath }/resources/img/test.png" id="imgView" class="imgView" alt="짱구">
+						    <div class="rounded m-auto">
+						    	<img src="${pageContext.request.contextPath }/resources/img/resume/resume-default-img.png" id="imgView" class="imgView" alt="profile">
 						    </div>
 						    </div>
 						</div>
@@ -57,7 +56,7 @@
 				      		<label class="result"></label>
 				      	</div>
 				      	<div class="form-group col-md-6">
-				      		<input type="file" accept="image/*" name="pic" class="m-auto btn member-btn form-control" id="profileImage"  />
+				      		<input type="file" accept="image/*" name="file" class="m-auto btn member-btn form-control" id="profileImage"  />
 				      	</div>
 				     </div>
 				     <div class="row">
@@ -69,7 +68,7 @@
 				      	<div class="form-group col-md-6">
 				      		<label for="userAge">생년월일</label>
 					      	<input type="text" value="${userVO.ubirth}" name="ubirth" class="form-control" id="ubirth" autocomplete="off">
-					      	<label class="result"></label>	
+					      	<label class="result"></label>
 				      	</div>
 			     	</div>
 				</div>
@@ -96,6 +95,7 @@
 				<div class="form-group">
 					<button type="button" class="m-auto btn member-btn signUp-btn" id="signSubmit"> 회원가입 </button>
 				</div>
+				<input type="hidden" name="csrf_token" value="${csrf_token}"/>
 			</form>
 		</div>
 		</div>
@@ -103,7 +103,7 @@
 </section>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script >var root = "${root}"</script>
-<script src="${root}/resources/js/memberInfo.js"></script>
+<script src="${root}/resources/js/signMember.js"></script>
 <script>
 	
 		var imgTemp = $("#imgView").attr("src");
@@ -125,6 +125,23 @@
 		function removeFileInfo(){
 			$("#imgFileName").val("");
 			$("imgView").attr("src",imgTemp);
+		}
+		
+		function signSubmit(){
+			var okNum = 0;	
+			for(var i = 1; i<7; i++){
+				var key = 'bool'+i;
+				
+				if(!isCheckobj[key].bool){
+					console.log(isCheckobj[key].bool);
+					alert(isCheckobj[key].message);
+					isCheckobj[key].id.focus();
+					return;
+				}else{
+					okNum++;
+				}
+			}
+			if(okNum === 6) $("#form").submit();
 		}
 		
 		var message = '${message}';
