@@ -12,7 +12,7 @@ public interface CommunityCommentService {
 	void update(CommunityCommentVO vo) throws Exception;
 	
 	// 댓글 삭제
-	void delete(int ccno) throws Exception;
+	void delete(int ccno, int ccorigin, int ccdepth) throws Exception;
 	
 	// 게시물 번호의 댓글 리스트
 	List<CommunityCommentVO> commentList(int cbno) throws Exception;

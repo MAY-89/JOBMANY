@@ -15,15 +15,15 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 
 	@Inject
 	CommunityCommentDAO dao;
-	
+
 	@Override
 	@Transactional
 	public void addComment(CommunityCommentVO vo) throws Exception {
-		
-		if(vo.getCcorigin()==0) {
+
+		if (vo.getCcorigin() == 0) {
 			dao.addComment(vo);
 			dao.updateOrigin();
-		}else {
+		} else {
 			dao.replyRegist(vo);
 		}
 	}
@@ -34,8 +34,24 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 	}
 
 	@Override
-	public void delete(int ccno) throws Exception {
-		dao.delete(ccno);
+	public void delete(int ccno, int ccorigin, int ccdepth) throws Exception {
+		if (ccdepth == 1) {
+			dao.delete(ccno);
+			int count = dao.originCount(ccorigin);
+			if(count==1) {
+				char check = dao.commentCheck(ccorigin);
+				if(check=='N') {
+					dao.delete(ccorigin);
+				}
+			}
+		}else {
+			int count = dao.originCount(ccorigin);
+			if(count>=2) {
+				dao.deleteShowview(ccno);
+			}else {
+				dao.delete(ccno);
+			}
+		}
 	}
 
 	@Override
@@ -45,9 +61,9 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 
 	@Override
 	public void replyRegister(CommunityCommentVO vo) throws Exception {
-		
-		vo.setCcdepth(vo.getCcdepth()+1);
-		
+
+		vo.setCcdepth(vo.getCcdepth() + 1);
+
 		dao.replyRegist(vo);
 	}
 
@@ -60,6 +76,5 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 	public int listCount(int cbno) throws Exception {
 		return dao.listCount(cbno);
 	}
-	
 
 }
