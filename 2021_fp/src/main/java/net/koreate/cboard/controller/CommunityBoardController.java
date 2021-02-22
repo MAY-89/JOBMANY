@@ -66,7 +66,7 @@ public class CommunityBoardController {
 		vo.setCcwriter(user.getUname());
 		vo.setUno(user.getUno());
 		ccs.addComment(vo);
-		return "redirect:/community/readDetail?cbno="+vo.getCbno();
+		return "redirect:/community/readPosition?cbno="+vo.getCbno()+"&position="+vo.getPosition();
 	}
 	
 
@@ -84,7 +84,7 @@ public class CommunityBoardController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:/community/readDetail";
 	}
-
+		
 	@GetMapping("/readDetail")
 	public ModelAndView readDetail(
 			@RequestParam("cbno") int cbno, 
@@ -112,11 +112,35 @@ public class CommunityBoardController {
 	}
 	
 	@RequestMapping("/removeComment")
-	public String removeComment(@RequestParam("ccno") int ccno, @RequestParam("cbno") int cbno) throws Exception{
+	public String removeComment(@RequestParam("ccno") int ccno, @RequestParam("cbno") int cbno, @RequestParam("ccorigin") int ccorigin, @RequestParam("ccdepth") int ccdepth, @RequestParam("position") int position) throws Exception{
 		System.out.println(ccno);
-		ccs.delete(ccno);
-		return "redirect:/community/readDetail?cbno="+cbno;
+		ccs.delete(ccno, ccorigin, ccdepth);
+		return "redirect:/community/readPosition?cbno="+cbno+"&position="+position;
 	}
+	
+	@GetMapping("/readPosition")
+	public ModelAndView readPosition(
+			@RequestParam("cbno") int cbno, 
+			@ModelAttribute("cri") SearchCriteria cri,
+			ModelAndView mav, HttpSession session, @RequestParam("position") int position) throws Exception {
+		
+		UserVO user = (UserVO)session.getAttribute("userInfo");
+		
+		mav.addObject("commentCount",ccs.listCount(cbno));
+		mav.addObject("list",ccs.commentList(cbno));
+		
+		mav.addObject("likeyYN",cls.LikeyYN(cbno, user.getUno()));
+		
+		mav.addObject(cbs.readReply(cbno));
+		
+		mav.addObject("position", position);
+		mav.setViewName("community/read");
+		
+		
+		return mav;
+	}
+	
+	
 
 	@GetMapping("/modify")
 	public ModelAndView modify(@RequestParam("cbno") int cbno, ModelAndView mav) throws Exception {

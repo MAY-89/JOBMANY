@@ -37,15 +37,19 @@ public interface CommunityCommentDAO {
 	void delete(int ccno) throws Exception;
 
 	// 댓글 showview -> N
-	@Update("UPDATE tbl_community_comment SET showboard = 'N' WHERE ccno = #{ccno}")
+	@Update("UPDATE tbl_community_comment SET ccshowboard = 'N' WHERE ccno = #{ccno}")
 	void deleteShowview(int ccno) throws Exception;
 
+	// 대댓글이 있는지 판단
+	@Select("SELECT count(*) FROM tbl_community_comment WHERE ccorigin=#{ccorigin}")
+	int originCount(int ccorigin) throws Exception;
+	
+	// 대댓글 삭제하고 난 뒤 원본댓글만 남은 경우, 원본 댓글이 삭제된 글인지 아닌지 판단
+	@Select("SELECT ccshowboard FROM tbl_community_comment WHERE ccorigin=#{ccorigin}")
+	char commentCheck(int ccorigin) throws Exception;
+	
 	// 댓글 몇 개인지 파악
 	@Select("SELECT count(*) FROM tbl_community_comment WHERE cbno = #{cbno}")
 	int listCount(int cbno) throws Exception;
-
-	/* 페이징
-	 * @Select("SELECT * FROM tbl_community_comment WHERE cbno = #{cbno} ORDER BY ccno DESC limit #{cri.pageStart}, #{cri.perPageNum}"
-	 * ) List<CommunityCommentVO> listPage(int cbno, Criteria cri) throws Exception;
-	 */
+	
 }

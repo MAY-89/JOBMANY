@@ -15,4 +15,6 @@ public class CommunityCommentVO {
 	private int ccdepth;
 	private String ccshowboard; // 추가
 	private int uno;
+	
+	private int position;
 }
