@@ -49,6 +49,11 @@
 		</div>
 	</div>
 </section>
+<div class="modal-box">
+	<div class="modal">
+		<img src="${pageContext.request.contextPath }/resources/img/member/findMember.gif" />
+	</div>
+</div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 	
@@ -87,17 +92,16 @@
 	$("#findPWBtn").click(function(){
 		var email = $("#uemail").val();
 		var url = "${pageContext.request.contextPath}/members/findPW/"+email+"/";
-		
+		$(".modal").css("display","flex");
 		$.getJSON(url,function(data){
 			
 			if(!data){
 				alert(email+"는 등록 되지 않은 회원입니다. 확인하여 주십시오");
-				return;
-				
+				$(".modal").css("display","none");
+			}else{
+				alert(email+"주소로 메일을 발송 했습니다. \n메일에서 비밀번호를 확인 해주십시오");
+				$(".modal").css("display","none");
 			}
-			alert(email+"주소로 메일을 발송 했습니다. \n메일에서 비밀번호를 확인 해주십시오");
 		});
 	});
-	
 </script>
-

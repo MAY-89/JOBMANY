@@ -1,5 +1,8 @@
 package net.koreate.member.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -8,9 +11,11 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
+import net.koreate.cboard.vo.CommunityBoardVO;
 import net.koreate.member.provider.memberQueryProvider;
 import net.koreate.member.vo.BanIDVO;
 import net.koreate.member.vo.UserVO;
+import net.koreate.resume.vo.ResumeVO;
 
 public interface UserDAO {
 	
@@ -72,11 +77,22 @@ public interface UserDAO {
 	@Update("UPDATE tbl_banID SET count = count +1, bandate = now() WHERE uemail = #{tryEmail}")
 	void updateBanIDCnt(String tryEmail) throws Exception;
 	
+	// 로그인 성공시 밴 되어 있는 아이디 삭제
 	@Delete("DELETE FROM tbl_banID WHERE uemail = #{tryEmail}")
 	void removeBanID(String tryEmail) throws Exception;
 
+	// 전체 리스트 불러 오기
+	@SelectProvider(type = memberQueryProvider.class, method = "getMyTotalList")
+	int getTotalList(Map<String, Object> map);
 	
+	// 카테고리 별로 리스트 불러오기
+	@SelectProvider(type = memberQueryProvider.class, method = "getMyList")
+	List<ResumeVO> getMyResumeList(Map<String, Object> map)throws Exception;
 	
+	@SelectProvider(type = memberQueryProvider.class, method = "getMyList")
+	List<CommunityBoardVO> getMyBoardList(Map<String, Object> map)throws Exception;
+	
+
 	
 	
 }

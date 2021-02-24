@@ -1,6 +1,10 @@
 package net.koreate.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import net.koreate.member.vo.UserVO;
+import net.koreate.util.SearchCriteria;
 
 public interface MemberService {
 
@@ -29,6 +33,10 @@ public interface MemberService {
 	// 회원 가입 인증 메일로 코드 확인
 	String signOK(String uemail, String signCode) throws Exception;
 	
+	// 유저 존재 확인
 	int checkUser(String data)throws Exception;
-	
+
+	// 특정유저가 스크랩한 글에 대한 목록을 리스트로 가지고 옵니다
+	Map<String, Object> readList(SearchCriteria cri,String category, int uno)throws Exception;
+
 }

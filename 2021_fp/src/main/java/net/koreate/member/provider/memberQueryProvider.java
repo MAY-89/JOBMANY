@@ -1,10 +1,16 @@
 package net.koreate.member.provider;
 
+import java.util.Map;
+
+import javax.management.ObjectName;
+
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
 
 import net.koreate.member.vo.UserVO;
+import net.koreate.util.SearchCriteria;
 
 public class memberQueryProvider {
 
@@ -27,6 +33,63 @@ public class memberQueryProvider {
 		String query = sql.toString();
 		System.out.println("쿼리 : "+query);
 		return query;
+	}
+	
+	
+	public String getMyTotalList(Map<String, Object> map) {
+		
+		SQL sql = new SQL(){
+			{
+				SELECT("count(*)");
+				if(map.get("category").equals("resume")) {
+					FROM("liketable");
+				}else {
+					FROM("communitylike");
+				}
+				WHERE("uno = #{uno}");
+			}
+		};
+		
+		String query =  sql.toString();
+		return query;
+	}
+	
+	
+	public String getMyList(Map<String, Object> map) {
+		
+		SearchCriteria cri = (SearchCriteria)map.get("cri");
+		String category = (String)map.get("category");
+		
+		if(category.equals("community")) {
+			
+		
+		SQL sql = new SQL() {
+			
+			{
+				SELECT("*");
+				FROM("tbl_community_board");
+				WHERE("cbno = (select cbno from communitylike where uno = #{uno})");
+				ORDER_BY("cbregdate desc");
+				LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
+			}
+		};
+		String query =  sql.toString();
+		return query;
+		
+		}else {
+			SQL sql = new SQL() {
+				
+				{
+					SELECT("*");
+					FROM("resumetable");
+					WHERE("rno = (select rno from liketable where uno = #{uno})");
+					ORDER_BY("regdate desc");
+					LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
+				}
+			};	
+			String query =  sql.toString();
+			return query;
+		}
 	}
 	
 	public String modifyUpdateSQL(UserVO vo) {

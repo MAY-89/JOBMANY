@@ -2,6 +2,11 @@ package net.koreate.member.service;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -9,8 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.koreate.member.dao.UserDAO;
 import net.koreate.member.vo.UserVO;
+import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.CreateMemberCookie;
 import net.koreate.util.MySendMail;
+import net.koreate.util.PageMaker;
+import net.koreate.util.SearchCriteria;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -114,5 +122,31 @@ public class MemberServiceImpl implements MemberService{
 		sendMail.findPwSendmail(user);
 		return isCheck;
 	}
+
+	@Override
+	public Map<String, Object> readList(SearchCriteria cri,String category,int uno) throws Exception{
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		
+		queryMap.put("category", category);
+		queryMap.put("uno", uno);
+		queryMap.put("cri", cri);
+		int totalcnt = dao.getTotalList(queryMap);
+		List<?> list =null;
+		if(category.equals("resume")) {
+			list = dao.getMyResumeList(queryMap);	
+		}else {
+			list = dao.getMyBoardList(queryMap);
+		}
+		System.out.println(list);
+		map.put("list",list );
+		map.put("pm", new PageMaker(cri, totalcnt));
+		map.put("category", category);
+		return map;
+	}
+
+	
 
 }
