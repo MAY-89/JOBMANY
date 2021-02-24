@@ -14,23 +14,23 @@
 			</div>
 			<div class="col footer-body-box">
 				<a href="#">개인정보처리방침</a>
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
 			</div>
 			<div class="col footer-body-box">
 				<a href="#">이메일무단수집거부</a>
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
 			</div>
 			<div class="col footer-body-box">
-				<div class="row">test</div>
-				<div class="row">test text shot</div>
-				<div class="row">test text shot</div>
-				<div class="row">test</div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
+				<div class="row"></div>
 			</div>
 		</div>
 	</div>

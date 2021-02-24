@@ -112,7 +112,7 @@ public class CommunityBoardController {
 	}
 	
 	@RequestMapping("/removeComment")
-	public String removeComment(@RequestParam("ccno") int ccno, @RequestParam("cbno") int cbno, @RequestParam("ccorigin") int ccorigin, @RequestParam("ccdepth") int ccdepth, @RequestParam("position") int position) throws Exception{
+	public String removeComment(@RequestParam("ccno") int ccno, @RequestParam("cbno") int cbno, @RequestParam("ccorigin") int ccorigin, @RequestParam("ccdepth") int ccdepth, @RequestParam("position") double position) throws Exception{
 		System.out.println(ccno);
 		ccs.delete(ccno, ccorigin, ccdepth);
 		return "redirect:/community/readPosition?cbno="+cbno+"&position="+position;
@@ -122,7 +122,7 @@ public class CommunityBoardController {
 	public ModelAndView readPosition(
 			@RequestParam("cbno") int cbno, 
 			@ModelAttribute("cri") SearchCriteria cri,
-			ModelAndView mav, HttpSession session, @RequestParam("position") int position) throws Exception {
+			ModelAndView mav, HttpSession session, @RequestParam("position") double position) throws Exception {
 		
 		UserVO user = (UserVO)session.getAttribute("userInfo");
 		
