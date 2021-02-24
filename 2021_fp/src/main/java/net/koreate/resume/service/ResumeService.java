@@ -135,8 +135,8 @@ public class ResumeService {
 		return false;
 	}
 
-	public List<ResumeVO> mainList() {
-		return dao.mainList();
+	public List<ResumeVO> mainList(String data) {
+		return dao.mainList(data);
 	}
 
 }

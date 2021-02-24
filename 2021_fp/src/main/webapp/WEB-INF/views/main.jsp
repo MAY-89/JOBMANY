@@ -32,10 +32,10 @@
 					
 				</div>
 				<div class="col main-inner-item-left-center">
-					<span>북도령 권민규</span>
+					<span>당신의 로그인을 응원합니다</span>
 				</div>
 				<div class="col main-inner-item-left-bottom">
-					One of three columns
+					후회없는 당신의 미래를 위해 우리가 응원 합니다.
 				</div>
 			</div>
 			<div class="line"></div>
@@ -44,10 +44,11 @@
 					
 				</div>
 				<div class="col main-inner-item-center-center">
-					<span>잠좀자라 양명안</span>
+					<span>잠시 떠들다 가세요</span>
 				</div>
 				<div class="col main-inner-item-center-bottom">
-					One of three columns
+					인맥이라는건 휴대전화에 저장된 사람의 수가 아니라<br/>
+					자신을 응원해주는 좋아요 수를 말한다.
 				</div>
 			</div>
 			<div class="line"></div>
@@ -55,11 +56,12 @@
 				<div class="col main-inner-item-right-top">
 					
 				</div>
-				<div class="col main-inner-item-right-center">
-					<span>졸린다 장인제</span>
+				<div class="col main-inner-item-right-center inje">
+					<span>지금 바로 도전하세요</span>
 				</div>
 				<div class="col main-inner-item-right-bottom">
-					One of three columns
+					과거에 매달리지 말고 미래를 원망하지도 마세요.<br/>
+					과거는 이미 사라졌고 미래는 아직 오지 않았습니다.
 				</div>
 			</div>
 		</div>
@@ -144,12 +146,12 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#rweek">
+						<a class="nav-link" data-toggle="tab" id="weekly" href="#rweek">
 						주간
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="tab" href="#rday">
+						<a class="nav-link" data-toggle="tab" id="daily" href="#rday">
 						일간
 						</a>
 					</li>
@@ -158,40 +160,67 @@
 					<div class="tab-pane fade show active" id="rmonth">
 						<table>
 							<tr>
-								<th>1</th>
-								<td class="ttile">
-									<a href="#">
-									🖋<i>writer</i>
-									</a>님의 이력서
-								</td>
-								<td class="tlike">📬<i>like</i></td>
+								<th>no.</th>
+								<th class="ttile">
+									🖋<i>쓴사람</i>
+								</th>
+								<th class="tlike"><i>like</i></th>
 							</tr>
+							<c:set var="monthi" value="0"/>
+							<c:forEach var="resume" items="${monthList }">
+							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+								<th><c:out value="${monthi+1}"/></th>
+								<c:set var="monthi" value="${monthi+1}"/>
+								<td class="ttile">
+									<c:out value="${resume.rname }"/>님의 이력서
+								</td>
+								<td class="tlike">📬<i><c:out value="${resume.likecnt }"/></i></td>
+							</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="tab-pane fade" id="rweek">
 						<table>
 							<tr>
-								<th>1</th>
-								<td class="ttile">
-									<a href="#">
-									🖋<i>writer</i>
-									</a>님의 이력서
-								</td>
-								<td class="tlike">📬<i>like</i></td>
+								<th>no.</th>
+								<th class="ttile">
+									🖋<i>쓴사람</i>
+								</th>
+								<th class="tlike"><i>like</i></th>
 							</tr>
+							<c:set var="weeki" value="0"/>
+							<c:forEach var="resume" items="${weekList }">
+							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+								<th><c:out value="${weeki+1}"/></th>
+								<c:set var="weeki" value="${weeki+1}"/>
+								<td class="ttile">
+									<c:out value="${resume.rname }"/>님의 이력서
+								</td>
+								<td class="tlike">📬<i><c:out value="${resume.likecnt }"/></i></td>
+							</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="tab-pane fade" id="rday">
 						<table>
 							<tr>
-								<th>1</th>
-								<td class="ttile">
-									<a href="#">
-									🖋<i>writer</i>
-									</a>님의 이력서
-								</td>
-								<td class="tlike">📬<i>like</i></td>
+								<th>no.</th>
+								<th class="ttile">
+									🖋<i>쓴사람</i>
+								</th>
+								<th class="tlike"><i>like</i></th>
 							</tr>
+							<c:set var="dayi" value="0"/>
+							<c:forEach var="resume" items="${dayList }">
+							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+								<th><c:out value="${dayi+1}"/></th>
+								<c:set var="dayi" value="${dayi+1}"/>
+								<td class="ttile">
+									<c:out value="${resume.rname }"/>님의 이력서
+								</td>
+								<td class="tlike">📬<i><c:out value="${resume.likecnt }"/></i></td>
+							</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
@@ -199,20 +228,10 @@
 		</div>
 	</div>
 </section>
-<!-- <div class="overflow-hidden cb-content">
-	<span>
-	문장 테스트 
-		Since Bootstrap is developed to be mobile first,
-		we use a handful of media queries to create sensible
-		breakpoints for our layouts and interfaces.
-		Since Bootstrap is developed to be mobile first,
-		we use a handful of media queries to create sensible
-		breakpoints for our layouts and interfaces.
-	</span>
-</div> -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 <script>
+	getResumeList("m");
 	var message = '${message}';
 	var wrongAccept = '${wrongAccept}';
 	if(message != null && !message == ""){
@@ -223,34 +242,6 @@
 		alert(wrongAccept);
 		
 	}
-
-	/*
-	$(function(){
-		
-		$.ajax({
-			method : "get",
-			url : "resume/mainList",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			success : function(data) {
-				console.log(data);
-				$(data).each(function(){
-					var html = "";
-					html += "<tr>";
-					html += "<td>"+this.rno;
-					html += "</td>";
-					html += "<td>"+this.rname+"님의 이력서";
-					html += "</td>";
-					html += "<td>"+this.likecnt;
-					html += "</td>";
-					html += "</tr>";
-					$("table").append(html);
-				});
-			}
-		});
-	
-	});
-	*/
-	
 
 	
 </script>
