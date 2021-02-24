@@ -151,9 +151,9 @@ public class ResumeController {
 	
 	@GetMapping("/mainList")
 	@ResponseBody
-	public ResponseEntity<List<ResumeVO>> mainList(){
+	public ResponseEntity<List<ResumeVO>> mainList(String data){
 		ResponseEntity<List<ResumeVO>> entity = null;
-		List<ResumeVO> list = rs.mainList();  
+		List<ResumeVO> list = rs.mainList(data);  
 		return entity = new ResponseEntity<List<ResumeVO>>(list,HttpStatus.OK);
 	}
 	

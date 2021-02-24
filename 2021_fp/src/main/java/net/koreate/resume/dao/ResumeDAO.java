@@ -68,7 +68,7 @@ public interface ResumeDAO {
 	int selectLike(@Param("rno")int rno,@Param("uno")int uno);
 	
 	@SelectProvider(type=ResumeQueryProvider.class, method="mainList")
-	List<ResumeVO> mainList();
+	List<ResumeVO> mainList(String data);
 	
 
 

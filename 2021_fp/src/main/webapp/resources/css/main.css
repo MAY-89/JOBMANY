@@ -24,7 +24,12 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'NanumBarunpen';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 메인 컨텐츠 */
 .bravo-text{
 	margin-top: 500px;
@@ -64,14 +69,15 @@
 .main-inner-item-left-center{
 	font-family: 'NotoSerifKR';
 	font-size: 20px;
-	left: 70px;
+	left: 10px;
 }
 .main-inner-item-left-center span{
 	border-bottom: 2px solid rgba(114, 192, 44, 1);
 }
 .main-inner-item-left-bottom{
+	font-family: 'NanumBarunpen';
 	font-weight: 500;
-	left: 50px;
+	left: -10px;
 }
 		
 		/* 중앙 */
@@ -88,14 +94,15 @@
 .main-inner-item-center-center{
 	font-family: 'NotoSerifKR';
 	font-size: 20px;
-	left: 40px;
+	left: 30px;
 }
 .main-inner-item-center-center span{
 	border-bottom: 2px solid rgba(114, 192, 44, 1);
 }
 .main-inner-item-center-bottom{
+	font-family: 'NanumBarunpen';
 	font-weight: 500;
-	left: 30px;
+	left: -30px;
 }
 		
 		/* 오른쪽 */
@@ -112,14 +119,15 @@
 .main-inner-item-right-center{
 	font-family: 'NotoSerifKR';
 	font-size: 20px;
-	left: 25px;
+	left: -5px;
 }
 .main-inner-item-right-center span{
 	border-bottom: 2px solid rgba(114, 192, 44, 1);
 }
 .main-inner-item-right-bottom{
+	font-family: 'NanumBarunpen';
 	font-weight: 500;
-	left: 5px;
+	left: -35px;
 }
 
 /* =================================================================== */
@@ -198,9 +206,6 @@
 	width: 80px;
 	background: rgba(114, 192, 44, 0.5);
 }
-
-
-
 
 
 
