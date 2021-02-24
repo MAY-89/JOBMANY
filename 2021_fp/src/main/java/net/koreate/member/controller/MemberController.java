@@ -42,7 +42,8 @@ public class MemberController {
 			model.addAttribute("userInfo",vo);
 		}
 		model.addAttribute("tryLoginUser",user.getUemail());
-		return "main";
+		
+		return "redirect:/";
 	}
 	
 	// 회원 가입 페이지 이동

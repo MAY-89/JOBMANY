@@ -146,21 +146,6 @@
 			<li class="page-item"><a href="resumeList${pm.makeQuery(pm.maxPage)}">&raquo;&raquo;</a></li>
 		</c:if>						
 	</ul>
-	  <!-- 
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item">
-	      <a class="page-link" href="#">Previous</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li> aria-current="page" 페이지 선택시
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item"><a class="page-link" href="#">4</a></li>
-	    <li class="page-item"><a class="page-link" href="#">5</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Next</a>
-	    </li>
-	  </ul>
-	   -->
 	</div>
 </section>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

@@ -1,9 +1,5 @@
 package net.koreate.resume.provider;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.apache.ibatis.javassist.runtime.Desc;
 import org.apache.ibatis.jdbc.SQL;
 
 import net.koreate.resume.vo.ResumeVO;
@@ -20,7 +16,7 @@ public class ResumeQueryProvider {
 				FROM(table);
 				setSearchWhere(cri, this);
 				ORDER_BY("regdate desc");
-				LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
+				LIMIT(cri.getPageStart() + "," + cri.getPerPageNum());
 			}
 		}.toString();
 	}
@@ -55,7 +51,7 @@ public class ResumeQueryProvider {
 	}
 
 	public String updateResume(ResumeVO vo) {
-		if(vo.getPic() != null && vo.getPortfolio() != null) {
+		if (vo.getPic() != null && vo.getPortfolio() != null) {
 			return new SQL() {
 				{
 					UPDATE(table);
@@ -83,7 +79,7 @@ public class ResumeQueryProvider {
 					WHERE("rno = #{rno}");
 				}
 			}.toString();
-		}else if(vo.getPic() == null && vo.getPortfolio() != null) {
+		} else if (vo.getPic() == null && vo.getPortfolio() != null) {
 			return new SQL() {
 				{
 					UPDATE(table);
@@ -110,7 +106,7 @@ public class ResumeQueryProvider {
 					WHERE("rno = #{rno}");
 				}
 			}.toString();
-		}else if(vo.getPic() != null && vo.getPortfolio() == null) {
+		} else if (vo.getPic() != null && vo.getPortfolio() == null) {
 			return new SQL() {
 				{
 					UPDATE(table);
@@ -137,8 +133,9 @@ public class ResumeQueryProvider {
 					WHERE("rno = #{rno}");
 				}
 			}.toString();
-		}else {
+		} else {
 			return new SQL() {
+
 				{
 					UPDATE(table);
 					SET("rname = #{rname}");
@@ -162,10 +159,11 @@ public class ResumeQueryProvider {
 					SET("updatedate = now()");
 					WHERE("rno = #{rno}");
 				}
+
 			}.toString();
 		}
 	}
-	
+
 	public void setSearchWhere(SearchCriteria cri, SQL sql) {
 
 		if (cri.getSearchType() != null) {
@@ -202,42 +200,41 @@ public class ResumeQueryProvider {
 				break;
 
 			}
-		}else {
+		} else {
 			sql.WHERE("showhide = 'y'");
 		}
 	}
-	
-	public String mainList(){
-		String month = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 month),'%Y%m%d')";
-		String week = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 week),'%Y%m%d')";
-		String day = "date_format(regdate,'%Y%m%d') = date_format(now(),'%Y%m%d')";
-		
-			return new SQL() {
+
+	public String mainList(String data) {
+		return new SQL() {
 			{
 				SELECT("*");
 				FROM(table);
-				WHERE("showhide = 'y'");
- 				AND();
-				WHERE(month);
+				mainListWhere(data, this);
 				ORDER_BY("likecnt desc");
 				LIMIT("5");
 			}
 		}.toString();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public void mainListWhere(String data, SQL sql) {
+		if (data != null || data != null) {
+			String month = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 month),'%Y%m%d')";
+			String week = "date_format(regdate,'%Y%m%d') >= date_format(date_sub(now(), interval 1 week),'%Y%m%d')";
+			String day = "date_format(regdate,'%Y%m%d') = date_format(now(),'%Y%m%d')";
+
+			switch (data) {
+			case "m":
+				sql.WHERE(month).AND().WHERE("showhide = 'y'");
+				break;
+			case "w":
+				sql.WHERE(week).AND().WHERE("showhide = 'y'");
+				break;
+			case "d":
+				sql.WHERE(day).AND().WHERE("showhide = 'y'");
+				break;
+			}
+		}
+	}
+
 }

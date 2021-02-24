@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%-- <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include> --%>
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/resume/readResume.css">
 <!-- 상단 이미지 -->
 <div>
@@ -26,8 +26,16 @@
 			<div class="row mb-3">
 				<div class="col-sm-3 " ><p>증명사진</p></div>
 				<div class="col-md-5" >
-					<img src="${pageContext.request.contextPath}/upload/${resume.pic}" alt="사진" name="profile" id="profile" class="card-img-top"/>
-					<input type="file" name="profilePic" id="profilePic" accept="image/*" value="${resume.pic}"/>
+					<c:choose>
+						<c:when test="${!empty resume.pic}">
+							<img src="${pageContext.request.contextPath}/upload/${resume.pic}" alt="${userInfo.uname }님의 프로필사진" name="profile" id="profile" class="card-img-top"/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/resources/img/resume/resume-default-img.png" alt="기본사진" name="profile" id="profile" class="card-img-top"/>
+						</c:otherwise>
+					</c:choose>
+					<input type="file" name="profilePic" id="profilePic" accept="image/*"/>
+					<input type="button" id="removePicBtn" value="삭제"/>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -246,10 +254,14 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	
+	/* 
 	if(${!empty message}){
 		alert("${message}");
 	}
+	 */
+	$("#removePicBtn").on("click",function(){
+		$("#profile").attr("src","${pageContext.request.contextPath}/resources/img/resume/resume-default-img.png");
+	})
 	
 	$("#profilePic").on("change",function(){
 		var files = this.files;
