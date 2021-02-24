@@ -7,6 +7,7 @@
 	.imgView{
 		width: 200px;
 	}
+	
 </style>
 <div class="top-img">
 	<img src="${pageContext.request.contextPath }/resources/img/member/loginImg.jpg" class="sign-header-top-img" alt="...">
@@ -101,6 +102,11 @@
 		</div>
 	</div>
 </section>
+<div class="modal-box">
+	<div class="modal">
+		<img src="${pageContext.request.contextPath }/resources/img/member/signLoading.gif" />
+	</div>
+</div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script >var root = "${root}"</script>
 <script src="${root}/resources/js/signMember.js"></script>
@@ -142,6 +148,7 @@
 				}
 			}
 			if(okNum === 6) $("#form").submit();
+				$(".modal").css("display","flex");
 		}
 		
 		var message = '${message}';

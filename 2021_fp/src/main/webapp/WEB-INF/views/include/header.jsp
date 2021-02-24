@@ -79,7 +79,6 @@
 							<c:when test="${empty userInfo}">
 								<li><a class="dropdown-item" href="${root}/member/login">Login</a></li>
 								<li><a class="dropdown-item" href="${root}/member/signMember">Sign</a></li>
-								<li><a class="dropdown-item" href="${root}/member/myList">스크랩</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a class="dropdown-item" href="${root}/member/memberInfo">내 정보 보기 </a></li>
