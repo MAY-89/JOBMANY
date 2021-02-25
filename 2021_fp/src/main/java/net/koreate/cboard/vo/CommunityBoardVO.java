@@ -13,4 +13,5 @@ public class CommunityBoardVO {
 	private Date cbupdatedate;
 	private int cbviewcnt;
 	private int uno;
+	
 }
