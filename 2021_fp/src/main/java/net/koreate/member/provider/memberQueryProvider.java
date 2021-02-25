@@ -66,28 +66,30 @@ public class memberQueryProvider {
 		SQL sql = new SQL() {
 			
 			{
-				SELECT("*");
-				FROM("tbl_community_board");
-				WHERE("cbno = (select cbno from communitylike where uno = #{uno})");
+				SELECT("tbl_cb.*");
+				FROM("tbl_community_board tbl_cb");
+				LEFT_OUTER_JOIN("communitylike clike ON tbl_cb.cbno = clike.cbno where clike.uno = #{uno}");
 				ORDER_BY("cbregdate desc");
 				LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
 			}
 		};
 		String query =  sql.toString();
+		System.out.println(query);
 		return query;
 		
 		}else {
 			SQL sql = new SQL() {
 				
 				{
-					SELECT("*");
-					FROM("resumetable");
-					WHERE("rno = (select rno from liketable where uno = #{uno})");
+					SELECT("tbl_re.*");
+					FROM("resumetable tbl_re");
+					LEFT_OUTER_JOIN("liketable rllike ON tbl_re.rno = rllike.rno where rllike.uno = #{uno}");
 					ORDER_BY("regdate desc");
 					LIMIT(cri.getPageStart()+","+cri.getPerPageNum());
 				}
 			};	
 			String query =  sql.toString();
+			System.out.println(query);
 			return query;
 		}
 	}

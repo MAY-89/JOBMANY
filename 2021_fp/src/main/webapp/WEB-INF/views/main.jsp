@@ -243,9 +243,6 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 <script>
-	
-	
-	
 	var message = '${message}';
 	var wrongAccept = '${wrongAccept}';
 	if(message != null && !message == ""){

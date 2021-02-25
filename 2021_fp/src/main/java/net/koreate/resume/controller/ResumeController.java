@@ -93,6 +93,7 @@ public class ResumeController {
 		if(user != null) {
 			model.addAttribute("likeYN", rs.likeYN(rno,user.getUno()));	
 		}
+		System.out.println(rs.select(rno));
 		model.addAttribute("resume", rs.select(rno));
 		model.addAttribute("cri", cri);
 		return "resume/readResume";

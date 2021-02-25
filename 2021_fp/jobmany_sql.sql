@@ -62,7 +62,9 @@ select * from tbl_comment;
 
 create table communityLike(
     cbno int not null,
-    uno int not null
+    uno int not null,
+    constraint foreign key(uno) REFERENCES tbl_user(uno),
+    constraint foreign key(cbno) REFERENCES tbl_community_board(cbno)
 );
 drop table communityLike;
 select * from communityLike;
@@ -102,7 +104,9 @@ select * from resumetalbe;
 
 create table liketable(
 	rno int not null,
-    uno int not null
+    uno int not null,
+    CONSTRAINT FOREIGN KEY(uno) REFERENCES tbl_user(uno),
+    CONSTRAINT FOREIGN KEY(rno) REFERENCES resumetable(rno)
 );
 drop table liketable;
 select * from liketable;
