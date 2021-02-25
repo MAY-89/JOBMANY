@@ -97,38 +97,50 @@
 				<div class="tab-content">
 					<div class="tab-pane fade show active" id="cmonth">
 						<table>
-							<tr>
-								<th>1</th>
+							<c:set var="mcno" value="0"/>
+							<c:forEach var="community" items="${cmonthList}">
+							<tr class="hotrank" onclick="location.href='community/readDetail?cbno=${community.cbno}'">
+								<th><c:out value="${mcno+1}"/></th>
+								<c:set var="mcno" value="${mcno+1}"/>
 								<td class="ttile">
-									<a href="#">제목</a>
+									${community.cbtitle }
 								</td>
-								<td>🖋<i>writer</i></td>
-								<td class="tview">💬<i>view</i></td>
+								<td>🖋<i>${community.cbwriter}</i></td>
+								<td class="tview">👥<i>${community.cbviewcnt}</i></td>
 							</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="tab-pane fade" id="cweek">
 						<table>
-							<tr>
-								<th>1</th>
+							<c:set var="wcno" value="0"/>
+							<c:forEach var="community" items="${cweekList}">
+							<tr onclick="location.href='community/readDetail?cbno=${community.cbno}'" class="hotrank">
+								<th><c:out value="${wcno+1}"/></th>
+								<c:set var="wcno" value="${wcno+1}"/>
 								<td class="ttile">
-									<a href="#">제목</a>
+									${community.cbtitle }
 								</td>
-								<td>🖋<i>writer</i></td>
-								<td class="tview">💬<i>view</i></td>
+								<td>🖋<i>${community.cbwriter}</i></td>
+								<td class="tview">👥<i>${community.cbviewcnt}</i></td>
 							</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="tab-pane fade" id="cday">
 						<table>
-							<tr>
-								<th>1</th>
-								<td class="ttile">
-									<a href="#">제목</a>
+							<c:set var="dcno" value="0"/>
+							<c:forEach var="community" items="${cdayList}">
+							<tr class="hotrank">
+								<th><c:out value="${dcno+1}"/></th>
+								<c:set var="dcno" value="${dcno+1}"/>
+								<td class="ttile" onclick="location.href='community/readDetail?cbno=${community.cbno}'">
+									${community.cbtitle }
 								</td>
-								<td>🖋<i>writer</i></td>
-								<td class="tview">💬<i>view</i></td>
+								<td>🖋<i>${community.cbwriter}</i></td>
+								<td class="tview">👥<i>${community.cbviewcnt}</i></td>
 							</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
@@ -231,7 +243,9 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 <script>
-	getResumeList("m");
+	
+	
+	
 	var message = '${message}';
 	var wrongAccept = '${wrongAccept}';
 	if(message != null && !message == ""){

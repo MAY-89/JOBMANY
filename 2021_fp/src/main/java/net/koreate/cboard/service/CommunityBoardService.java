@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.koreate.cboard.vo.CommunityBoardVO;
+import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.PageMaker;
 import net.koreate.util.SearchCriteria;
 
@@ -32,4 +33,7 @@ public interface CommunityBoardService {
 
 	// 게시글 삭제 
 	void removeBoard(int cbno) throws Exception;
+	
+	// 메인페이지에서 게시글 불러오기
+	List<CommunityBoardVO> mainList(String data);
 }

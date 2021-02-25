@@ -104,6 +104,8 @@ public class CommunityBoardController {
 		
 		return mav;
 	}
+	
+
 
 	@PostMapping("/remove")
 	public String remove(@RequestParam("cbno") int cbno) throws Exception {

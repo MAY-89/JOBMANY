@@ -76,4 +76,11 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 		
 	}
 
+	@Override
+	public List<CommunityBoardVO> mainList(String data) {
+		return dao.mainList(data);
+	}
+	
+	
+
 }
