@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Update;
 
 import net.koreate.cboard.provider.BoardQueryProvider;
 import net.koreate.cboard.vo.CommunityBoardVO;
+import net.koreate.resume.provider.ResumeQueryProvider;
+import net.koreate.resume.vo.ResumeVO;
 import net.koreate.util.SearchCriteria;
 
 public interface CommunityBoardDAO {
@@ -37,8 +39,12 @@ public interface CommunityBoardDAO {
 	// 게시글 수정
 	@Update("UPDATE tbl_community_board SET cbtitle = #{cbtitle}, cbcontent = #{cbcontent}, cbupdatedate = now() where cbno = #{cbno} ")
 	void modify(CommunityBoardVO vo) throws Exception;
-	
+
 	// 게시글 삭제
 	@Delete("DELETE FROM tbl_community_board WHERE cbno=#{cbno}")
 	void removeBoard(int cbno) throws Exception;
+
+	// 메인페이지에서 게시글 불러오기
+	@SelectProvider(type = BoardQueryProvider.class, method = "mainList")
+	List<CommunityBoardVO> mainList(String data);
 }
