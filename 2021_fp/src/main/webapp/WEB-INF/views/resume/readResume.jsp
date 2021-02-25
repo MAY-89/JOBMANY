@@ -233,7 +233,15 @@
 			</div>
 			<div class="row">
 				<div class='col'>
-					<input type="text" value="${resume.portfolio}" readonly/>
+				<c:choose>
+					<c:when test="${!empty resume.portfolio}">
+						<input type="text" value="${resume.portfolio}" readonly/>
+						<a href="${root}/upload/${resume.portfolio}">내려받기</a>   
+					</c:when>
+					<c:otherwise>
+						파일이 존재하지 않습니다.
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</div>		
 		</div>
@@ -301,13 +309,13 @@
     $.each($("input:checked"),function(){
 	   	$(this).closest("label").css({
 	   		backgroundColor :"#72c02c",
-    		color : "white" 	
+    		color : "white"
 	   	});
 	   	$(this).closest("div").css({
 	   		backgroundColor :"#72c02c",
     		color : "white" 	
 	   	}); 
-     })
+     });
      
    
      
