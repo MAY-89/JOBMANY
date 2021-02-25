@@ -79,12 +79,14 @@ public class MemberRestController {
 		return entity;
 	}
 	
-	@GetMapping("getMyList/{uno}/{category}")
+	@GetMapping("getMyList/{uno}/{category}/{page}")
 	public ResponseEntity<Object> getMyList(@PathVariable("uno")int uno,
-			@PathVariable("category")String category, SearchCriteria cri
+			@PathVariable("category")String category, SearchCriteria cri, @PathVariable("page") int page
 			)throws Exception{
 		
 		ResponseEntity<Object> entity = null;
+		cri.setPerPageNum(4);
+		cri.setPage(page);
 		Map<String, Object> map = service.readList(cri,category,uno);
 		entity = new ResponseEntity<Object>(map,HttpStatus.OK);
 		return entity;

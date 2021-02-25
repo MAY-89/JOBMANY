@@ -35,207 +35,173 @@
 			<div class="tab-content">
 				<!-- 커뮤니티 -->
 				<div class="tab-pane fade show active commu" id="#commu">
-					<%-- <div class="col board-list-size-right">
-						<div class="container board-list-size-right-boxing">
-							<div class="row board-list-size-right-box">
-								<c:choose>
-									<c:when test="${category == 'community'}">
-										<c:choose>
-											<c:when test="${empty list }">없음</c:when>
-											<c:otherwise>
-												<c:forEach items="${list }" var="board">
-													<div class="col list-box">
-														<div class="row list-box-item3">
-															<div class="item3-title">
-																<span class="h5"> <a href="${i}">${board.cbtitle}</a>
-																</span>
-															</div>
-															<div class="row mt-0">
-																<div class="col-md-9 overflow-hidden item3-content">
-																	<span> ${i.cbcontent} </span>
-																</div>
-																<div class="col item3-footer">
-																	<span>📅<i>&nbsp; ${board.cbregdate} </i></span> <span>🖋<i>&nbsp;
-																			${board.cbwriter} </i></span> <span>✔️<i>&nbsp;
-																			${board.cbviewcnt} </i></span> <span>✔️<i>&nbsp;
-																			${board.cbviewcnt} </i></span>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- 리스트 박스 끝 -->
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</c:when>
-								</c:choose>
-								<!-- 페이징 -->
-								
-							</div>
-						</div>
-					</div> --%>
 				</div>
-				<!-- 이력서 -->
-				<!-- 
-				<div class="tab-pane fade resum" id="#resum">
-					<div class="col board-list-size-right">
-						<div class="container board-list-size-right-boxing">
-							<div class="row board-list-size-right-box">
-								
-								<c:choose>
-									<c:when test=" ${category eq 'resume' } ">
-										<c:forEach var="r" items=" ${list} ">
-											<div class="col list-box">
-												<div class="row list-box-item1">
-													<div class="item1-title">
-														<span class="h5"> <a
-															href="/resume/read?rno=${r.rno } "> ${r.rname}의 이력서 </a>
-														</span>
-													</div>
-													<div class="row mt-0 item1-content-box">
-														<div class="col">
-															<ul>
-																<li class="resume-info">이름 :<span>
-																		${r.rname} </span></li>
-															</ul>
-														</div>
-														<div class="col-md-6 overflow-hidden item1-content">
-															<span> ${r.introduce} </span>
-														</div>
-														<div class="col item1-footer">
-															<span>📅<i>&nbsp;${r.regdate} </i></span> <span>🖋<i>&nbsp;${r.rname}
-															</i></span> <span>✔️<i>&nbsp;이력서 좋아요 여부</i></span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</c:forEach>
-									</c:when>
-								</c:choose>
-							</div>
-							 -->
-						</div>
-					</div>
+
+				</div>
+				</div>
 					<!-- 페이징 블럭 -->
-					<div class="container text-center paging-block">
-						<ul class="pagination justify-content-center">
-							<c:if test="${pm.first }">
+					
+							<%-- <c:if test="${pm.first}">
 								<li class="page-item"><a class="page-link"
-									href="myList${pm.makeQuery(1) }">Previous</a></li>
+									href="myList${pm.makeQuery(1)}">Previous</a></li>
 							</c:if>
-							<c:forEach var="i" begin="${pm.startPage }" end="${pm.endPage }">
-								<li class="page-item ${pm.cri.page == i ? 'class=active' : '' }">
-									<a class="page-link" href="myList${pm.makeQuery(i) }">${i }</a>
+							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage }">
+								<li class="page-item ${pm.cri.page == i ? 'class=active' : ''}">
+									<a class="page-link" href="myList${pm.makeQuery(i)}">${i}</a>
 								</li>
 							</c:forEach>
-							<c:if test="${pm.next }">
+							<c:if test="${pm.next}">
 								<li class="page-item"><a class="page-link"
-									href="myList${pm.makeQuery(pm.endPage+1) }">Next</a></li>
-							</c:if>
-						</ul>
-					</div>
-					<!-- 페이징 블럭 끝 -->
-				</div>
-			</div>
+									href="myList${pm.makeQuery(pm.endPage+1)}">Next</a></li>
+							</c:if> --%>
+	
+					
 	</form>
+	<div class="container text-center paging-block">
+	<ul class="pagination justify-content-center pageBlock">
+	</ul>
+</div>
 	<!-- 보드 끝 -->
 </section>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <script>
 	var category = "";
+	var page = 1;
 
+	
+	function printPage(data){
+		var str = "";
+		$(".pagination").html("");
+		if(data.first){
+			str += "<li class='page-item'>";
+			str += "<a class='page-link prevBtn' href='#' >Previous</a>";
+			str += "</li>";
+		}
+		for(var i = data.startPage; i <= data.endPage; i++){
+			str += "<li ";
+			if(data.cri.page == i){
+				str+= "class='page-item active'";
+			}
+			str += " class='page-item'>";
+			str += "<a class='page-link pageBtn' href='#'>"+i+"</a>";
+			str += "</li>";
+		}
+		if(data.next){
+			str += "<li class='page-item'>";
+			str += "<a class='page-link nextBtn' href='#'>"; 
+			str += "Next";
+			str += "</a></li>";
+		}
+		$(".pagination").append(str);
+	}
+		
+	
 	window.onload = function() {
-		getCommunityList();
+		getCommunityList(1);
 	};
+	
+	$(".pagination").on("click",".page-item a",function(event){
+		event.preventDefault();
+		
+		var page = this.text;
+		if(category == 'resume'){
+			getResumeList(page);
+		}else{
+			
+			getCommunityList(page);
+		}
+		console.log(this.text);
+	});
 
 	$(".resumBtn").click(function() {
 		category = "resume";
-		console.log("보바야");
-		getResumeList();
+		getResumeList(1);
 	});
 
-	function getResumeList() {
-		var url = "${root}/members/getMyList/${userInfo.uno}/resume";
-		var i = 0;
+	function getResumeList(page) {
+		var url = "${root}/members/getMyList/${userInfo.uno}/resume/"+page;
 		$(".resum").html("");
 		$(".commu").html("");
 		$.getJSON(url,function(data) {
 			console.log(data);
 			var str = "";
-			var list = data.list;
-			console.log(list);
-			$(data).each(function() {
-				str += "<div class='col board-list-size-right'>";
-				str += "<div class='container board-list-size-right-boxing'>";
-				str += "<div class='row board-list-size-right-box'>";
-				if (this.list == null) {
-					없음
+			str += "<div class='col board-list-size-right'>";
+			str += "<div class='container board-list-size-right-boxing'>";
+			str += "<div class='row board-list-size-right-box'>";
+			$(data.list).each(function() {
+				if (this == null) {
+					str="없음";
 				} else {
 					str += "<div class='col list-box'>";
 					str += "<div class='item2-title'>";
-					str += "<span class='h5'><a href=" + this.list[i].rno+">";
-					str += this.list[i].rname + "님의 이력서</a>";
+					str += "<span class='h5'><a href=" + this.rno+">";
+					str += this.rname + "님의 이력서</a>";
 					str += "</span>";
 					str += "</div>";
 					str += "<div class='row mt-0'>";
 					str += "<div class='col-md-8 overflow-hidden item2-content'>";
-					str += "<span>"	+ this.list[i].introduce + "</span>";
+					str += "<span>";
+					if(this.introduce != null){
+						str += this.introduce;
+					}else{
+						str += "자기소개서 없음";
+					}
+					str += "</span>";
 					str += "</div>";
 					str += "<div class='col item2-footer'>";
-					str += "<span>📅<i>&nbsp;" + getDate(this.list[i].regdate) + "</i></span> <span>🖋<i>&nbsp;";
-					str += this.list[i].rname + "</i></span> <span>✔️<i>&nbsp;";
-					str += this.list[i].views + "</i></span>";
-					str += "</div></div></div></div></div></div></div></div>";
+					str += "<span>📅<i>&nbsp;" + getDate(this.regdate) + "</i></span> <span>🖋<i>&nbsp;";
+					str += this.rname + "</i></span> <span>✔️<i>&nbsp;";
+					str += this.views + "</i></span>";
+					str += "</div></div></div>";
 				}
-				i++;
 			});
+			str +="</div></div></div>";
 			$(".commu").html(str);
+			printPage(data.pm);
 		});
 	}
 
 	$(".commBtn").click(function() {
 		category = "community";
-		console.log("바보야");
-		getCommunityList();
+		getCommunityList(1);
 	});
 
-	function getCommunityList() {
-		var url = "${root}/members/getMyList/${userInfo.uno}/community";
-		var i = 0;
+	function getCommunityList(page) {
+		var url = "${root}/members/getMyList/${userInfo.uno}/community/"+page;
 		$(".commu").html("");
 		$(".resum").html("");
 		$.getJSON(url,function(data) {
-			console.log(data);
 			var str = "";
-			$(data)
-				.each(
-					function() {
-						str += "<div class='col board-list-size-right'>";
-						str += "<div class='container board-list-size-right-boxing'>";
-						str += "<div class='row board-list-size-right-box'>";
-						if (this.list == null) {
-							없음
+			str += "<div class='col board-list-size-right'>";
+			str += "<div class='container board-list-size-right-boxing'>";
+			str += "<div class='row board-list-size-right-box'>";
+			
+			$(data.list).each(function() {
+							
+						if (this == null) {
+							str += "없음";
 						} else {
-							str += "<div class='col list-box'>";
+							str += "<div class='col list-box'>";				
 							str += "<div class='item3-title'>";
-							str += "<span class='h5'><a href=" + this.list[i].cbno+">";
-							str += this.list[i].cbtitle	+ "</a>";
+							str += "<span class='h5'><a href=" + this.cbno+">";
+							str += this.cbtitle	+ "</a>";
 							str += "</span>";
 							str += "</div>";
 							str += "<div class='row mt-0'>";
 							str += "<div class='col-md-9 overflow-hidden item3-content'>";
-							str += "<span>"	+ this.list[0].cbcontent + "</span>";
+							str += "<span>"	+ this.cbcontent + "</span>";
 							str += "</div>";
 							str += "<div class='col item3-footer'>";
-							str += "<span>📅<i>&nbsp;"+ getDate(this.list[i].cbregdate) + "</i></span> <span>🖋<i>&nbsp;";
-							str += this.list[i].cbwriter + "</i></span> <span>✔️<i>&nbsp;";
-							str += this.list[i].cbviewcnt + "</i></span>";
-							str += "</div></div></div></div></div></div></div></div>";
+							str += "<span>📅<i>&nbsp;"+ getDate(this.cbregdate) + "</i></span> <span>🖋<i>&nbsp;";
+							str += this.cbwriter + "</i></span> <span>✔️<i>&nbsp;";
+							str += this.cbviewcnt + "</i></span>";
+							str += "</div></div></div>";
 						}
-						i++;
 					});
+			str += "</div></div></div>";
 			$(".commu").append(str);
+			printPage(data.pm);
 		});
 	}
 	
@@ -251,4 +217,17 @@
 		var time = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
 		return time;
 	}
+	
+	
+	
+	
+	$(".commu").on("click",function(){
+		
+		alert("sdfsfsdfs");
+		
+	});
+	
+	
+	
+	
 </script>

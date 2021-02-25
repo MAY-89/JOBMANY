@@ -65,13 +65,23 @@ section .resume-top{
 }
 
 /* 카드식 게시글 */
+.hotcard{
+	display: inline-block;
+	width: 300px;
+}
 .hotcard:hover{
 	cursor: pointer;
 	background-color: #f2f2f2;
 }
-
-
-
+.resume-top-box{
+	
+}
+.text-muted{
+	margin-top: 0;
+}
+.timebox{
+	margin-bottom: 0;
+}
 /* 일반형 게시글 */
 .resume-board{
 	margin-top:50px;
@@ -110,7 +120,13 @@ section .resume-top{
 	cursor: pointer;
 	background-color: #D8D8D8;
 }
+.card-text{
 	
+}
+.card-text1{
+	height: 50px;	
+	overflow: hidden;
+}
 
 
 

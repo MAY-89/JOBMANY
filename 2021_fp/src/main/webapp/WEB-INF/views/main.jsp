@@ -231,7 +231,6 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
 <script>
-	getResumeList("m");
 	var message = '${message}';
 	var wrongAccept = '${wrongAccept}';
 	if(message != null && !message == ""){

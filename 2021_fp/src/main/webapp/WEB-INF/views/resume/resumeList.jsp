@@ -30,7 +30,7 @@
 		<c:otherwise>
 			<c:forEach var="r" items="${likeList }" >
 				<div class="col-sm-4 hotcard" onclick="location.href='readResume${pm.makeQuery(cri.page)}&rno=${r.rno}'">
-					<div class="shadow p-2 mb-4 bg-white rounded">
+					<div class="shadow p-2 mb-4 bg-white rounded resume-top-box">
 						<div class="card mb-3" style="max-width: 18rem; max-height: 200px;">
 						  <div class="row no-gutters">
 						    <div class="col-sm-5 hidden-xs hidden-sm">                                             
@@ -39,8 +39,8 @@
 						    <div class="col-sm-7" >
 						      <div class="card-body" style="max-height: 200px;">
 						        <h5 class="card-title">${r.rname }님의<br/> 이력서</h5>
-						        <p class="card-text">${r.introduce }</p>
-						        <p class="card-text"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="medium"/></small></p>
+						        <p class="card-text1">${r.introduce }</p>
+						        <p class="card-text timebox"><small class="text-muted"><f:formatDate value="${r.regdate}" dateStyle="medium"/></small></p>
 						        <p class="card-text"><small class="text-muted">👍 ${r.likecnt}&nbsp;&nbsp;&nbsp;조회수 ${r.views}</small></p>
 						      </div>
 						    </div>
@@ -133,7 +133,7 @@
 			</li>
 		</c:if>
 		<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}">
-			<li class="page-item" ${pm.cri.page == i ? ' class=active' : ''}>
+			<li class="page-item" ${pm.cri.page == i ? 'class=active' : ''}>
 				<a href="resumeList${pm.makeQuery(i)}">${i}</a>
 			</li>
 		</c:forEach>
