@@ -39,23 +39,6 @@
 
 				</div>
 				</div>
-					<!-- 페이징 블럭 -->
-					
-							<%-- <c:if test="${pm.first}">
-								<li class="page-item"><a class="page-link"
-									href="myList${pm.makeQuery(1)}">Previous</a></li>
-							</c:if>
-							<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage }">
-								<li class="page-item ${pm.cri.page == i ? 'class=active' : ''}">
-									<a class="page-link" href="myList${pm.makeQuery(i)}">${i}</a>
-								</li>
-							</c:forEach>
-							<c:if test="${pm.next}">
-								<li class="page-item"><a class="page-link"
-									href="myList${pm.makeQuery(pm.endPage+1)}">Next</a></li>
-							</c:if> --%>
-	
-					
 	</form>
 	<div class="container text-center paging-block">
 	<ul class="pagination justify-content-center pageBlock">
@@ -65,6 +48,7 @@
 </section>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <script>
 	var category = "";
 	var page = 1;
@@ -135,7 +119,9 @@
 				} else {
 					str += "<div class='col list-box'>";
 					str += "<div class='item2-title'>";
-					str += "<span class='h5'><a href=" + this.rno+">";
+					str += "<span class='h5'><a href=";
+					str += "${root}/resume/read?rno="+this.rno;
+					str += ">";
 					str += this.rname + "님의 이력서</a>";
 					str += "</span>";
 					str += "</div>";
@@ -184,7 +170,9 @@
 						} else {
 							str += "<div class='col list-box'>";				
 							str += "<div class='item3-title'>";
-							str += "<span class='h5'><a href=" + this.cbno+">";
+							str += "<span class='h5'><a href=";
+							str += "${root}/community/readDetail?cbno="+this.cbno;
+							str += ">";
 							str += this.cbtitle	+ "</a>";
 							str += "</span>";
 							str += "</div>";
@@ -217,17 +205,5 @@
 		var time = year+"/"+month+"/"+day+" "+hour+":"+minute+":"+second;
 		return time;
 	}
-	
-	
-	
-	
-	$(".commu").on("click",function(){
-		
-		alert("sdfsfsdfs");
-		
-	});
-	
-	
-	
 	
 </script>

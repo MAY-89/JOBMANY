@@ -180,7 +180,8 @@
 							</tr>
 							<c:set var="monthi" value="0"/>
 							<c:forEach var="resume" items="${monthList }">
-							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+							<tr onclick="location.href='${root}/resume/read?rno=${resume.rno}'" class="hotrank">
+							
 								<th><c:out value="${monthi+1}"/></th>
 								<c:set var="monthi" value="${monthi+1}"/>
 								<td class="ttile">
@@ -202,7 +203,7 @@
 							</tr>
 							<c:set var="weeki" value="0"/>
 							<c:forEach var="resume" items="${weekList }">
-							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+							<tr onclick="location.href='${root}/resume/read?rno=${resume.rno}'" class="hotrank">
 								<th><c:out value="${weeki+1}"/></th>
 								<c:set var="weeki" value="${weeki+1}"/>
 								<td class="ttile">
@@ -224,7 +225,7 @@
 							</tr>
 							<c:set var="dayi" value="0"/>
 							<c:forEach var="resume" items="${dayList }">
-							<tr onclick="loacation.href='resume/readResume?rno=${resuem.rno }'">
+							<tr onclick="location.href='${root}/resume/read?rno=${resume.rno}'" class="hotrank">
 								<th><c:out value="${dayi+1}"/></th>
 								<c:set var="dayi" value="${dayi+1}"/>
 								<td class="ttile">

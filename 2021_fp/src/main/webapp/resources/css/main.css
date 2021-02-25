@@ -137,6 +137,10 @@
 	height: 600px;
 }
 	/* 탭 메뉴 */
+	.like-board .nav-link:hover{
+	    color: rgba(114, 192, 44, 1);
+	}
+	
 	.like-board .nav-link{
 		font-family: 'NotoSerifKR';
 		color: black;
@@ -186,7 +190,10 @@
 	background: rgba(114, 192, 44, 0.5);
 }
 	
-
+.hotrank:hover{
+	cursor: pointer;
+	background: rgba(0,0,0,0.05);
+}
 
 
 
