@@ -48,11 +48,13 @@
 		</div>
 		</div>
 	</div>
+	
 </section>
 <div class="modal-box">
-	<div class="modal">
-		<img src="${pageContext.request.contextPath }/resources/img/member/findMember.gif" />
-	</div>
+		<div class="modal">
+			<img src="${pageContext.request.contextPath }/resources/img/member/findMember.gif" /><br/>
+			<span class="mailMessage">메일을 전달 중입니다 : )</span>
+		</div>
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>

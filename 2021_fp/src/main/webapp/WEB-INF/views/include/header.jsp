@@ -18,7 +18,6 @@
 <body>
 <header>
 	<div class="container">
-	<a href="${root}/error">에러페이지 확인</a>
 	<nav class="navbar navbar-expand-lg header-nav">
  		<a class="navbar-brand header-nav-logo" href="${root}/">
  			<span class="header-nav-logo-front h3">J</span>
