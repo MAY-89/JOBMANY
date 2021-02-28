@@ -1,6 +1,7 @@
 package net.koreate.common.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,17 @@ public class MainController {
 	CommunityBoardService cbs;
 	
 	@RequestMapping("/")
-	public String main(Model model) {
+	public String main(Model model, HttpSession session) {
+		String message = (String)session.getAttribute("message");
+		if(message != null) {
+			session.removeAttribute("message");
+			model.addAttribute("message", message);
+		}
+		
+		
 		model.addAttribute("monthList",rs.mainList("m"));
 		model.addAttribute("weekList",rs.mainList("w"));
 		model.addAttribute("dayList",rs.mainList("d"));
-		
 		model.addAttribute("cmonthList",cbs.mainList("m"));
 		model.addAttribute("cweekList",cbs.mainList("w"));
 		model.addAttribute("cdayList",cbs.mainList("d"));

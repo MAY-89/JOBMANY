@@ -96,7 +96,7 @@ public class CommunityBoardController {
 		mav.addObject("commentCount",ccs.listCount(cbno));
 		mav.addObject("list",ccs.commentList(cbno));
 		
-		mav.addObject("likeyYN",cls.LikeyYN(cbno, user.getUno()));
+		if(user != null)mav.addObject("likeyYN",cls.LikeyYN(cbno, user.getUno()));
 		
 		mav.addObject(cbs.readReply(cbno));
 		mav.setViewName("community/read");

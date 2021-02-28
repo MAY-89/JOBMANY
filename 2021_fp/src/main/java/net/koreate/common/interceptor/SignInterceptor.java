@@ -72,8 +72,7 @@ public class SignInterceptor extends HandlerInterceptorAdapter{
 			String signCode = getSignCode();
 			dao.sign(user, signCode);
 			sendMail.signInSend(user, request, signCode);
-			mav.addObject("message", "가입하신 계정으로 메일이 발송 되었습니다.메일에서 회원가입을 완료 시켜주십시오");
-			mav.setViewName("main");
+			request.getSession().setAttribute("message", "가입하신 계정으로 메일이 발송 되었습니다.메일에서 회원가입을 완료 시켜주십시오");
 		}
 	}
 	

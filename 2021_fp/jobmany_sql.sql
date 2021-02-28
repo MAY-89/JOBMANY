@@ -21,7 +21,7 @@ drop table tbl_user;
 
 create table tbl_banid(
     uemail varchar(60) not null,
-    count int default 5,
+    count int default 1,
     bandate timestamp default now(),
     constraint fk_tbl_community_board foreign key(uemail) REFERENCES tbl_user(uemail)
     

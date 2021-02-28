@@ -7,7 +7,6 @@
 	.imgView{
 		width: 200px;
 	}
-	
 </style>
 <div class="top-img">
 	<img src="${pageContext.request.contextPath }/resources/img/member/loginImg.jpg" class="sign-header-top-img" alt="...">
@@ -103,9 +102,10 @@
 	</div>
 </section>
 <div class="modal-box">
-	<div class="modal">
-		<img src="${pageContext.request.contextPath }/resources/img/member/signLoading.gif" />
-	</div>
+		<div class="modal">
+			<img src="${pageContext.request.contextPath }/resources/img/member/findMember.gif" /><br/>
+			<span class="mailMessage">메일을 전달 중입니다 : )</span>
+		</div>
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script >var root = "${root}"</script>

@@ -56,8 +56,9 @@ public class MemberController {
 	
 	// 회원 가입
 	@PostMapping("signMemberUp")
-	public void sign(UserVO user, Model model)throws Exception {
+	public String sign(UserVO user, Model model)throws Exception {
 		model.addAttribute("userVO",user);
+		return "redirect:/";
 	}
 	
 	// 회원 singCode 인증
@@ -83,35 +84,13 @@ public class MemberController {
 		return "/member/memberInfo";
 	}
 
-	/*
-	 * // 스크랩한 글들 모아 보기
-	 * 
-	 * @GetMapping("myList") public String myList(@ModelAttribute("cri")
-	 * SearchCriteria cri, Model model,String category, HttpSession session) throws
-	 * Exception{ int uno = ((UserVO)session.getAttribute("userInfo")).getUno();
-	 * 
-	 * if(category == null)category = "community"; System.out.println(category +
-	 * " : cate"); System.out.println(uno); Map<String, Object> map =
-	 * service.readList(cri,category,uno); model.addAllAttributes(map); return
-	 * "member/myList"; }
-	 */
-	
+		
 	// 스크랩한 글들 모아 보기
 		@GetMapping("myList")
 		public String myList() throws Exception{
 			return "member/myList";
 		}
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 회원 정보 찾기 페이지로 이동
 	@GetMapping("findUser")
 	public void findUser() throws Exception{}
