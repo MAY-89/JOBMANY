@@ -39,7 +39,6 @@
 <!-- 토큰 체크하여 post method 진행 -->		
 		<mvc:interceptor>
 			<mvc:mapping path="/member/signMemberUp"/>
-			<mvc:mapping path="/member/signOK"/>
 			<mvc:mapping path="/member/modifyMember"/>
 			<mvc:mapping path="/member/deleteMember"/>
 			<bean class="net.koreate.common.interceptor.CheckTokenInterceptor" />
